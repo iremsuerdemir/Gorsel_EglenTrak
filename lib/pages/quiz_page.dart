@@ -3,54 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-void main() {
-  const primaryColor = Color.fromARGB(255, 207, 47, 35);
-  const backgroundColor = Color.fromARGB(255, 50, 59, 63);
-
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: primaryColor,
-        scaffoldBackgroundColor: backgroundColor,
-        colorScheme: ColorScheme.dark(
-          primary: primaryColor,
-          secondary: Colors.blue,
-          surface: backgroundColor,
-          surfaceContainer: const Color.fromARGB(255, 54, 61, 65),
-          onPrimary: Colors.white, //textField
-        ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: primaryColor,
-          foregroundColor: Colors.white,
-          toolbarHeight: 50,
-          actionsPadding: EdgeInsets.only(right: 10),
-        ),
-        textTheme: TextTheme(
-          displayLarge: TextStyle(fontSize: 30),
-          bodyMedium: TextStyle(fontSize: 16),
-          bodySmall: TextStyle(fontSize: 12),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: WidgetStateProperty.all(Colors.white),
-            backgroundColor: WidgetStateProperty.all(primaryColor),
-            shape: WidgetStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-          ),
-        ),
-      ),
-      home: QuizPage(),
-    ),
-  );
-}
-
 class QuizPage extends StatefulWidget {
-  const QuizPage({Key? key}) : super(key: key);
+  const QuizPage({super.key});
 
   @override
-  _QuizPageState createState() => _QuizPageState();
+  State<QuizPage> createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
