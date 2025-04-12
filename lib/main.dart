@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'package:gorsel_programlama_proje/pages/home_page.dart';
-import 'package:gorsel_programlama_proje/pages/question_page.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_page.dart';
 
 void main() {
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
-  const backgroundColor = Color.fromARGB(255, 255, 255, 255);
+  const backgroundColor = Color.fromARGB(255, 50, 59, 63);
 
   runApp(
     MaterialApp(
@@ -40,7 +39,7 @@ void main() {
           ),
         ),
       ),
-      home: QuizPage(),
+      home: CohiceGamePage(),
     ),
   );
 }

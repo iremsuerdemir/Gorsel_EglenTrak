@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:gorsel_programlama_proje/components/box.dart';
+import 'package:gorsel_programlama_proje/components/slide_animation.dart';
+import 'package:gorsel_programlama_proje/models/game.dart';
+
+class ChoicePage extends StatefulWidget {
+  final Game game;
+  final VoidCallback onGameUpdated;
+  const ChoicePage({
+    super.key,
+    required this.game,
+    required this.onGameUpdated,
+  });
+
+  @override
+  State<ChoicePage> createState() => _ChoicePageState();
+}
+
+class _ChoicePageState extends State<ChoicePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Text("${widget.game.currentRound} / ${widget.game.round}"),
+          SizedBox(height: 10),
+          Expanded(
+            flex: 4,
+            child: SlideAnimation(
+              startOffsetX: 1.5,
+              startOffsetY: -1.5,
+              child: Box(
+                onpressed: () {
+                  widget.game.selectFirstCard();
+                  setState(() {
+                    widget.game.updateCurrentRound();
+                  });
+                  widget.onGameUpdated();
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    widget.game.cards[0].imagePath,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Image.asset(
+              "static/images/logo/vs.png",
+              fit: BoxFit.contain,
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: SlideAnimation(
+              startOffsetX: -1.5,
+              startOffsetY: 1.5,
+              child: Box(
+                onpressed: () {
+                  widget.game.selectSecondCard();
+                  setState(() {
+                    widget.game.updateCurrentRound();
+                  });
+                  widget.onGameUpdated();
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    widget.game.cards[1].imagePath,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
