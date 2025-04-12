@@ -17,7 +17,7 @@ class Game {
         CardModel(
           id: cards.length,
           name: "Empty",
-          imagePath: "static/images/logo/cross.png",
+          imagePath: "assets/icons/cross.png",
         ),
       );
     }

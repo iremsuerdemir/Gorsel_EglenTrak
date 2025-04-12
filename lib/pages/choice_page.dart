@@ -49,10 +49,7 @@ class _ChoicePageState extends State<ChoicePage> {
             ),
           ),
           Expanded(
-            child: Image.asset(
-              "static/images/logo/vs.png",
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset("assets/icons/vs.png", fit: BoxFit.contain),
           ),
           Expanded(
             flex: 4,

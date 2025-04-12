@@ -59,14 +59,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - static/images/logo/
-    - assets/animations/correct.json
-    - assets/animations/wrong.json
-    - assets/sounds/correct.mp3
-    - assets/sounds/wrong.mp3
-    - assets/icons/fifty.png
-    - assets/icons/double.png
-    - assets/icons/skip.png
+    - assets/icons/
+    - assets/sounds/
+    - assets/animations/
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
