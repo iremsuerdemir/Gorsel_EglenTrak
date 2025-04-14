@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/pages/choice_game_page.dart';
+import 'package:gorsel_programlama_proje/pages/add_card_page.dart';
 
 void main() {
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
@@ -39,7 +39,7 @@ void main() {
           ),
         ),
       ),
-      home: CohiceGamePage(),
+      home: AddCardPage(),
     ),
   );
 }
