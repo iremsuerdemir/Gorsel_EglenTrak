@@ -42,6 +42,74 @@ class _AddCardPageState extends State<AddCardPage> {
     });
   }
 
+  void showEditDialog(BuildContext context, int index) {
+    final TextEditingController editNameController = TextEditingController(
+      text: imagePaths[index]['name'],
+    );
+    String? editedImageUrl = imagePaths[index]['url'];
+
+    void pickNewImage() async {
+      final html.FileUploadInputElement uploadInput =
+          html.FileUploadInputElement();
+      uploadInput.accept = 'image/*';
+      uploadInput.click();
+
+      uploadInput.onChange.listen((e) async {
+        final files = uploadInput.files;
+        if (files!.isEmpty) return;
+
+        final reader = html.FileReader();
+        reader.readAsDataUrl(files[0]);
+        reader.onLoadEnd.listen((e) {
+          setState(() {
+            editedImageUrl = reader.result as String;
+            editNameController.text = files[0].name;
+          });
+        });
+      });
+    }
+
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text('Düzenle'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: editNameController,
+                  decoration: InputDecoration(labelText: 'Dosya Adı'),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('İptal'),
+              ),
+              ElevatedButton.icon(
+                onPressed: pickNewImage,
+                icon: Icon(Icons.image),
+                label: Text('Yeni Resim Seç'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    imagePaths[index] = {
+                      'url': editedImageUrl!,
+                      'name': editNameController.text,
+                    };
+                  });
+                  Navigator.pop(context);
+                },
+                child: Text('Kaydet'),
+              ),
+            ],
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,13 +183,28 @@ class _AddCardPageState extends State<AddCardPage> {
                           title: Text(
                             imagePaths[i]['name']!,
                           ), // Dosya adı burada gösteriliyor
-                          trailing: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                imagePaths.removeAt(i); // Resim silme
-                              });
-                            },
-                            icon: Icon(Icons.delete, color: Colors.red),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  showEditDialog(context, i);
+                                },
+                                icon: Icon(
+                                  Icons.edit,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    imagePaths.removeAt(i); // Resim silme
+                                  });
+                                },
+                                icon: Icon(Icons.delete, color: Colors.red),
+                              ),
+                            ],
                           ),
                         ),
                       );
