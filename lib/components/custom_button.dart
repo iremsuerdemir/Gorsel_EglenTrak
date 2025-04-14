@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final double? width;
   final double? height;
@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final Icon? icon;
   final String text;
   final TextStyle? textStyle;
+
   const CustomButton({
     super.key,
     this.onPressed,
@@ -20,32 +21,59 @@ class CustomButton extends StatelessWidget {
   });
 
   @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  double _scale = 1.0; // Başlangıç boyutu
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: color ?? Theme.of(context).primaryColor,
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            if (icon != null)
-              Positioned(left: 8, child: SizedBox(width: 30, child: icon)),
-            Center(
-              child: Text(
-                text,
-                style:
-                    textStyle ??
-                    Theme.of(
-                      context,
-                    ).textTheme.bodyMedium, // okunabilirlik için
+      onTapDown: (_) {
+        setState(() {
+          _scale = 0.95; // Butona basıldığında küçülme oranı
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          _scale = 1.0; // Buton bırakıldığında eski boyutuna döner
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          _scale = 1.0; // Buton iptal edildiğinde eski boyutuna döner
+        });
+      },
+      child: AnimatedScale(
+        duration: Duration(milliseconds: 100), // Animasyon süresi
+        curve: Curves.easeInOut, // Animasyon eğrisi
+        scale: _scale, // Butonun boyutu
+        child: Container(
+          height: widget.height,
+          width: widget.width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: widget.color ?? Theme.of(context).primaryColor,
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (widget.icon != null)
+                Positioned(
+                  left: 8,
+                  child: SizedBox(width: 30, child: widget.icon),
+                ),
+              Center(
+                child: Text(
+                  widget.text,
+                  style:
+                      widget.textStyle ??
+                      Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
