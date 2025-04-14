@@ -308,8 +308,15 @@ class _AddCardPageState extends State<AddCardPage> {
                               IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    imagePaths.removeAt(i); // Resim silme
-                                    if (selectedHeaderIndex == i) {
+                                    imagePaths.removeAt(i);
+                                    if (imagePaths.isEmpty ||
+                                        selectedHeaderIndex == i) {
+                                      selectedHeaderIndex = 0;
+                                    } else if (i < selectedHeaderIndex) {
+                                      selectedHeaderIndex--;
+                                    } else if (i > selectedHeaderIndex) {
+                                      //hiçbir şey yapma
+                                    } else {
                                       selectedHeaderIndex = 0;
                                     }
                                   });
