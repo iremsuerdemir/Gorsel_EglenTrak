@@ -83,7 +83,7 @@ class _AddCardPageState extends State<AddCardPage> {
             // --- TextField ---
             CustomTextField(
               controller: nameController,
-              label: "Ad",
+              label: "Başlık",
               focusedColor: Theme.of(context).primaryColor,
             ),
 
