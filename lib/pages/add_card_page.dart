@@ -12,13 +12,30 @@ class AddCardPage extends StatefulWidget {
 }
 
 class _AddCardPageState extends State<AddCardPage> {
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController headerController = TextEditingController();
 
   final List<Map<String, String>> imagePaths =
       []; // Her resim için hem URL hem de dosya adı tutacağız
 
+  int? selectedValue = 32;
+  int selectedHeaderIndex = 0;
+
   // Tarayıcıda resim seçme fonksiyonu
   void pickImage(BuildContext context) async {
+    if (selectedValue == null) {
+      setState(() {
+        selectedValue = 32;
+      });
+    }
+    if (imagePaths.length >= selectedValue!) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Eklenen görsel sayısısı $selectedValue sayısını aştı"),
+          showCloseIcon: true,
+        ),
+      );
+      return;
+    }
     final html.FileUploadInputElement uploadInput =
         html.FileUploadInputElement();
     uploadInput.accept = 'image/*'; // Sadece resim dosyaları kabul edilecek
@@ -133,15 +150,46 @@ class _AddCardPageState extends State<AddCardPage> {
                   ), // Resim seçme fonksiyonunu çağırıyoruz
               child: GradientBorder(
                 height: 180,
+                backgroundImage:
+                    imagePaths.isNotEmpty
+                        ? imagePaths[selectedHeaderIndex]["url"]
+                        : null,
                 child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add_a_photo, size: 40, color: Colors.grey),
-                      SizedBox(height: 8),
-                      Text('Resim Ekle', style: TextStyle(color: Colors.grey)),
-                    ],
-                  ),
+                  child:
+                      imagePaths.isEmpty
+                          ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add_a_photo,
+                                size: 40,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Resim Ekle',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          )
+                          : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add_a_photo,
+                                size: 40,
+                                color: Colors.black,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Eklemeye Devam et',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                 ),
               ),
             ),
@@ -150,17 +198,61 @@ class _AddCardPageState extends State<AddCardPage> {
 
             // --- TextField ---
             CustomTextField(
-              controller: nameController,
+              controller: headerController,
               label: "Başlık",
               focusedColor: Theme.of(context).primaryColor,
             ),
 
             SizedBox(height: 10),
 
+            SizedBox(
+              width: 100,
+              child: DropdownButton<int>(
+                isExpanded: true,
+                value: selectedValue,
+                icon: Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 16,
+                ),
+                underline: Container(
+                  height: 2,
+                  color: Theme.of(context).primaryColor,
+                ),
+                focusColor: Colors.transparent,
+                borderRadius: BorderRadius.circular(10),
+                onChanged: (int? newValue) {
+                  if (imagePaths.length > newValue!) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Görsel sayısı bu miktar için çok büyük"),
+                        showCloseIcon: true,
+                      ),
+                    );
+                    return;
+                  }
+                  setState(() {
+                    selectedValue = newValue;
+                  });
+                },
+                items:
+                    <int>[2, 4, 8, 16, 32, 64, 128].map<DropdownMenuItem<int>>((
+                      int value,
+                    ) {
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Center(child: Text(value.toString())),
+                      );
+                    }).toList(),
+              ),
+            ),
+
+            SizedBox(height: 10),
+
             // --- Liste ya da Boş İkon ---
             imagePaths.isEmpty
-                ? SizedBox(
-                  height: MediaQuery.of(context).size.height - 370,
+                ? Expanded(
                   child: Center(
                     child: Icon(Icons.image_not_supported, size: 50),
                   ),
@@ -188,6 +280,23 @@ class _AddCardPageState extends State<AddCardPage> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  setState(() {
+                                    selectedHeaderIndex = i;
+                                  });
+                                },
+                                icon:
+                                    selectedHeaderIndex != i
+                                        ? Icon(
+                                          Icons.check_box_outline_blank,
+                                          color: Colors.white,
+                                        )
+                                        : Icon(
+                                          Icons.check,
+                                          color: Colors.green,
+                                        ),
+                              ),
+                              IconButton(
+                                onPressed: () {
                                   showEditDialog(context, i);
                                 },
                                 icon: Icon(
@@ -200,6 +309,9 @@ class _AddCardPageState extends State<AddCardPage> {
                                 onPressed: () {
                                   setState(() {
                                     imagePaths.removeAt(i); // Resim silme
+                                    if (selectedHeaderIndex == i) {
+                                      selectedHeaderIndex = 0;
+                                    }
                                   });
                                 },
                                 icon: Icon(Icons.delete, color: Colors.red),
@@ -218,8 +330,14 @@ class _AddCardPageState extends State<AddCardPage> {
               children: [
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
-                    text: "İptal",
+                    onPressed: () {
+                      setState(() {
+                        imagePaths.clear();
+                        headerController.clear();
+                        selectedHeaderIndex = 0;
+                      });
+                    },
+                    text: "Tümünü temizle",
                     height: 30,
                     icon: Icon(Icons.close),
                   ),

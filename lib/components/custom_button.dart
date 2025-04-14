@@ -39,6 +39,9 @@ class _CustomButtonState extends State<CustomButton> {
         setState(() {
           _scale = 1.0; // Buton bırakıldığında eski boyutuna döner
         });
+        if (widget.onPressed != null) {
+          widget.onPressed!();
+        }
       },
       onTapCancel: () {
         setState(() {

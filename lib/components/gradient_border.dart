@@ -8,6 +8,8 @@ class GradientBorder extends StatelessWidget {
   final double padding;
   final Color? backgroundColor;
   final List<Color>? colors;
+  final String? backgroundImage; // 🔥 Eklendi: Image URL veya Asset yolu.
+
   const GradientBorder({
     super.key,
     required this.child,
@@ -17,6 +19,7 @@ class GradientBorder extends StatelessWidget {
     this.colors,
     this.padding = 10,
     this.backgroundColor,
+    this.backgroundImage, // 🔥 Eklendi
   });
 
   @override
@@ -39,8 +42,19 @@ class GradientBorder extends StatelessWidget {
       child: Container(
         width: width,
         decoration: BoxDecoration(
-          color: backgroundColor ?? Theme.of(context).colorScheme.surface,
+          color:
+              backgroundColor ??
+              Theme.of(
+                context,
+              ).colorScheme.surface, // 🔥 Eğer image varsa renk yok
           borderRadius: BorderRadius.circular(10),
+          image:
+              backgroundImage != null
+                  ? DecorationImage(
+                    image: NetworkImage(backgroundImage!), // URL'yi alır.
+                    fit: BoxFit.cover,
+                  )
+                  : null,
         ),
         padding: EdgeInsets.all(padding),
         child: child,
