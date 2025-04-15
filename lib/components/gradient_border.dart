@@ -8,7 +8,7 @@ class GradientBorder extends StatelessWidget {
   final double padding;
   final Color? backgroundColor;
   final List<Color>? colors;
-  final String? backgroundImage; // 🔥 Eklendi: Image URL veya Asset yolu.
+  final String? backgroundImage;
 
   const GradientBorder({
     super.key,
@@ -19,7 +19,7 @@ class GradientBorder extends StatelessWidget {
     this.colors,
     this.padding = 10,
     this.backgroundColor,
-    this.backgroundImage, // 🔥 Eklendi
+    this.backgroundImage,
   });
 
   @override

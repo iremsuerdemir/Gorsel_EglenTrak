@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/pages/add_card_page.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_menu_page.dart';
 
 void main() {
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
@@ -28,6 +28,11 @@ void main() {
           displayLarge: TextStyle(fontSize: 30),
           bodyMedium: TextStyle(fontSize: 16),
           bodySmall: TextStyle(fontSize: 12),
+          headlineMedium: TextStyle(fontSize: 24), // Card header
+          headlineSmall: TextStyle(
+            fontSize: 12,
+            color: const Color.fromARGB(255, 96, 111, 117), // Card description
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
@@ -39,7 +44,7 @@ void main() {
           ),
         ),
       ),
-      home: AddCardPage(),
+      home: ChoiceGameMenuPage(),
     ),
   );
 }
