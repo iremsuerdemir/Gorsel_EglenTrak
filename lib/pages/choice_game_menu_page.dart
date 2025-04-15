@@ -113,7 +113,7 @@ class ChoiceGameMenuPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
-                                  '${cards[i][6].id}',
+                                  '${cards[i][6].id}', //round sayısı gelecek
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
