@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class GradientBorder extends StatelessWidget {
   final Widget child;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final double borderWidth;
   final double padding;
   final Color? backgroundColor;
@@ -14,7 +14,7 @@ class GradientBorder extends StatelessWidget {
     super.key,
     required this.child,
     this.width = double.infinity,
-    this.height = 30,
+    this.height,
     this.borderWidth = 5,
     this.colors,
     this.padding = 10,

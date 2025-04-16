@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
 import 'package:gorsel_programlama_proje/pages/login_page.dart';
+import 'package:gorsel_programlama_proje/pages/my_games_page.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,6 +11,46 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton:
+          UserService.user == null
+              ? null
+              : FloatingActionButton(
+                elevation: 10,
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder:
+                        (context) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              leading: Icon(Icons.add),
+                              title: Text('Oyun Oluştur'),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.videogame_asset),
+                              title: Text('Oyunlarım'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyGamesPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(height: 30),
+                          ],
+                        ),
+                  );
+                },
+                child: Icon(Icons.add),
+              ),
+
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -17,15 +59,28 @@ class HomePage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-            icon: Icon(Icons.person),
-          ),
+          UserService.user == null
+              ? IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                icon: Icon(Icons.person),
+              )
+              : IconButton(
+                onPressed: () {
+                  UserService.logout();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Başarıyla çıkış yapıldı"),
+                      showCloseIcon: true,
+                    ),
+                  );
+                },
+                icon: Icon(Icons.exit_to_app),
+              ),
         ],
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -51,10 +106,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Image.asset(
-                "static/images/logo/vs.png",
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset("assets/icons/vs.png", fit: BoxFit.contain),
             ),
             Expanded(
               flex: 4,

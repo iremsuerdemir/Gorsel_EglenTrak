@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_button.dart';
 import 'package:gorsel_programlama_proje/components/custom_text_field.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
+import 'package:gorsel_programlama_proje/models/card_model.dart';
 
 class AddCardPage extends StatefulWidget {
-  const AddCardPage({super.key});
+  final List<CardModel>? cards;
+  final String? title;
+  const AddCardPage({super.key, this.cards, this.title});
 
   @override
   State<AddCardPage> createState() => _AddCardPageState();
@@ -14,11 +17,28 @@ class AddCardPage extends StatefulWidget {
 class _AddCardPageState extends State<AddCardPage> {
   final TextEditingController headerController = TextEditingController();
 
-  final List<Map<String, String>> imagePaths =
+  final List<CardModel> imagePaths =
       []; // Her resim için hem URL hem de dosya adı tutacağız
 
   int? selectedValue = 32;
   int selectedHeaderIndex = 0;
+  late bool isWillUpdate; //veri tabanına güncelleme yapılacak mı?
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.cards != null) {
+      if (widget.title != null) {
+        imagePaths.addAll(widget.cards!);
+        isWillUpdate = true;
+        headerController.text = widget.title!;
+      } else {
+        throw Exception("Düzenleme yapılacağından title boş olamaz");
+      }
+    } else {
+      isWillUpdate = false;
+    }
+  }
 
   // Tarayıcıda resim seçme fonksiyonu
   void pickImage(BuildContext context) async {
@@ -53,7 +73,13 @@ class _AddCardPageState extends State<AddCardPage> {
 
         // Resim URL'ini ve dosya adını listeye ekleyelim
         setState(() {
-          imagePaths.add({'url': imageUrl, 'name': fileName});
+          imagePaths.add(
+            CardModel(
+              id: DateTime.now().millisecondsSinceEpoch,
+              name: fileName,
+              imagePath: imageUrl,
+            ),
+          );
         });
       });
     });
@@ -61,9 +87,9 @@ class _AddCardPageState extends State<AddCardPage> {
 
   void showEditDialog(BuildContext context, int index) {
     final TextEditingController editNameController = TextEditingController(
-      text: imagePaths[index]['name'],
+      text: imagePaths[index].name,
     );
-    String? editedImageUrl = imagePaths[index]['url'];
+    String? editedImageUrl = imagePaths[index].imagePath;
 
     void pickNewImage() async {
       final html.FileUploadInputElement uploadInput =
@@ -113,10 +139,11 @@ class _AddCardPageState extends State<AddCardPage> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    imagePaths[index] = {
-                      'url': editedImageUrl!,
-                      'name': editNameController.text,
-                    };
+                    imagePaths[index] = CardModel(
+                      id: imagePaths[index].id,
+                      name: editNameController.text,
+                      imagePath: editedImageUrl!,
+                    );
                   });
                   Navigator.pop(context);
                 },
@@ -152,7 +179,7 @@ class _AddCardPageState extends State<AddCardPage> {
                 height: 180,
                 backgroundImage:
                     imagePaths.isNotEmpty
-                        ? imagePaths[selectedHeaderIndex]["url"]
+                        ? imagePaths[selectedHeaderIndex].imagePath
                         : null,
                 child: Center(
                   child:
@@ -172,23 +199,30 @@ class _AddCardPageState extends State<AddCardPage> {
                               ),
                             ],
                           )
-                          : Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_a_photo,
-                                size: 40,
-                                color: Colors.black,
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Eklemeye Devam et',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                          : Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.black.withValues(alpha: 0.7),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.add_a_photo,
+                                  size: 40,
+                                  color: Colors.grey,
                                 ),
-                              ),
-                            ],
+                                SizedBox(height: 8),
+                                Text(
+                                  'Eklemeye Devam et',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                 ),
               ),
@@ -268,12 +302,12 @@ class _AddCardPageState extends State<AddCardPage> {
                         padding: EdgeInsets.only(bottom: 10),
                         child: ListTile(
                           leading: Image.network(
-                            imagePaths[i]['url']!, // URL kullanılıyor
+                            imagePaths[i].imagePath, // URL kullanılıyor
                             width: 100,
                             fit: BoxFit.contain,
                           ),
                           title: Text(
-                            imagePaths[i]['name']!,
+                            imagePaths[i].name,
                           ), // Dosya adı burada gösteriliyor
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -352,7 +386,37 @@ class _AddCardPageState extends State<AddCardPage> {
                 SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (imagePaths.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Lütfen en az bir görsel ekleyin!"),
+                          ),
+                        );
+                        return;
+                      }
+
+                      if (headerController.text.trim().isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Başlık boş olamaz!")),
+                        );
+                        return;
+                      }
+
+                      if (isWillUpdate) {
+                        // 🔄 GÜNCELLEME İŞLEMİ
+                        // Buraya veri tabanı güncelleme kodunu koyacaksın.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Başarıyla güncellendi!")),
+                        );
+                      } else {
+                        // ➕ YENİ KAYIT İŞLEMİ
+                        // Buraya veri tabanı kayıt kodunu koyacaksın.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Başarıyla kaydedildi!")),
+                        );
+                      }
+                    },
                     height: 30,
                     text: "Kaydet",
                     color: Theme.of(context).colorScheme.secondary,
