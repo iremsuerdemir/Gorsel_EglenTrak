@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
+import 'package:gorsel_programlama_proje/pages/add_card_page.dart';
 import 'package:gorsel_programlama_proje/pages/login_page.dart';
 import 'package:gorsel_programlama_proje/pages/my_games_page.dart';
 import 'package:gorsel_programlama_proje/services/user_service.dart';
@@ -28,6 +29,12 @@ class HomePage extends StatelessWidget {
                               title: Text('Oyun Oluştur'),
                               onTap: () {
                                 Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddCardPage(),
+                                  ),
+                                );
                               },
                             ),
                             ListTile(

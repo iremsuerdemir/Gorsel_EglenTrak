@@ -8,7 +8,8 @@ import 'package:gorsel_programlama_proje/models/card_model.dart';
 class AddCardPage extends StatefulWidget {
   final List<CardModel>? cards;
   final String? title;
-  const AddCardPage({super.key, this.cards, this.title});
+  final int? round;
+  const AddCardPage({super.key, this.cards, this.title, this.round});
 
   @override
   State<AddCardPage> createState() => _AddCardPageState();
@@ -28,12 +29,13 @@ class _AddCardPageState extends State<AddCardPage> {
   void initState() {
     super.initState();
     if (widget.cards != null) {
-      if (widget.title != null) {
+      if (widget.title != null && widget.round != null) {
         imagePaths.addAll(widget.cards!);
         isWillUpdate = true;
         headerController.text = widget.title!;
+        selectedValue = widget.round;
       } else {
-        throw Exception("Düzenleme yapılacağından title boş olamaz");
+        throw Exception("Düzenleme yapılacağından title ve round null olamaz");
       }
     } else {
       isWillUpdate = false;

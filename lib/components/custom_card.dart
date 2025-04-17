@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
-import 'package:gorsel_programlama_proje/pages/choice_game_detail_menu_page.dart';
 
 class CustomCard extends StatelessWidget {
   final int round;
   final int cardHeaderImageIndex;
   final List<CardModel> cards;
+  final Function? onPressed;
   const CustomCard({
     super.key,
     required this.round,
     required this.cardHeaderImageIndex,
     required this.cards,
+    this.onPressed,
   });
 
   @override
@@ -20,14 +21,7 @@ class CustomCard extends StatelessWidget {
       elevation: 10,
       child: Box(
         padding: 0,
-        onpressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChoiceGameDetailMenuPage(cards: cards),
-            ),
-          );
-        },
+        onpressed: onPressed ?? () {},
         child: Stack(
           children: [
             Column(

@@ -3,20 +3,20 @@ import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
 import 'package:gorsel_programlama_proje/models/game.dart';
 
-class ChoicePage extends StatefulWidget {
+class ChoiceGamePageBody extends StatefulWidget {
   final Game game;
   final VoidCallback onGameUpdated;
-  const ChoicePage({
+  const ChoiceGamePageBody({
     super.key,
     required this.game,
     required this.onGameUpdated,
   });
 
   @override
-  State<ChoicePage> createState() => _ChoicePageState();
+  State<ChoiceGamePageBody> createState() => _ChoiceGamePageBodyState();
 }
 
-class _ChoicePageState extends State<ChoicePage> {
+class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,7 +62,8 @@ class _ChoicePageState extends State<ChoicePage> {
                   setState(() {
                     widget.game.updateCurrentRound();
                   });
-                  widget.onGameUpdated();
+                  widget
+                      .onGameUpdated(); // oyun bittiğinde gameOver ekranını göstermek için üst widgetı günceller
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),

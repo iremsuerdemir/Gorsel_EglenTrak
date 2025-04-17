@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:gorsel_programlama_proje/components/custom_button.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_page.dart';
 
 class ChoiceGameDetailMenuPage extends StatelessWidget {
   final List<CardModel> cards;
-  const ChoiceGameDetailMenuPage({super.key, required this.cards});
+  final int round;
+  final String title;
+  final String description;
+  final bool isGameOver;
+  const ChoiceGameDetailMenuPage({
+    super.key,
+    required this.cards,
+    required this.title,
+    required this.description,
+    required this.round,
+    this.isGameOver = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +34,10 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: header(context),
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: cards.length,
@@ -85,6 +102,38 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  GradientBorder header(BuildContext context) {
+    return GradientBorder(
+      padding: 10,
+      child: Column(
+        children: [
+          Text(title, style: Theme.of(context).textTheme.displayLarge),
+          Text(description),
+          isGameOver
+              ? SizedBox()
+              : CustomButton(
+                text: "Oyna",
+                width: MediaQuery.of(context).size.width * 0.2,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => CohiceGamePage(
+                            cards: cards,
+                            round: round,
+                            title: title,
+                            description: description,
+                          ),
+                    ),
+                  );
+                },
+              ),
+        ],
       ),
     );
   }

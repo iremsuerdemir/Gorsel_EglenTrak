@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_card.dart';
 import 'package:gorsel_programlama_proje/models/card_items.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_detail_menu_page.dart';
 
 class ChoiceGameMenuPage extends StatelessWidget {
   ChoiceGameMenuPage({super.key});
@@ -47,6 +48,21 @@ class ChoiceGameMenuPage extends StatelessWidget {
                       round: 32,
                       cardHeaderImageIndex: 6,
                       cards: cards[i],
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => ChoiceGameDetailMenuPage(
+                                  cards: cards[i],
+                                  round: 4,
+                                  title: "title",
+                                  description:
+                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },

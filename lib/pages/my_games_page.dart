@@ -2,15 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_card.dart';
 import 'package:gorsel_programlama_proje/models/card_items.dart';
 import 'package:gorsel_programlama_proje/pages/add_card_page.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_detail_menu_page.dart';
 
-class MyGamesPage extends StatelessWidget {
+class MyGamesPage extends StatefulWidget {
   const MyGamesPage({super.key});
 
+  @override
+  State<MyGamesPage> createState() => _MyGamesPageState();
+}
+
+class _MyGamesPageState extends State<MyGamesPage> {
   final int gameCount = 5;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddCardPage()),
+          ).then((_) {
+            setState(() {});
+          });
+        },
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -33,6 +50,21 @@ class MyGamesPage extends StatelessWidget {
                   round: 32,
                   cardHeaderImageIndex: 3,
                   cards: CardItems.items,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => ChoiceGameDetailMenuPage(
+                              cards: CardItems.items,
+                              round: 4,
+                              title: "title",
+                              description:
+                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                            ),
+                      ),
+                    );
+                  },
                 ),
 
                 Positioned(
@@ -47,6 +79,7 @@ class MyGamesPage extends StatelessWidget {
                               (context) => AddCardPage(
                                 cards: CardItems.items,
                                 title: "Title",
+                                round: 8,
                               ),
                         ),
                       );

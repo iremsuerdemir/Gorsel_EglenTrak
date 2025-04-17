@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/models/card_items.dart';
+import 'package:gorsel_programlama_proje/components/custom_button.dart';
+import 'package:gorsel_programlama_proje/components/gradient_border.dart';
+import 'package:gorsel_programlama_proje/models/card_model.dart';
 import 'package:gorsel_programlama_proje/models/game.dart';
-import 'package:gorsel_programlama_proje/pages/choice_page.dart';
-import 'package:gorsel_programlama_proje/pages/login_page.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_page_body.dart';
+import 'package:gorsel_programlama_proje/pages/game_over_body.dart';
 
 class CohiceGamePage extends StatefulWidget {
-  const CohiceGamePage({super.key});
+  final String title;
+  final String description;
+  final int round;
+  final List<CardModel> cards;
+  const CohiceGamePage({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.round,
+    required this.cards,
+  });
 
   @override
   State<CohiceGamePage> createState() => _CohiceGamePageState();
 }
 
 class _CohiceGamePageState extends State<CohiceGamePage> {
-  final Game game = Game(round: 4, cards: CardItems.items);
+  late Game game;
+
+  @override
+  void initState() {
+    super.initState();
+    game = Game(round: widget.round, cards: List.from(widget.cards));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +38,74 @@ class _CohiceGamePageState extends State<CohiceGamePage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            if (game.isGameOver) {
+              game.restart(); // geri dödüğümüzde kullanıcı tekrar oynamak isterse
+              Navigator.pop(context);
+            } else {
+              showDialog(
+                context: context,
+                builder:
+                    (context) => Dialog(
+                      child: GradientBorder(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                "Geri dönmek oyununuzu iptal edecektir. Emin misiniz?",
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: CustomButton(
+                                    text: "Hayır",
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.1,
+                                    height: 30,
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ),
+                                CustomButton(
+                                  text: "Evet",
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                  height: 30,
+                                  onPressed: () {
+                                    game.restart(); // geri dödüğümüzde kullanıcı tekrar oynamak isterse
+                                    Navigator.pop(context); // dialog'u kapatır
+                                    Navigator.pop(context); // geri döner
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+              );
+            }
           },
           icon: Icon(Icons.arrow_back),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-            icon: Icon(Icons.person),
-          ),
-        ],
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body:
           game.isGameOver
-              ? Center(child: Text("Game Over"))
-              : ChoicePage(
+              ? GameOverBody(
+                game: game,
+                onRestart: () {
+                  setState(() {});
+                },
+              )
+              : ChoiceGamePageBody(
                 game: game,
                 onGameUpdated: () {
                   setState(

@@ -1,6 +1,7 @@
 import 'package:gorsel_programlama_proje/models/card_model.dart';
 
 class Game {
+  final int _roundCount;
   int round;
   bool _isGameover = false;
   List<CardModel> cards;
@@ -8,7 +9,7 @@ class Game {
   final List<CardModel> _rankCard = [];
   int _currentRound = 1;
 
-  Game({required this.round, required this.cards}) {
+  Game({required this.round, required this.cards}) : _roundCount = round {
     if (!_isPowerOfTwo(round)) {
       throw Exception("Round sayısı ikini kuvveti olmalıdır");
     }
@@ -26,6 +27,8 @@ class Game {
   get currentRound => _currentRound;
 
   get isGameOver => _isGameover;
+
+  get rankCard => _rankCard;
 
   void updateCurrentRound() {
     if (_currentRound == round) {
@@ -70,5 +73,21 @@ class Game {
 
   void selectSecondCard() {
     _makeChoice(1, 0); // ikinci kartı seçip ilk kartı siler
+  }
+
+  void restart() {
+    _isGameover = false;
+
+    // oyun bitmediyse kalan kartları eski listesine koyar
+    for (CardModel card in _rankCard) {
+      cards.add(card);
+    }
+    for (CardModel card in _selectedCards) {
+      cards.add(card);
+    }
+    _selectedCards.clear();
+    _rankCard.clear();
+    _currentRound = 1;
+    round = _roundCount; // roundu başlangıçtaki sayısına getirir
   }
 }
