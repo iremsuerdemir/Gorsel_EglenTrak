@@ -51,7 +51,7 @@ void main() {
           ),
         ),
       ),
-      home: ScoreHistoryPage(),
+      home: QuizIntroPage(),
     ),
   );
 }

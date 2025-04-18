@@ -305,7 +305,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
+                  color: const Color.fromARGB(
+                    255,
+                    245,
+                    231,
+                    36,
+                  ).withOpacity(0.5),
                   blurRadius: 10,
                   offset: Offset(3, 3),
                 ),
@@ -324,7 +329,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                     fontSize: 20,
                     color:
                         bgColor == Colors.white
-                            ? Color.fromARGB(255, 243, 196, 24)
+                            ? Color.fromARGB(255, 0, 0, 0)
                             : Colors.white,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 1.5,
@@ -332,7 +337,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                       Shadow(
                         offset: Offset(1, 1),
                         blurRadius: 2,
-                        color: Colors.black26.withOpacity(0.7),
+                        color: const Color.fromARGB(
+                          255,
+                          245,
+                          231,
+                          36,
+                        ).withOpacity(0.5),
                       ),
                     ],
                   ),
@@ -441,7 +451,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     color: Colors.deepPurple[300],
-                    shadowColor: Colors.black,
+                    shadowColor: const Color.fromARGB(
+                      255,
+                      245,
+                      231,
+                      36,
+                    ).withOpacity(0.5),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
@@ -458,7 +473,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                               shadows: [
                                 Shadow(
                                   blurRadius: 5.0,
-                                  color: Colors.black,
+                                  color: const Color.fromARGB(
+                                    255,
+                                    245,
+                                    231,
+                                    36,
+                                  ).withOpacity(0.5),
                                   offset: Offset(2, 2),
                                 ),
                               ],

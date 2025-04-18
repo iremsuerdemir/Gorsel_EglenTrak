@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 
@@ -13,12 +14,17 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = min(
+      MediaQuery.of(context).size.width,
+      500.0,
+    ); // max 500 px
+    final screenHeight = min(
+      MediaQuery.of(context).size.height,
+      900.0,
+    ); // max 900 px
 
-    // Oransal boyutlandırma
-    final brainSize = screenWidth * 0.4; // Beynin genişliği
-    final iconSize = screenWidth * 0.2; // İkonların boyutu
+    final brainSize = screenWidth * 0.4;
+    final iconSize = screenWidth * 0.2;
     final spacingFactor = 1.0;
 
     final center = Offset(screenWidth / 2, screenHeight * 0.4);
@@ -53,8 +59,8 @@ class CategoryPage extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color.fromARGB(255, 73, 141, 168)!,
-                const Color.fromARGB(255, 100, 8, 92)!,
+                const Color.fromARGB(255, 73, 141, 168),
+                const Color.fromARGB(255, 100, 8, 92),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -67,15 +73,22 @@ class CategoryPage extends StatelessWidget {
             Text(
               "KATEGORİLER",
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFFFFD700), // Koyu sarı
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    color: Colors.black, // Siyah gölge
+                  ),
+                ],
               ),
             ),
           ],
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Color(0xFFFFD700)),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -83,90 +96,129 @@ class CategoryPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Degrade arka plan
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color.fromARGB(255, 120, 199, 230)!,
-                  const Color.fromARGB(255, 100, 8, 92)!,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color.fromARGB(255, 120, 199, 230),
+                    const Color.fromARGB(255, 100, 8, 92),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
             ),
           ),
           SafeArea(
-            child: Stack(
-              children: [
-                // Beyin görseli daire içinde ve boşluksuz
-                Positioned(
-                  left: center.dx - brainSize / 2,
-                  top: center.dy - brainSize / 2,
-                  child: Container(
-                    width: brainSize,
-                    height: brainSize,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white.withOpacity(0.8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          blurRadius: 6,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: ClipOval(
-                      child: Image.asset(
-                        "assets/icons/beyin.png",
-                        fit: BoxFit.cover, // Tam daireyi doldursun
-                      ),
-                    ),
-                  ),
-                ),
-
-                // Kategoriler
-                ...categories.map((category) {
-                  final Offset pos = center + category['position'] as Offset;
-                  return Positioned(
-                    left: pos.dx - iconSize / 2,
-                    top: pos.dy - iconSize / 2,
-                    child: GestureDetector(
-                      onTap:
-                          () => navigateToQuiz(
-                            context,
-                            category['name'] as String,
-                          ),
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        width: iconSize,
-                        height: iconSize,
+            child: Center(
+              child: Container(
+                width: screenWidth,
+                height: screenHeight,
+                child: Stack(
+                  children: [
+                    // Beyin görseli
+                    Positioned(
+                      left: center.dx - brainSize / 2,
+                      top: center.dy - brainSize / 2,
+                      child: Container(
+                        width: brainSize,
+                        height: brainSize,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white.withOpacity(0.8),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 6,
-                              spreadRadius: 1,
+                              color: Colors.black.withOpacity(0.6),
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                              offset: Offset(2, 2),
                             ),
                           ],
                         ),
                         child: ClipOval(
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Image.asset(
-                              category['image'] as String,
-                              fit: BoxFit.fill,
-                            ),
+                          child: Image.asset(
+                            "assets/icons/beyin.png",
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
-                  );
-                }).toList(),
-              ],
+
+                    // Kategoriler + metinleri
+                    ...categories.map((category) {
+                      final Offset pos =
+                          center + category['position'] as Offset;
+                      return Stack(
+                        children: [
+                          // Kategori ikonu
+                          Positioned(
+                            left: pos.dx - iconSize / 2,
+                            top: pos.dy - iconSize / 2,
+                            child: GestureDetector(
+                              onTap:
+                                  () => navigateToQuiz(
+                                    context,
+                                    category['name'] as String,
+                                  ),
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 300),
+                                width: iconSize,
+                                height: iconSize,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white.withOpacity(0.8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.6),
+                                      blurRadius: 10,
+                                      spreadRadius: 2,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipOval(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: Image.asset(
+                                      category['image'] as String,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Kategori adı metni
+                          Positioned(
+                            left: pos.dx - iconSize,
+                            top: pos.dy + iconSize / 2 + 4,
+                            width: iconSize * 2,
+                            child: Center(
+                              child: Text(
+                                category['name'] as String,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFFFD700), // Koyu sarı
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(2, 2),
+                                      blurRadius: 4,
+                                      color: Colors.black, // Siyah gölge
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
