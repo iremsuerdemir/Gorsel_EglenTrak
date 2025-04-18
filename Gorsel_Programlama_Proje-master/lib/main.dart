@@ -6,6 +6,7 @@ import 'package:gorsel_programlama_proje/pages/quiz_page.dart';
 import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:gorsel_programlama_proje/pages/score_history_page.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
+import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
 
 void main() {
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
@@ -50,7 +51,7 @@ void main() {
           ),
         ),
       ),
-      home: ScoreScreen(),
+      home: TimeFinishPage(),
     ),
   );
 }

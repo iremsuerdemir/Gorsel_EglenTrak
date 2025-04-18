@@ -30,6 +30,7 @@ environment:
 dependencies:
   intl: ^0.18.1
   
+  
 
   fl_score_bar: ^0.2.4 
   flutter:
@@ -69,7 +70,7 @@ flutter:
     - assets/icons/
     - assets/sounds/
     - assets/animations/
-
+    - assets/animations/time_over.json
     - assets/animations/background.json
     - assets/animations/quiz_start.json
     - assets/animations/intro.json

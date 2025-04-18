@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/question_list.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
+import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
 import 'package:lottie/lottie.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -75,7 +76,10 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
           isTimeUp = true;
         });
         timer.cancel();
-        goToNextQuestion();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TimeFinishPage()),
+        );
       }
     });
   }
@@ -151,7 +155,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         }
 
         await lottieController.forward(from: 0.0);
-        await Future.delayed(Duration(seconds: 0));
+        await Future.delayed(Duration(seconds: 1));
         setState(() => doubleAnswerActive = false);
         goToNextQuestion();
         return;
@@ -264,6 +268,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         firstSelectedAnswer != -1 &&
         firstSelectedAnswer != correctAnswerIndex &&
         index == firstSelectedAnswer;
+    final isFirstSelected =
+        doubleAnswerActive &&
+        firstSelectedAnswer == index; // İlk seçilen cevap kontrolü
 
     if (usedFiftyFifty && hiddenOptions.contains(index)) {
       return const SizedBox.shrink();
@@ -278,8 +285,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       } else if (isFirstSelectedWrong && index == firstSelectedAnswer) {
         bgColor = Colors.red.withOpacity(0.7); // İlk yanlış cevap rengi
       }
-    } else if (doubleAnswerActive && selectedAnswer == index) {
-      bgColor = Colors.orangeAccent; // İlk seçilen cevap rengi
+    } else if (isFirstSelected) {
+      // doubleAnswerActive ve ilk seçilen cevap
+      bgColor = Colors.orangeAccent;
     }
 
     return SizedBox(
@@ -292,14 +300,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
             duration: Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 136, 208, 228),
-                  Color.fromARGB(255, 90, 46, 112),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              color: bgColor,
+
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -320,7 +322,10 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,
-                    color: const Color.fromARGB(255, 243, 196, 24),
+                    color:
+                        bgColor == Colors.white
+                            ? Color.fromARGB(255, 243, 196, 24)
+                            : Colors.white,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 1.5,
                     shadows: [
