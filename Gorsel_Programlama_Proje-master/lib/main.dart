@@ -51,7 +51,7 @@ void main() {
           ),
         ),
       ),
-      home: TimeFinishPage(),
+      home: ScoreHistoryPage(),
     ),
   );
 }

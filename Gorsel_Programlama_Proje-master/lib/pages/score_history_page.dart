@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/score_history_item.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
+import 'package:gorsel_programlama_proje/pages/awards.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -17,8 +18,6 @@ class ScoreHistoryPage extends StatelessWidget {
           return b.timestamp.compareTo(a.timestamp);
         });
 
-    final top5 = skorGecmisi.take(5).toList();
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -32,7 +31,7 @@ class ScoreHistoryPage extends StatelessWidget {
           ),
           child: AppBar(
             title: const Text(
-              'En İyi 5 Skor',
+              'En İyi Skorlar',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -73,14 +72,13 @@ class ScoreHistoryPage extends StatelessWidget {
         ),
         child: ListView.builder(
           padding: const EdgeInsets.all(16),
-          itemCount: top5.length,
+          itemCount: skorGecmisi.length,
           itemBuilder: (context, index) {
-            final skorKaydi = top5[index];
+            final skorKaydi = skorGecmisi[index];
             final formattedDate = DateFormat(
               'dd MMM yyyy - HH:mm:ss',
             ).format(skorKaydi.timestamp);
-
-            // 🥇🥈🥉 Emoji ile ödül simgeleri
+            final isTop3 = index < 3;
             final String? medalEmoji = switch (index) {
               0 => '🥇',
               1 => '🥈',
@@ -89,7 +87,7 @@ class ScoreHistoryPage extends StatelessWidget {
             };
 
             return Stack(
-              clipBehavior: Clip.none, // <-- Bu kısım taşmayı engeller
+              clipBehavior: Clip.none,
               children: [
                 AnimatedContainer(
                   duration: Duration(milliseconds: 500 + (index * 100)),
@@ -107,8 +105,10 @@ class ScoreHistoryPage extends StatelessWidget {
                     ],
                     border: Border.all(
                       color:
-                          index == 0
-                              ? Colors.amberAccent
+                          isTop3
+                              ? (index == 0
+                                  ? Colors.amberAccent
+                                  : Colors.white.withOpacity(0.3))
                               : Colors.white.withOpacity(0.3),
                       width: 2,
                     ),
@@ -135,20 +135,77 @@ class ScoreHistoryPage extends StatelessWidget {
                       style: const TextStyle(color: Colors.white70),
                     ),
                     isThreeLine: true,
+                    trailing:
+                        isTop3
+                            ? ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => Awards(
+                                          skorKaydi: skorKaydi,
+                                          siralama: index,
+                                        ),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.limeAccent.shade400,
+                                foregroundColor: Colors.deepPurple.shade800,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.1,
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black26,
+                                      offset: Offset(1, 1),
+                                      blurRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                  side: BorderSide(
+                                    color: Colors.yellow.shade700,
+                                    width: 1.5,
+                                  ),
+                                ),
+                                elevation: 6,
+                                animationDuration: const Duration(
+                                  milliseconds: 150,
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text('Ödülü Kap!'),
+                                ],
+                              ),
+                            )
+                            : null,
                   ),
                 ),
-
-                // 🎉 Lottie animasyonu sadece kazanan için
-                if (index == 0)
+                if (isTop3 && index == 0)
                   Positioned(
-                    right: 0, // Sağ tarafa dayandırıyoruz
-                    top: 0, // Üst kısımdan sıfırlıyoruz
+                    right: 0,
+                    top: 0,
                     child: Align(
-                      alignment:
-                          Alignment.centerRight, // Animasyonu sağa hizalıyoruz
+                      alignment: Alignment.centerRight,
                       child: SizedBox(
-                        width: 100,
-                        height: 100,
+                        width: 80,
+                        height: 80,
                         child: Lottie.asset(
                           'assets/animations/star.json',
                           repeat: true,

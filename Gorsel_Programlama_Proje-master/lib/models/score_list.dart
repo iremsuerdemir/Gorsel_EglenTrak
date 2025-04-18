@@ -7,12 +7,15 @@ class ScoreList {
   ScoreList({required this.kullaniciAdi, required this.score});
 
   static List<ScoreList> list = [
-    ScoreList(kullaniciAdi: "Ali", score: 1),
-    ScoreList(kullaniciAdi: "Veli", score: 4),
-    ScoreList(kullaniciAdi: "Ayşe", score: 5),
-    ScoreList(kullaniciAdi: "Fatma", score: 8),
-    ScoreList(kullaniciAdi: "Mehmet", score: 9),
-    ScoreList(kullaniciAdi: "Zeynep", score: 10),
+    ScoreList(kullaniciAdi: "Ali", score: 10),
+    ScoreList(kullaniciAdi: "Veli", score: 40),
+    ScoreList(kullaniciAdi: "Ayşe", score: 50),
+    ScoreList(kullaniciAdi: "Fatma", score: 80),
+    ScoreList(kullaniciAdi: "Mehmet", score: 90),
+    ScoreList(kullaniciAdi: "Zeynep", score: 100),
+    ScoreList(kullaniciAdi: "Can", score: 20),
+    ScoreList(kullaniciAdi: "Ece", score: 30),
+    ScoreList(kullaniciAdi: "Burak", score: 70),
   ];
 
   static void ekle(ScoreList yeniList) {
