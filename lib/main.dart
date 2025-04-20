@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/models/card_items.dart';
-import 'package:gorsel_programlama_proje/pages/choice_game_detail_menu_page.dart';
+import 'package:gorsel_programlama_proje/pages/my_games_page.dart';
 
 void main() {
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
@@ -45,13 +44,7 @@ void main() {
           ),
         ),
       ),
-      home: ChoiceGameDetailMenuPage(
-        cards: CardItems.items,
-        title: "deneme",
-        round: 4,
-        description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      ),
+      home: MyGamesPage(),
     ),
   );
 }

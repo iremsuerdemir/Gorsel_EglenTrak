@@ -8,8 +8,15 @@ import 'package:gorsel_programlama_proje/models/card_model.dart';
 class AddCardPage extends StatefulWidget {
   final List<CardModel>? cards;
   final String? title;
+  final String? description;
   final int? round;
-  const AddCardPage({super.key, this.cards, this.title, this.round});
+  const AddCardPage({
+    super.key,
+    this.cards,
+    this.title,
+    this.round,
+    this.description,
+  });
 
   @override
   State<AddCardPage> createState() => _AddCardPageState();
@@ -17,6 +24,7 @@ class AddCardPage extends StatefulWidget {
 
 class _AddCardPageState extends State<AddCardPage> {
   final TextEditingController headerController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   final List<CardModel> imagePaths =
       []; // Her resim için hem URL hem de dosya adı tutacağız
@@ -29,13 +37,17 @@ class _AddCardPageState extends State<AddCardPage> {
   void initState() {
     super.initState();
     if (widget.cards != null) {
-      if (widget.title != null && widget.round != null) {
+      if (widget.title != null &&
+          widget.round != null &&
+          widget.description != null) {
         imagePaths.addAll(widget.cards!);
         isWillUpdate = true;
         headerController.text = widget.title!;
-        selectedValue = widget.round;
+        descriptionController.text = widget.description!;
       } else {
-        throw Exception("Düzenleme yapılacağından title ve round null olamaz");
+        throw Exception(
+          "Düzenleme yapılacağından title, description ve round null olamaz",
+        );
       }
     } else {
       isWillUpdate = false;
@@ -119,15 +131,11 @@ class _AddCardPageState extends State<AddCardPage> {
       builder:
           (context) => AlertDialog(
             title: Text('Düzenle'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: editNameController,
-                  decoration: InputDecoration(labelText: 'Dosya Adı'),
-                ),
-              ],
+            content: CustomTextField(
+              controller: editNameController,
+              label: "Ad",
             ),
+
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -236,6 +244,12 @@ class _AddCardPageState extends State<AddCardPage> {
             CustomTextField(
               controller: headerController,
               label: "Başlık",
+              focusedColor: Theme.of(context).primaryColor,
+            ),
+            SizedBox(height: 10),
+            CustomTextField(
+              controller: descriptionController,
+              label: "Açıklama",
               focusedColor: Theme.of(context).primaryColor,
             ),
 

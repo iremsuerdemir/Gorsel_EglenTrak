@@ -51,7 +51,7 @@ class _CohiceGamePageState extends State<CohiceGamePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: EdgeInsets.only(bottom: 10, left: 10),
                               child: Text(
                                 "Geri dönmek oyununuzu iptal edecektir. Emin misiniz?",
                               ),

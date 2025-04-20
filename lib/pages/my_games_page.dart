@@ -79,6 +79,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
                               (context) => AddCardPage(
                                 cards: CardItems.items,
                                 title: "Title",
+                                description: "deneme deneme",
                                 round: 8,
                               ),
                         ),

@@ -57,7 +57,7 @@ class GameOverBody extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(right: 10),
-                                child: Text("#$index"),
+                                child: Text("#${index + 1}"),
                               ),
                             ],
                           ),
