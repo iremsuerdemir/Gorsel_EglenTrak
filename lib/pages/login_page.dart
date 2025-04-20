@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_text_field.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,7 +12,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _registerNameController = TextEditingController();
   final TextEditingController _registerPasswordController =
@@ -55,7 +56,7 @@ class _LoginPageState extends State<LoginPage>
         _animationController.reverse();
       }
     });
-    _nameController.clear();
+    _emailController.clear();
     _registerEmailController.clear();
     _passwordController.clear();
     _registerNameController.clear();
@@ -92,8 +93,8 @@ class _LoginPageState extends State<LoginPage>
                         ),
                         SizedBox(height: 30),
                         CustomTextField(
-                          controller: _nameController,
-                          label: "Kullanıcı Adı",
+                          controller: _emailController,
+                          label: "Email",
                           focusedColor: Theme.of(context).colorScheme.primary,
                           enabledColor: Theme.of(context).colorScheme.onPrimary,
                           disabledColor:
@@ -115,7 +116,15 @@ class _LoginPageState extends State<LoginPage>
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              UserService.login(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              ).then((_) {
+                                if (!context.mounted) return;
+                                Navigator.pop(context);
+                              });
+                            },
                             child: Text("Giriş Yap"),
                           ),
                         ),
@@ -187,7 +196,16 @@ class _LoginPageState extends State<LoginPage>
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              UserService.register(
+                                email: _registerEmailController.text,
+                                username: _registerNameController.text,
+                                password: _registerPasswordController.text,
+                              ).then((_) {
+                                if (!context.mounted) return;
+                                Navigator.pop(context);
+                              });
+                            },
                             child: Text("Kayıt Ol"),
                           ),
                         ),

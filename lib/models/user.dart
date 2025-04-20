@@ -8,11 +8,11 @@ class User {
     return User(
       id: json["id"],
       email: json["email"],
-      username: json["username"],
+      username: json["userName"],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {"id": id, "email": email, "username": username};
+    return {"id": id, "email": email, "userName": username};
   }
 }

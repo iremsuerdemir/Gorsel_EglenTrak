@@ -44,7 +44,11 @@ class UserService {
         'Content-Type':
             'application/json', // JSON formatında gönderildiğini belirt
       },
-      body: {"email": email, "password": password, "username": username},
+      body: jsonEncode({
+        "email": email,
+        "password": password,
+        "username": username,
+      }),
     );
 
     if (response.statusCode == 201) {

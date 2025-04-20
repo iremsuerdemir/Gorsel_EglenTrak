@@ -6,9 +6,14 @@ import 'package:gorsel_programlama_proje/pages/login_page.dart';
 import 'package:gorsel_programlama_proje/pages/my_games_page.dart';
 import 'package:gorsel_programlama_proje/services/user_service.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +77,17 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
+                  ).then((_) {
+                    setState(() {});
+                  });
                 },
                 icon: Icon(Icons.person),
               )
               : IconButton(
                 onPressed: () {
-                  UserService.logout();
+                  setState(() {
+                    UserService.logout();
+                  });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("Başarıyla çıkış yapıldı"),
