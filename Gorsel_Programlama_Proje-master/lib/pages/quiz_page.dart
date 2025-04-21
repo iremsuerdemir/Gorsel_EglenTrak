@@ -1,11 +1,13 @@
 import 'dart:async';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/question_list.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
+import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
 import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
 import 'package:lottie/lottie.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class QuizPage extends StatefulWidget {
   final String category;
@@ -30,7 +32,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   late AnimationController pageTransition;
   late AnimationController lottieController;
 
-  // Jokerler
   bool usedFiftyFifty = false;
   bool usedDoubleAnswer = false;
   bool usedSkipQuestion = false;
@@ -64,17 +65,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   void startTimer() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) async {
       if (timeLeft > 0) {
-        setState(() {
-          timeLeft--;
-        });
-
+        setState(() => timeLeft--);
         if (timeLeft == 10) {
           await player.play(AssetSource("sounds/alert.mp3"));
         }
       } else {
-        setState(() {
-          isTimeUp = true;
-        });
+        setState(() => isTimeUp = true);
         timer.cancel();
         Navigator.push(
           context,
@@ -109,7 +105,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         firstSelectedAnswer = index;
 
         if (index == correctAnswerIndex) {
-          // İlk cevap doğruysa, normal akışa geç
           timer.cancel();
           setState(() {
             selectedAnswer = index;
@@ -124,15 +119,11 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
           await Future.delayed(Duration(seconds: 2));
           goToNextQuestion();
         } else {
-          // İlk cevap yanlışsa, kullanıcıya ikinci şansı ver
-          setState(() {
-            selectedAnswer = index;
-          });
+          setState(() => selectedAnswer = index);
           await player.play(AssetSource("sounds/wrong.mp3"));
         }
         return;
       } else {
-        // İkinci hakkı kullanıyor
         timer.cancel();
         setState(() {
           selectedAnswer = index;
@@ -149,9 +140,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
           setState(() => score += 10);
         } else {
           await player.play(AssetSource("sounds/wrong.mp3"));
-          setState(() {
-            selectedAnswer = correctAnswerIndex; // Doğru cevabı göster
-          });
+          setState(() => selectedAnswer = correctAnswerIndex);
         }
 
         await lottieController.forward(from: 0.0);
@@ -178,10 +167,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       setState(() => score += 10);
     } else {
       await player.play(AssetSource("sounds/wrong.mp3"));
-      setState(() {
-        selectedAnswer = correctAnswerIndex; // Doğru cevabı göster
-      });
-      await Future.delayed(Duration(seconds: 1)); // Kısa bir süre göster
+      setState(() => selectedAnswer = correctAnswerIndex);
+      await Future.delayed(Duration(seconds: 1));
     }
 
     lottieController.forward(from: 0.0);
@@ -197,17 +184,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       showLottie = false;
       lottieFile = '';
       hiddenOptions = [];
-      firstSelectedAnswer = -1; // Reset first selected answer
+      firstSelectedAnswer = -1;
     });
 
-    if (currentQuestionIndex < QuestionList.list.length - 1 || isTimeUp) {
+    if (currentQuestionIndex < QuestionList.list.length - 1) {
       setState(() {
-        currentQuestionIndex =
-            isTimeUp && currentQuestionIndex < QuestionList.list.length - 1
-                ? currentQuestionIndex + 1
-                : currentQuestionIndex < QuestionList.list.length - 1
-                ? currentQuestionIndex + 1
-                : currentQuestionIndex;
+        currentQuestionIndex++;
         timeLeft = 40;
       });
       await pageTransition.reverse();
@@ -230,9 +212,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     final correctAnswerIndex = currentQuestion.correctAnswerIndex;
     List<int> incorrectOptions = [];
     for (int i = 0; i < currentQuestion.options.length; i++) {
-      if (i != correctAnswerIndex) {
-        incorrectOptions.add(i);
-      }
+      if (i != correctAnswerIndex) incorrectOptions.add(i);
     }
     incorrectOptions.shuffle();
 
@@ -268,9 +248,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         firstSelectedAnswer != -1 &&
         firstSelectedAnswer != correctAnswerIndex &&
         index == firstSelectedAnswer;
-    final isFirstSelected =
-        doubleAnswerActive &&
-        firstSelectedAnswer == index; // İlk seçilen cevap kontrolü
+    final isFirstSelected = doubleAnswerActive && firstSelectedAnswer == index;
 
     if (usedFiftyFifty && hiddenOptions.contains(index)) {
       return const SizedBox.shrink();
@@ -283,10 +261,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       } else if (isSelected && !isFirstSelectedWrong) {
         bgColor = Colors.red;
       } else if (isFirstSelectedWrong && index == firstSelectedAnswer) {
-        bgColor = Colors.red.withOpacity(0.7); // İlk yanlış cevap rengi
+        bgColor = Colors.red.withOpacity(0.7);
       }
     } else if (isFirstSelected) {
-      // doubleAnswerActive ve ilk seçilen cevap
       bgColor = Colors.orangeAccent;
     }
 
@@ -301,7 +278,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
             curve: Curves.easeInOut,
             decoration: BoxDecoration(
               color: bgColor,
-
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
@@ -328,9 +304,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                   style: TextStyle(
                     fontSize: 20,
                     color:
-                        bgColor == Colors.white
-                            ? Color.fromARGB(255, 0, 0, 0)
-                            : Colors.white,
+                        bgColor == Colors.white ? Colors.black : Colors.white,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 1.5,
                     shadows: [
@@ -387,160 +361,183 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 
     return Scaffold(
       backgroundColor: Colors.deepPurple[700],
-      body: SafeArea(
-        child: FadeTransition(
-          opacity: pageTransition,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Card(
-                    color: Colors.deepPurple[300],
-                    elevation: 8,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SafeArea(
+                  child: FadeTransition(
+                    opacity: pageTransition,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.emoji_events,
-                                color: Colors.amberAccent,
-                              ),
-                              SizedBox(width: 6),
-                              Text(
-                                "Skor: $score",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(width: 24),
-                          Row(
-                            children: [
-                              Icon(Icons.timer, color: Colors.redAccent),
-                              SizedBox(width: 6),
-                              Text(
-                                "Süre: $timeLeft",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Card(
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    color: Colors.deepPurple[300],
-                    shadowColor: const Color.fromARGB(
-                      255,
-                      245,
-                      231,
-                      36,
-                    ).withOpacity(0.5),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            currentQuestion.questionText,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              letterSpacing: 1.5,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 5.0,
-                                  color: const Color.fromARGB(
-                                    255,
-                                    245,
-                                    231,
-                                    36,
-                                  ).withOpacity(0.5),
-                                  offset: Offset(2, 2),
-                                ),
-                              ],
+                          Card(
+                            color: Colors.deepPurple[300],
+                            elevation: 8,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 10,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.emoji_events,
+                                        color: Colors.amberAccent,
+                                      ),
+
+                                      Text(
+                                        "Skor: $score",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 40),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.timer,
+                                        color: Colors.redAccent,
+                                      ),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        "Süre: $timeLeft",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
+                          const SizedBox(height: 20),
+                          Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            color: Colors.deepPurple[300],
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    currentQuestion.questionText,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      letterSpacing: 1.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Column(
+                            children:
+                                currentQuestion.options
+                                    .asMap()
+                                    .entries
+                                    .map((entry) => buildAnswer(entry.key))
+                                    .toList(),
+                          ),
+                          const SizedBox(height: 20),
+                          if (isTimeUp)
+                            Text(
+                              "Süreniz doldu!",
+                              style: TextStyle(
+                                color: Colors.redAccent,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildJokerButton(
+                                'assets/icons/fifty.png',
+                                useFiftyFifty,
+                                usedFiftyFifty,
+                              ),
+                              buildJokerButton(
+                                'assets/icons/double.png',
+                                useDoubleAnswer,
+                                usedDoubleAnswer,
+                              ),
+                              buildJokerButton(
+                                'assets/icons/skip.png',
+                                skipQuestion,
+                                usedSkipQuestion,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  Column(
-                    children:
-                        currentQuestion.options.asMap().entries.map((entry) {
-                          int index = entry.key;
-                          return buildAnswer(index);
-                        }).toList(),
-                  ),
-                  const SizedBox(height: 20),
-                  if (isTimeUp)
-                    Text(
-                      "Süreniz doldu!",
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildJokerButton(
-                        'assets/icons/fifty.png',
-                        useFiftyFifty,
-                        usedFiftyFifty,
-                      ),
-                      buildJokerButton(
-                        'assets/icons/double.png',
-                        useDoubleAnswer,
-                        usedDoubleAnswer,
-                      ),
-                      buildJokerButton(
-                        'assets/icons/skip.png',
-                        skipQuestion,
-                        usedSkipQuestion,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  if (showLottie)
-                    Lottie.asset(
+                ),
+              ],
+            ),
+          ),
+          if (showLottie)
+            Positioned.fill(
+              child: Center(
+                child: Opacity(
+                  opacity: 0.7, // Daha silik görünüm
+                  child: SizedBox(
+                    width:
+                        MediaQuery.of(context).size.width *
+                        2.0, // Daha büyük boyut
+                    height:
+                        MediaQuery.of(context).size.height *
+                        2.0, // Daha büyük boyut
+                    child: Lottie.asset(
                       lottieFile,
                       controller: lottieController,
                       onLoaded: (composition) {
                         lottieController.duration = composition.duration;
                       },
+                      fit: BoxFit.contain,
                     ),
-                ],
+                  ),
+                ),
               ),
             ),
+          Positioned(
+            top: 20,
+            left: 20,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuizIntroPage()),
+                );
+              },
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

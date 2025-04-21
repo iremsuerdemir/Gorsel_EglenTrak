@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/category_page.dart';
+import 'package:gorsel_programlama_proje/pages/home_page.dart';
 import 'package:gorsel_programlama_proje/pages/informatin_quiz_intro.dart';
 import 'package:lottie/lottie.dart';
 
@@ -37,6 +38,13 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
     );
   }
 
+  void navigateToLoginPage(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +52,6 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
         fit: StackFit.expand,
         children: [
           Lottie.asset('assets/animations/background.json', fit: BoxFit.cover),
-
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
@@ -52,7 +59,6 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-
                     Text(
                       "Bilgi Yarışmasına Hoş Geldiniz!",
                       textAlign: TextAlign.center,
@@ -70,13 +76,9 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         ],
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
                     Lottie.asset('assets/animations/intro.json', height: 300),
-
                     const SizedBox(height: 20),
-
                     if (_showSpeechBubble)
                       GestureDetector(
                         onTap: () => navigateToInformationPage(context),
@@ -85,10 +87,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           curve: Curves.easeOutBack,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [
-                                Color(0xFF00FFAB), // Açık neon yeşil
-                                Color(0xFF58CFFB), // Parlak mavi
-                              ],
+                              colors: [Color(0xFF00FFAB), Color(0xFF58CFFB)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -141,9 +140,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           ),
                         ),
                       ),
-
-                    const SizedBox(height: 60),
-
+                    const SizedBox(height: 30),
                     GestureDetector(
                       onTap: () => navigateToHome(context),
                       child: AnimatedContainer(
@@ -151,10 +148,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         curve: Curves.easeOutBack,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              Color(0xFF00FFAB), // Açık neon yeşil
-                              Color(0xFF58CFFB), // Parlak mavi
-                            ],
+                            colors: [Color(0xFF00FFAB), Color(0xFF58CFFB)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -206,8 +200,66 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         ),
                       ),
                     ),
-
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 30),
+                    GestureDetector(
+                      onTap: () => navigateToLoginPage(context),
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeOutBack,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFF00FFAB), Color(0xFF58CFFB)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.4),
+                              offset: Offset(4, 4),
+                              blurRadius: 12,
+                            ),
+                            BoxShadow(
+                              color: Colors.white.withOpacity(0.3),
+                              offset: Offset(-4, -4),
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 18.0,
+                            horizontal: 36.0,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.exit_to_app,
+                                color: Colors.redAccent,
+                                size: 26,
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                "Çıkış Yap",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 88, 6, 82),
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black.withOpacity(0.6),
+                                      offset: Offset(1.5, 1.5),
+                                      blurRadius: 5,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

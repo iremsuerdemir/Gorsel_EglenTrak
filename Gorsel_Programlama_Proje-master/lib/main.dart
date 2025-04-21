@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/models/card_items.dart';
-import 'package:gorsel_programlama_proje/pages/category_page.dart';
-import 'package:gorsel_programlama_proje/pages/choice_game_detail_menu_page.dart';
-import 'package:gorsel_programlama_proje/pages/quiz_page.dart';
-import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
-import 'package:gorsel_programlama_proje/pages/score_history_page.dart';
-import 'package:gorsel_programlama_proje/pages/score_screen.dart';
 import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
 
 void main() {
@@ -51,7 +44,7 @@ void main() {
           ),
         ),
       ),
-      home: QuizIntroPage(),
+      home: TimeFinishPage(),
     ),
   );
 }

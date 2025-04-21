@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:fl_score_bar/fl_score_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
 import 'package:gorsel_programlama_proje/pages/category_page.dart';
-import 'package:lottie/lottie.dart';
-import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
+import 'package:gorsel_programlama_proje/pages/home_page.dart';
 import 'package:gorsel_programlama_proje/pages/score_history_page.dart';
+import 'package:lottie/lottie.dart';
 
 class ScoreScreen extends StatefulWidget {
   final int score;
@@ -223,6 +223,54 @@ class _ScoreScreenState extends State<ScoreScreen> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 20),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      borderRadius: BorderRadius.circular(30),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 50,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              gradient: const LinearGradient(
+                                colors: [Colors.orangeAccent, Colors.amber],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.amber,
+                                  blurRadius: 15,
+                                  offset: const Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            child: const Text(
+                              "Ana sayfaya dön",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                letterSpacing: 1.2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
