@@ -112,7 +112,9 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
       child: Column(
         children: [
           Text(title, style: Theme.of(context).textTheme.displayLarge),
+          SizedBox(height: 10),
           Text(description),
+          SizedBox(height: 10),
           isGameOver
               ? SizedBox()
               : CustomButton(
