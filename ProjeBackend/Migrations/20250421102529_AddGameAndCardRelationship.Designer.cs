@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjeBackend;
 
@@ -10,9 +11,11 @@ using ProjeBackend;
 namespace ProjeBackend.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250421102529_AddGameAndCardRelationship")]
+    partial class AddGameAndCardRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,12 +74,7 @@ namespace ProjeBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Games");
                 });
@@ -119,23 +117,7 @@ namespace ProjeBackend.Migrations
 
             modelBuilder.Entity("ProjeBackend.Models.Game", b =>
                 {
-                    b.HasOne("ProjeBackend.Models.User", "User")
-                        .WithMany("Games")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ProjeBackend.Models.Game", b =>
-                {
                     b.Navigation("Cards");
-                });
-
-            modelBuilder.Entity("ProjeBackend.Models.User", b =>
-                {
-                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

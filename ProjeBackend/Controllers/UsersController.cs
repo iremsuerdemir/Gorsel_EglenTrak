@@ -85,17 +85,19 @@ namespace ProjeBackend.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<User>> Login(LoginRequest loginRequest)
+        public async Task<ActionResult<UserVM>> Login(LoginRequest loginRequest)
         {
             User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email && u.Password == loginRequest.Password);
-
-            if (user == null)
+            
+            if(user == null)
             {
-                return Unauthorized( new {message = "Email veya şifre hatalı"});
+                return Unauthorized(new { message = "Email veya şifre hatalı" });
             }
 
-            return Ok(user);
+            UserVM userVM = new UserVM(user.Id, user.UserName, user.Email);
+            return Ok(userVM);
         }
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
