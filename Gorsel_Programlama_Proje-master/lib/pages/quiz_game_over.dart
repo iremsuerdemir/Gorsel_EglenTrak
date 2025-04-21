@@ -184,7 +184,7 @@ class QuizGameOverState extends State<QuizGameOver>
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomePage(),
+                    builder: (context) => QuizIntroPage(),
                   ), // HomePage yönlendirmesi
                 );
               },

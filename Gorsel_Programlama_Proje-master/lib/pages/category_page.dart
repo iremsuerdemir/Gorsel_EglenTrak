@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:gorsel_programlama_proje/pages/home_page.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -90,7 +91,10 @@ class CategoryPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Color(0xFFFFD700)),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
           },
         ),
       ),
