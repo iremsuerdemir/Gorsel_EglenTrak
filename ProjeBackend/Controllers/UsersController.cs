@@ -23,10 +23,13 @@ namespace ProjeBackend.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserVM>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Select(u => new UserVM(u.Id, u.UserName, u.Email))
+                .ToListAsync();
         }
+
 
         // GET: api/Users/5
         [HttpGet("{id}")]

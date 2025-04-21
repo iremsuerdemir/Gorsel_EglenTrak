@@ -1,32 +1,43 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using ProjeBackend;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
 
-// Swagger / OpenAPI yapýlandýrmasý
+
+// Swagger / OpenAPI yapï¿½landï¿½rmasï¿½
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Veritabaný baðlantýsý
+// Veritabanï¿½ baï¿½lantï¿½sï¿½
 builder.Services.AddDbContext<ApiDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// CORS yapýlandýrmasý — herkese izin veren yapý
+// CORS yapï¿½landï¿½rmasï¿½ ï¿½ herkese izin veren yapï¿½
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
         policy => policy
-            .AllowAnyOrigin()    // Tüm domainlere izin
+            .AllowAnyOrigin()    // Tï¿½m domainlere izin
             .AllowAnyMethod()    // GET, POST, PUT, DELETE vs.
-            .AllowAnyHeader());  // Tüm headerlara izin
+            .AllowAnyHeader());  // Tï¿½m headerlara izin
 });
 
 var app = builder.Build();
 
-// Swagger sadece Development ortamýnda aktif
+app.UseStaticFiles();
+
+
+
+app.UseRouting();
+
+// Swagger sadece Development ortamï¿½nda aktif
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -35,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// CORS middleware — Authorization'dan önce çaðýr
+// CORS middleware ï¿½ Authorization'dan ï¿½nce ï¿½aï¿½ï¿½r
 app.UseCors("AllowAll");
 
 app.UseAuthorization();

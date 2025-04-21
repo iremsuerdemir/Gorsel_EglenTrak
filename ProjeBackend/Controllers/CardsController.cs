@@ -84,6 +84,41 @@ namespace ProjeBackend.Controllers
             return CreatedAtAction("GetCard", new { id = card.Id }, card);
         }
 
+        [HttpPost("UploadCard")]
+        public async Task<IActionResult> UploadCard([FromForm] IFormFile file, [FromForm] string name, [FromForm] int gameId)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("Dosya seçilmedi!");
+
+            // Dosya adı + sunucu dizini
+            var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
+            if (!Directory.Exists(uploadsDir))
+                Directory.CreateDirectory(uploadsDir);
+
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            var filePath = Path.Combine(uploadsDir, uniqueFileName);
+
+            // Dosyayı kaydet
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // DB'ye kayıt
+            var card = new Card
+            {
+                Name = name,
+                GameId = gameId,
+                ImagePath = $"images/cards/{uniqueFileName}"  // sadece yol!
+            };
+
+            _context.Card.Add(card);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { card.Id, card.Name, card.ImagePath });
+        }
+
+
         // DELETE: api/Cards/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCard(int id)

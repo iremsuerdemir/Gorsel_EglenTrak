@@ -50,6 +50,8 @@ class _MyGamesPageState extends State<MyGamesPage> {
                   round: 32,
                   cardHeaderImageIndex: 3,
                   cards: CardItems.items,
+                  title: "title",
+                  description: "deneme",
                   onPressed: () {
                     Navigator.push(
                       context,

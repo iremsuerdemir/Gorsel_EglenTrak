@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_card.dart';
-import 'package:gorsel_programlama_proje/models/card_items.dart';
-import 'package:gorsel_programlama_proje/models/card_model.dart';
+import 'package:gorsel_programlama_proje/models/game_model.dart';
 import 'package:gorsel_programlama_proje/pages/choice_game_detail_menu_page.dart';
+import 'package:gorsel_programlama_proje/services/game_service.dart';
 
-class ChoiceGameMenuPage extends StatelessWidget {
-  ChoiceGameMenuPage({super.key});
-  final List<List<CardModel>> cards = [
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-    CardItems.items.toList(),
-  ];
+class ChoiceGameMenuPage extends StatefulWidget {
+  const ChoiceGameMenuPage({super.key});
+
+  @override
+  State<ChoiceGameMenuPage> createState() => _ChoiceGameMenuPageState();
+}
+
+class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
+  List<GameModel> games = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    GameService.getGames().then((g) {
+      setState(() {
+        if (g != null) {
+          games = g;
+        } else {
+          games = [];
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,25 +49,26 @@ class ChoiceGameMenuPage extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 300,
                 ),
-                itemCount: cards.length,
+                itemCount: games.length,
                 itemBuilder: (context, i) {
                   return Padding(
                     padding: EdgeInsets.all(5),
                     child: CustomCard(
-                      round: 32,
+                      round: games[i].round,
                       cardHeaderImageIndex: 6,
-                      cards: cards[i],
+                      cards: games[i].cards,
+                      title: games[i].name,
+                      description: games[i].description,
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder:
                                 (context) => ChoiceGameDetailMenuPage(
-                                  cards: cards[i],
-                                  round: 4,
-                                  title: "title",
-                                  description:
-                                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                  cards: games[i].cards,
+                                  round: games[i].round,
+                                  title: games[i].name,
+                                  description: games[i].description,
                                 ),
                           ),
                         );

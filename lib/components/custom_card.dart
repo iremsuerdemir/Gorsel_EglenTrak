@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
+import 'package:gorsel_programlama_proje/services/base_url.dart';
 
 class CustomCard extends StatelessWidget {
   final int round;
+  final String title;
+  final String description;
   final int cardHeaderImageIndex;
   final List<CardModel> cards;
   final Function? onPressed;
@@ -13,6 +16,8 @@ class CustomCard extends StatelessWidget {
     required this.cardHeaderImageIndex,
     required this.cards,
     this.onPressed,
+    required this.title,
+    required this.description,
   });
 
   @override
@@ -34,7 +39,7 @@ class CustomCard extends StatelessWidget {
                       top: Radius.circular(10),
                     ),
                     child: Image.network(
-                      cards[cardHeaderImageIndex].imagePath,
+                      "${BaseUrl.imageBaseUrl}/${cards[cardHeaderImageIndex].imagePath}",
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -49,12 +54,12 @@ class CustomCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Title",
+                          title,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         SizedBox(height: 8),
                         Text(
-                          "Descriptrion",
+                          description,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: Theme.of(context).textTheme.headlineSmall,

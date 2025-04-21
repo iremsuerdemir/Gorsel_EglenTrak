@@ -14,7 +14,7 @@ namespace ProjeBackend.Models
         public required string Description { get; set; }
 
         [Required]
-        public required string Round { get; set; }
+        public required int Round { get; set; }
 
         [Required]
         public required string ImagePath { get; set; }

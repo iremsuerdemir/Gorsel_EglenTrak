@@ -558,3 +558,4 @@ C:\Users\polat\OneDrive\Masaüstü\Gorsel_Programlama_Proje\ProjeBackend\obj\Deb
 C:\Users\polat\OneDrive\Masaüstü\Gorsel_Programlama_Proje\ProjeBackend\obj\Debug\net8.0\ProjeBackend.pdb
 C:\Users\polat\OneDrive\Masaüstü\Gorsel_Programlama_Proje\ProjeBackend\obj\Debug\net8.0\ProjeBackend.genruntimeconfig.cache
 C:\Users\polat\OneDrive\Masaüstü\Gorsel_Programlama_Proje\ProjeBackend\obj\Debug\net8.0\ref\ProjeBackend.dll
+C:\Users\polat\OneDrive\Masaüstü\Gorsel_Programlama_Proje\ProjeBackend\bin\Debug\net8.0\ProjeBackend.staticwebassets.runtime.json
