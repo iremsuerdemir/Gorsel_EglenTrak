@@ -34,6 +34,7 @@ flutter:
     - assets/animations/
     - assets/animations/time_over.json
     - assets/animations/background.json
+    - assets/animations/gameover.json
     - assets/animations/quiz_start.json
     - assets/animations/intro.json
     - assets/animations/congrats.json

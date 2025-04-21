@@ -4,7 +4,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/question_list.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
-import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
+import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
+import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
 import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
 import 'package:lottie/lottie.dart';
@@ -96,7 +97,13 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       await player.play(AssetSource("sounds/wrong.mp3"));
       lottieController.forward(from: 0.0);
       await Future.delayed(Duration(seconds: 2));
-      goToNextQuestion();
+
+      // İlk yanlışta TimeFinishPage'e yönlendir
+      timer.cancel();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => QuizGameOver()),
+      );
       return;
     }
 
@@ -121,6 +128,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         } else {
           setState(() => selectedAnswer = index);
           await player.play(AssetSource("sounds/wrong.mp3"));
+          await Future.delayed(Duration(seconds: 1));
         }
         return;
       } else {
@@ -138,15 +146,21 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         if (index == correctAnswerIndex) {
           await player.play(AssetSource("sounds/correct.mp3"));
           setState(() => score += 10);
+          await lottieController.forward(from: 0.0);
+          await Future.delayed(Duration(seconds: 2));
+          setState(() => doubleAnswerActive = false);
+          goToNextQuestion();
         } else {
           await player.play(AssetSource("sounds/wrong.mp3"));
-          setState(() => selectedAnswer = correctAnswerIndex);
-        }
+          await lottieController.forward(from: 0.0);
+          await Future.delayed(Duration(seconds: 2));
 
-        await lottieController.forward(from: 0.0);
-        await Future.delayed(Duration(seconds: 1));
-        setState(() => doubleAnswerActive = false);
-        goToNextQuestion();
+          // İkinci cevap da yanlışsa oyun bitsin
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => QuizGameOver()),
+          );
+        }
         return;
       }
     }
@@ -165,15 +179,20 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     if (index == correctAnswerIndex) {
       await player.play(AssetSource("sounds/correct.mp3"));
       setState(() => score += 10);
+      await lottieController.forward(from: 0.0);
+      await Future.delayed(Duration(seconds: 2));
+      goToNextQuestion();
     } else {
       await player.play(AssetSource("sounds/wrong.mp3"));
-      setState(() => selectedAnswer = correctAnswerIndex);
-      await Future.delayed(Duration(seconds: 1));
-    }
+      await lottieController.forward(from: 0.0);
+      await Future.delayed(Duration(seconds: 2));
 
-    lottieController.forward(from: 0.0);
-    await Future.delayed(Duration(seconds: 2));
-    goToNextQuestion();
+      // Yanlışsa direkt TimeFinishPage'e git
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => QuizGameOver()),
+      );
+    }
   }
 
   void goToNextQuestion() async {
@@ -274,7 +293,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 100),
             curve: Curves.easeInOut,
             decoration: BoxDecoration(
               color: bgColor,
@@ -394,7 +413,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                         Icons.emoji_events,
                                         color: Colors.amberAccent,
                                       ),
-
                                       Text(
                                         "Skor: $score",
                                         style: TextStyle(
@@ -504,14 +522,10 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
             Positioned.fill(
               child: Center(
                 child: Opacity(
-                  opacity: 0.7, // Daha silik görünüm
+                  opacity: 0.7,
                   child: SizedBox(
-                    width:
-                        MediaQuery.of(context).size.width *
-                        2.0, // Daha büyük boyut
-                    height:
-                        MediaQuery.of(context).size.height *
-                        2.0, // Daha büyük boyut
+                    width: MediaQuery.of(context).size.width * 2.0,
+                    height: MediaQuery.of(context).size.height * 2.0,
                     child: Lottie.asset(
                       lottieFile,
                       controller: lottieController,
@@ -532,7 +546,9 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => QuizIntroPage()),
+                  MaterialPageRoute(
+                    builder: (context) => QuizHomePage(category: 'bilim'),
+                  ),
                 );
               },
             ),
