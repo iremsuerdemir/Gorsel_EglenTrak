@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
 import 'package:gorsel_programlama_proje/pages/quiz_page.dart';
 
 void main() {
@@ -44,7 +45,7 @@ void main() {
           ),
         ),
       ),
-      home: QuizPage(category: 'bilim'),
+      home: QuizGameOver(),
     ),
   );
 }

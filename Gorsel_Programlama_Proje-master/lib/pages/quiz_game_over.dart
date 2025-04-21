@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
+import 'package:gorsel_programlama_proje/pages/home_page.dart';
+import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:lottie/lottie.dart';
+
+import 'quizhomepage.dart';
 
 // Global veri yönetimi için QuizManager sınıfı
 class QuizManager {
@@ -47,7 +50,7 @@ class QuizGameOverState extends State<QuizGameOver>
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => QuizIntroPage(),
+        builder: (context) => QuizHomePage(category: 'bilim'),
       ), // QuizIntroPage yönlendirmesi
     );
   }
@@ -76,7 +79,26 @@ class QuizGameOverState extends State<QuizGameOver>
                   children: [
                     SizedBox(
                       height: 200,
-                      child: Lottie.asset('assets/animations/gameover.json'),
+                      child: FutureBuilder(
+                        future: _loadLottieAnimation(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator(
+                              color: Colors.white,
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              'Animasyon yüklenemedi',
+                              style: TextStyle(color: Colors.white),
+                            );
+                          } else {
+                            return Lottie.asset(
+                              'assets/animations/gameover.json',
+                            );
+                          }
+                        },
+                      ),
                     ),
                     SizedBox(height: 20),
                     Text(
@@ -162,7 +184,7 @@ class QuizGameOverState extends State<QuizGameOver>
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizHomePage(category: 'tarih'),
+                    builder: (context) => HomePage(),
                   ), // HomePage yönlendirmesi
                 );
               },
@@ -187,39 +209,9 @@ class QuizGameOverState extends State<QuizGameOver>
       ),
     );
   }
-}
 
-// Diğer sayfalar (QuizIntroPage, CategoryPage, HomePage) şu şekilde:
-
-// QuizIntroPage sayfası
-class QuizIntroPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Quiz Başlangıç Sayfası')),
-      body: Center(child: Text('Quiz Başlangıç Sayfasına Hoşgeldiniz!')),
-    );
-  }
-}
-
-// CategoryPage sayfası
-class CategoryPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Kategori Sayfası')),
-      body: Center(child: Text('Kategori Seçenekleri Burada Olacak')),
-    );
-  }
-}
-
-// HomePage sayfası
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Ana Sayfa')),
-      body: Center(child: Text('Ana Sayfaya Hoşgeldiniz!')),
-    );
+  // Animasyon dosyasını yüklemek için yardımcı fonksiyon
+  Future<void> _loadLottieAnimation() async {
+    await Lottie.asset('assets/animations/gameover.json');
   }
 }
