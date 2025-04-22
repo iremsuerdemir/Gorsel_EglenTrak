@@ -102,7 +102,13 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       timer.cancel();
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuizGameOver()),
+        MaterialPageRoute(
+          builder:
+              (context) => QuizGameOver(
+                correctAnswersBeforeMistake: currentQuestionIndex,
+                scoreBeforeMistake: score,
+              ),
+        ),
       );
       return;
     }
@@ -158,7 +164,13 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
           // İkinci cevap da yanlışsa oyun bitsin
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => QuizGameOver()),
+            MaterialPageRoute(
+              builder:
+                  (context) => QuizGameOver(
+                    correctAnswersBeforeMistake: currentQuestionIndex,
+                    scoreBeforeMistake: score,
+                  ),
+            ),
           );
         }
         return;
@@ -190,7 +202,13 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       // Yanlışsa direkt TimeFinishPage'e git
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => QuizGameOver()),
+        MaterialPageRoute(
+          builder:
+              (context) => QuizGameOver(
+                correctAnswersBeforeMistake: currentQuestionIndex,
+                scoreBeforeMistake: score,
+              ),
+        ),
       );
     }
   }
