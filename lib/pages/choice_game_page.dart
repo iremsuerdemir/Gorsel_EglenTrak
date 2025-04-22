@@ -30,6 +30,7 @@ class _CohiceGamePageState extends State<CohiceGamePage> {
   void initState() {
     super.initState();
     game = Game(round: widget.round, cards: List.from(widget.cards));
+    game.cards.shuffle();
   }
 
   @override

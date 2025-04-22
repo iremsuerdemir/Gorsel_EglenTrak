@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
@@ -39,12 +41,38 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
                   });
                   widget.onGameUpdated();
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    "${BaseUrl.imageBaseUrl}/${widget.game.cards[0].imagePath}",
-                    fit: BoxFit.cover,
-                  ),
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "${BaseUrl.imageBaseUrl}/${widget.game.cards[0].imagePath}",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.secondary.withValues(alpha: 0.7),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        height: 30,
+                        child: Center(child: Text(widget.game.cards[0].name)),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: zoomButton(context, 0),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -66,17 +94,118 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
                   widget
                       .onGameUpdated(); // oyun bittiğinde gameOver ekranını göstermek için üst widgetı günceller
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    "${BaseUrl.imageBaseUrl}/${widget.game.cards[1].imagePath}",
-                    fit: BoxFit.cover,
-                  ),
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "${BaseUrl.imageBaseUrl}/${widget.game.cards[1].imagePath}",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withValues(alpha: 0.7),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        height: 30,
+                        child: Center(child: Text(widget.game.cards[1].name)),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: zoomButton(context, 1),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  GestureDetector zoomButton(BuildContext context, int i) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder:
+              (context) => Stack(
+                children: [
+                  BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 5.0, // X eksenindeki blur yoğunluğu
+                      sigmaY: 5.0, // Y eksenindeki blur yoğunluğu
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        color: Colors.transparent, // şeffaf overlay
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Dialog(
+                      backgroundColor: Colors.transparent,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Stack(
+                            children: [
+                              Image.network(
+                                "${BaseUrl.imageBaseUrl}/${widget.game.cards[i].imagePath}",
+                              ),
+                              Positioned(
+                                right: 10,
+                                top: 10,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.surface.withOpacity(0.7),
+                                    ),
+                                    child: Icon(Icons.close),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+        );
+      },
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Theme.of(context).colorScheme.surface.withOpacity(0.7),
+        ),
+        child: Icon(Icons.zoom_in),
       ),
     );
   }

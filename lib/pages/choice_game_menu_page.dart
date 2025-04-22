@@ -16,6 +16,7 @@ class ChoiceGameMenuPage extends StatefulWidget {
 
 class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
   List<GameModel> games = [];
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
         } else {
           games = [];
         }
+        isLoading = false;
       });
     });
   }
@@ -66,44 +68,49 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
-                ),
-                itemCount: games.length,
-                itemBuilder: (context, i) {
-                  return Padding(
-                    padding: EdgeInsets.all(5),
-                    child: CustomCard(
-                      round: games[i].round,
-                      cardHeaderImageIndex: 1,
-                      cards: games[i].cards,
-                      title: games[i].name,
-                      description: games[i].description,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => ChoiceGameDetailMenuPage(
-                                  cards: games[i].cards,
-                                  round: games[i].round,
-                                  title: games[i].name,
-                                  description: games[i].description,
-                                ),
-                          ),
-                        );
-                      },
+        child:
+            isLoading && games.isEmpty
+                ? Center(child: CircularProgressIndicator())
+                : games.isEmpty
+                ? Center(child: Text("Oyun bulunamadı!"))
+                : Column(
+                  children: [
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 300,
+                        ),
+                        itemCount: games.length,
+                        itemBuilder: (context, i) {
+                          return Padding(
+                            padding: EdgeInsets.all(5),
+                            child: CustomCard(
+                              round: games[i].round,
+                              cardHeaderImageIndex: 1,
+                              cards: games[i].cards,
+                              title: games[i].name,
+                              description: games[i].description,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => ChoiceGameDetailMenuPage(
+                                          cards: games[i].cards,
+                                          round: games[i].round,
+                                          title: games[i].name,
+                                          description: games[i].description,
+                                        ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+                  ],
+                ),
       ),
     );
   }
