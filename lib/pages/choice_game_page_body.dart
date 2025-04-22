@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
 import 'package:gorsel_programlama_proje/models/game.dart';
+import 'package:gorsel_programlama_proje/services/base_url.dart';
 
 class ChoiceGamePageBody extends StatefulWidget {
   final Game game;
@@ -41,7 +42,7 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    widget.game.cards[0].imagePath,
+                    "${BaseUrl.imageBaseUrl}/${widget.game.cards[0].imagePath}",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -68,7 +69,7 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    widget.game.cards[1].imagePath,
+                    "${BaseUrl.imageBaseUrl}/${widget.game.cards[1].imagePath}",
                     fit: BoxFit.cover,
                   ),
                 ),

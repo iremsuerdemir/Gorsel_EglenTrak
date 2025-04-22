@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_button.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
 import 'package:gorsel_programlama_proje/models/game.dart';
+import 'package:gorsel_programlama_proje/services/base_url.dart';
 
 class GameOverBody extends StatelessWidget {
   final Game game;
@@ -40,7 +41,7 @@ class GameOverBody extends StatelessWidget {
                             bottomLeft: Radius.circular(10),
                           ),
                           child: Image.network(
-                            card.imagePath,
+                            "${BaseUrl.imageBaseUrl}/${card.imagePath}",
                             width: 120,
                             height: double.infinity,
                             fit: BoxFit.cover,

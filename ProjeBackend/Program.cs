@@ -31,7 +31,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseStaticFiles();
 
 
 
@@ -48,6 +47,14 @@ app.UseHttpsRedirection();
 
 // CORS middleware � Authorization'dan �nce �a��r
 app.UseCors("AllowAll");
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+    }
+});
 
 app.UseAuthorization();
 

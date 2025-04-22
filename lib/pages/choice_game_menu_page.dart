@@ -1,3 +1,6 @@
+//import 'dart:html' as html;
+//import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_card.dart';
 import 'package:gorsel_programlama_proje/models/game_model.dart';
@@ -18,6 +21,8 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
   void initState() {
     super.initState();
 
+    //debugFetch("https://localhost:7176/images/cards/cem.jpeg");
+
     GameService.getGames().then((g) {
       setState(() {
         if (g != null) {
@@ -28,6 +33,25 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
       });
     });
   }
+
+  /*
+  Future<void> debugFetch(String url) async {
+    try {
+      final resp = await html.HttpRequest.request(
+        url,
+        responseType: 'arraybuffer',
+      );
+      print('Status: ${resp.status}'); // should be 200
+      print('Content-Type: ${resp.getResponseHeader('content-type')}');
+      final bytes = Uint8List.view(resp.response as ByteBuffer);
+      print(
+        'Header bytes: ${bytes.take(4).map((b) => b.toRadixString(16)).toList()}',
+      );
+    } catch (e) {
+      print('Fetch error: $e');
+    }
+  }
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +79,7 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
                     padding: EdgeInsets.all(5),
                     child: CustomCard(
                       round: games[i].round,
-                      cardHeaderImageIndex: 6,
+                      cardHeaderImageIndex: 1,
                       cards: games[i].cards,
                       title: games[i].name,
                       description: games[i].description,

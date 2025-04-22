@@ -3,6 +3,7 @@ import 'package:gorsel_programlama_proje/components/custom_button.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
 import 'package:gorsel_programlama_proje/pages/choice_game_page.dart';
+import 'package:gorsel_programlama_proje/services/base_url.dart';
 
 class ChoiceGameDetailMenuPage extends StatelessWidget {
   final List<CardModel> cards;
@@ -55,7 +56,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                               bottomLeft: Radius.circular(10),
                             ),
                             child: Image.network(
-                              cards[i].imagePath,
+                              "${BaseUrl.imageBaseUrl}/${cards[i].imagePath}",
                               width: 120,
                               height: double.infinity,
                               fit: BoxFit.cover,
