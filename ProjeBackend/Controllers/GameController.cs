@@ -26,20 +26,20 @@ namespace ProjeBackend.Controllers
         }
 
         // GET: api/Games/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Game>> GetGame(int id)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetGame(int userId)
         {
-            var game = await _context.Games
+            var games = await _context.Games
                 .Include(g => g.Cards)  // Kartlar dahil
                 .Include(g => g.User)   // Kullanıcı dahil
-                .FirstOrDefaultAsync(g => g.Id == id);
+                .Where(g => g.UserId == userId).ToListAsync();
 
-            if (game == null)
+            if (games == null || games.Count == 0)
             {
                 return NotFound();
             }
 
-            return game;
+            return games;
         }
 
         // POST: api/Games

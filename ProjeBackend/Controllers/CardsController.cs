@@ -85,9 +85,9 @@ namespace ProjeBackend.Controllers
         }
 
         [HttpPost("UploadCard")]
-        public async Task<IActionResult> UploadCard([FromForm] IFormFile file, [FromForm] string name, [FromForm] int gameId)
+        public async Task<IActionResult> UploadCard([FromForm] UploadCardRequest request)
         {
-            if (file == null || file.Length == 0)
+            if (request.File == null || request.File.Length == 0)
                 return BadRequest("Dosya seçilmedi!");
 
             // Dosya adı + sunucu dizini
@@ -95,20 +95,20 @@ namespace ProjeBackend.Controllers
             if (!Directory.Exists(uploadsDir))
                 Directory.CreateDirectory(uploadsDir);
 
-            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(request.File.FileName);
             var filePath = Path.Combine(uploadsDir, uniqueFileName);
 
             // Dosyayı kaydet
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await file.CopyToAsync(stream);
+                await request.File.CopyToAsync(stream);
             }
 
             // DB'ye kayıt
             var card = new Card
             {
-                Name = name,
-                GameId = gameId,
+                Name = request.Name,
+                GameId = request.GameId,
                 ImagePath = $"images/cards/{uniqueFileName}"  // sadece yol!
             };
 

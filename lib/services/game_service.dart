@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:gorsel_programlama_proje/models/game_model.dart';
 import 'package:gorsel_programlama_proje/services/base_url.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
 import 'package:http/http.dart' as http;
 
 class GameService {
@@ -26,5 +26,19 @@ class GameService {
     } else {
       return null;
     }
+  }
+
+  static Future<List<GameModel>> getUserGames() async {
+    List<GameModel> games = [];
+    final http.Response response = await http.get(
+      Uri.parse("${BaseUrl.baseUrl}/Games/${UserService.user!.id}"),
+    );
+
+    if (response.statusCode != 200) {
+      return games;
+    }
+
+    final values = jsonDecode(response.body)["\$values"];
+    return (values as List<dynamic>).map((e) => GameModel.fromJson(e)).toList();
   }
 }
