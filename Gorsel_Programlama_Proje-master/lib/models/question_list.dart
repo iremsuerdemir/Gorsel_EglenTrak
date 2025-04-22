@@ -3,6 +3,10 @@ class Question {
   final List<String> options;
   final int correctAnswerIndex;
 
+  static var list;
+
+  static var score;
+
   Question({
     required this.questionText,
     required this.options,

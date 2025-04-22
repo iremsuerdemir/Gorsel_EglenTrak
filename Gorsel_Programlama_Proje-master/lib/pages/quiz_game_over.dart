@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/pages/home_page.dart';
 import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:lottie/lottie.dart';
 
 import 'quizhomepage.dart';
 
-// Global veri yönetimi için QuizManager sınıfı
-class QuizManager {
-  static int correctAnswers = 0; // Doğru cevap sayısı
-  static int score = 0; // Puan
-}
-
 class QuizGameOver extends StatefulWidget {
+  final int correctAnswersBeforeMistake; // İlk hataya kadar doğru cevap sayısı
+  final int scoreBeforeMistake; // İlk hataya kadar alınan skor
+
+  QuizGameOver({
+    Key? key,
+    this.correctAnswersBeforeMistake = 0,
+    this.scoreBeforeMistake = 0,
+  }) : super(key: key);
+
   @override
-  State<QuizGameOver> createState() => QuizGameOverState();
+  State<QuizGameOver> createState() => _QuizGameOverState();
 }
 
-class QuizGameOverState extends State<QuizGameOver>
+class _QuizGameOverState extends State<QuizGameOver>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -51,7 +53,7 @@ class QuizGameOverState extends State<QuizGameOver>
       context,
       MaterialPageRoute(
         builder: (context) => QuizHomePage(category: 'bilim'),
-      ), // QuizIntroPage yönlendirmesi
+      ), // QuizHomePage yönlendirmesi
     );
   }
 
@@ -120,7 +122,7 @@ class QuizGameOverState extends State<QuizGameOver>
                     SizedBox(height: 20),
                     // Doğru cevap sayısı ve puan bilgileri
                     Text(
-                      "✅ Doğru Cevap Sayısı: ${QuizManager.correctAnswers}",
+                      "✅ Doğru Cevap Sayısı: ${widget.correctAnswersBeforeMistake}",
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -129,7 +131,7 @@ class QuizGameOverState extends State<QuizGameOver>
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "🏆 Skorunuz: ${QuizManager.score}",
+                      "🏆 Skorunuz: ${widget.scoreBeforeMistake}",
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,

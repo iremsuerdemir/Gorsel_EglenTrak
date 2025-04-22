@@ -204,6 +204,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       lottieFile = '';
       hiddenOptions = [];
       firstSelectedAnswer = -1;
+      usedDoubleAnswer = false;
     });
 
     if (currentQuestionIndex < QuestionList.list.length - 1) {
@@ -534,16 +535,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                     .toList(),
                           ),
                           const SizedBox(height: 20),
-                          if (isTimeUp)
-                            Text(
-                              "Süreniz doldu!",
-                              style: TextStyle(
-                                color: Colors.redAccent,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          const SizedBox(height: 20),
+                          if (isTimeUp) const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
