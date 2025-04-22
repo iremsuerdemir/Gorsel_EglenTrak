@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
+import 'package:gorsel_programlama_proje/components/zoom_dialog.dart';
 import 'package:gorsel_programlama_proje/models/game.dart';
 import 'package:gorsel_programlama_proje/services/base_url.dart';
 
@@ -138,64 +139,11 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
   GestureDetector zoomButton(BuildContext context, int i) {
     return GestureDetector(
       onTap: () {
-        showDialog(
+        ZoomDialog.show(
           context: context,
-          builder:
-              (context) => Stack(
-                children: [
-                  BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 5.0, // X eksenindeki blur yoğunluğu
-                      sigmaY: 5.0, // Y eksenindeki blur yoğunluğu
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        color: Colors.transparent, // şeffaf overlay
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Dialog(
-                      backgroundColor: Colors.transparent,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Stack(
-                            children: [
-                              Image.network(
-                                "${BaseUrl.imageBaseUrl}/${widget.game.cards[i].imagePath}",
-                              ),
-                              Positioned(
-                                right: 10,
-                                top: 10,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.surface.withOpacity(0.7),
-                                    ),
-                                    child: Icon(Icons.close),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+          image: Image.network(
+            "${BaseUrl.imageBaseUrl}/${widget.game.cards[i].imagePath}",
+          ),
         );
       },
       child: Container(
@@ -203,7 +151,7 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Theme.of(context).colorScheme.surface.withOpacity(0.7),
+          color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.7),
         ),
         child: Icon(Icons.zoom_in),
       ),

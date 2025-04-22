@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/custom_button.dart';
 import 'package:gorsel_programlama_proje/components/custom_text_field.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
+import 'package:gorsel_programlama_proje/components/zoom_dialog.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
 
 class AddCardPage extends StatefulWidget {
@@ -314,66 +315,74 @@ class _AddCardPageState extends State<AddCardPage> {
                     shrinkWrap: true,
                     itemCount: imagePaths.length,
                     itemBuilder: (context, i) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: ListTile(
-                          leading: Image.network(
-                            imagePaths[i].imagePath, // URL kullanılıyor
-                            width: 100,
-                            fit: BoxFit.contain,
-                          ),
-                          title: Text(
-                            imagePaths[i].name,
-                          ), // Dosya adı burada gösteriliyor
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedHeaderIndex = i;
-                                  });
-                                },
-                                icon:
-                                    selectedHeaderIndex != i
-                                        ? Icon(
-                                          Icons.check_box_outline_blank,
-                                          color: Colors.white,
-                                        )
-                                        : Icon(
-                                          Icons.check,
-                                          color: Colors.green,
-                                        ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  showEditDialog(context, i);
-                                },
-                                icon: Icon(
-                                  Icons.edit,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
+                      return GestureDetector(
+                        onTap: () {
+                          ZoomDialog.show(
+                            context: context,
+                            image: Image.network(imagePaths[i].imagePath),
+                          );
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: ListTile(
+                            leading: Image.network(
+                              imagePaths[i].imagePath, // URL kullanılıyor
+                              width: 100,
+                              fit: BoxFit.contain,
+                            ),
+                            title: Text(
+                              imagePaths[i].name,
+                            ), // Dosya adı burada gösteriliyor
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedHeaderIndex = i;
+                                    });
+                                  },
+                                  icon:
+                                      selectedHeaderIndex != i
+                                          ? Icon(
+                                            Icons.check_box_outline_blank,
+                                            color: Colors.white,
+                                          )
+                                          : Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                          ),
                                 ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    imagePaths.removeAt(i);
-                                    if (imagePaths.isEmpty ||
-                                        selectedHeaderIndex == i) {
-                                      selectedHeaderIndex = 0;
-                                    } else if (i < selectedHeaderIndex) {
-                                      selectedHeaderIndex--;
-                                    } else if (i > selectedHeaderIndex) {
-                                      //hiçbir şey yapma
-                                    } else {
-                                      selectedHeaderIndex = 0;
-                                    }
-                                  });
-                                },
-                                icon: Icon(Icons.delete, color: Colors.red),
-                              ),
-                            ],
+                                IconButton(
+                                  onPressed: () {
+                                    showEditDialog(context, i);
+                                  },
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      imagePaths.removeAt(i);
+                                      if (imagePaths.isEmpty ||
+                                          selectedHeaderIndex == i) {
+                                        selectedHeaderIndex = 0;
+                                      } else if (i < selectedHeaderIndex) {
+                                        selectedHeaderIndex--;
+                                      } else if (i > selectedHeaderIndex) {
+                                        //hiçbir şey yapma
+                                      } else {
+                                        selectedHeaderIndex = 0;
+                                      }
+                                    });
+                                  },
+                                  icon: Icon(Icons.delete, color: Colors.red),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
