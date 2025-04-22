@@ -444,30 +444,85 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Card(
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            color: Colors.deepPurple[300],
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
+
+                          Column(
+                            children: [
+                              Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                    currentQuestion.questionText,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      letterSpacing: 1.5,
+                                  // Numara Yuvarlakları
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: List.generate(
+                                      QuestionList.list.length,
+                                      (index) {
+                                        bool isActive =
+                                            index == currentQuestionIndex;
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 4.0,
+                                          ),
+                                          child: AnimatedContainer(
+                                            duration: Duration(
+                                              milliseconds: 300,
+                                            ),
+                                            width: isActive ? 30 : 20,
+                                            height: isActive ? 30 : 20,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color:
+                                                  isActive
+                                                      ? Colors.orangeAccent
+                                                      : Colors.white,
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              '${index + 1}',
+                                              style: TextStyle(
+                                                color:
+                                                    isActive
+                                                        ? Colors.white
+                                                        : Colors.deepPurple,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: isActive ? 16 : 12,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
+
+                                  const SizedBox(height: 20),
                                 ],
                               ),
-                            ),
+
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                color: Colors.deepPurple[300],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        currentQuestion.questionText,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          letterSpacing: 1.5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 20),
                           Column(
