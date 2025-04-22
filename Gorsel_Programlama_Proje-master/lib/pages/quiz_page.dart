@@ -1,81 +1,83 @@
 import 'dart:async';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:gorsel_programlama_proje/models/question_list.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
 import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
 import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
-import 'package:lottie/lottie.dart';
 
 class QuizPage extends StatefulWidget {
   final String category;
-
-  const QuizPage({super.key, required this.category});
+  const QuizPage({Key? key, required this.category}) : super(key: key);
 
   @override
-  State<QuizPage> createState() => _QuizPageState();
+  _QuizPageState createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
-  final player = AudioPlayer();
+  late final AudioPlayer player;
+  late final AnimationController pageTransition;
+  late final AnimationController lottieController;
+  Timer? timer;
+
   int currentQuestionIndex = 0;
   int selectedAnswer = -1;
   int score = 0;
   int timeLeft = 40;
-  late Timer timer;
+
   bool isTimeUp = false;
   bool questionAnswered = false;
   bool showLottie = false;
   String lottieFile = '';
-  late AnimationController pageTransition;
-  late AnimationController lottieController;
 
+  // Jokers
   bool usedFiftyFifty = false;
   bool usedDoubleAnswer = false;
   bool usedSkipQuestion = false;
-  int doubleAnswerAttempts = 2;
-  List<int> hiddenOptions = [];
   bool doubleAnswerActive = false;
   int firstSelectedAnswer = -1;
+  List<int> hiddenOptions = [];
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    player = AudioPlayer();
     pageTransition = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     )..forward();
     lottieController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
+    startTimer();
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    timer?.cancel();
     pageTransition.dispose();
     lottieController.dispose();
+    player.dispose();
     super.dispose();
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) async {
+    timer = Timer.periodic(const Duration(seconds: 1), (t) async {
       if (timeLeft > 0) {
         setState(() => timeLeft--);
         if (timeLeft == 10) {
           await player.play(AssetSource("sounds/alert.mp3"));
         }
       } else {
+        t.cancel();
         setState(() => isTimeUp = true);
-        timer.cancel();
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => TimeFinishPage()),
+          MaterialPageRoute(builder: (ContextAction) => TimeFinishPage()),
         );
       }
     });
@@ -84,157 +86,96 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   void checkAnswer(int index) async {
     if (questionAnswered) return;
 
-    final currentQuestion = QuestionList.list[currentQuestionIndex];
-    final correctAnswerIndex = currentQuestion.correctAnswerIndex;
+    final question = QuestionList.list[currentQuestionIndex];
+    final correctIndex = question.correctAnswerIndex;
 
-    if (usedFiftyFifty && index != correctAnswerIndex) {
-      setState(() {
-        selectedAnswer = index;
-        questionAnswered = true;
-        lottieFile = 'assets/animations/wrong.json';
-        showLottie = true;
-      });
+    timer?.cancel();
+
+    // Double Answer first attempt
+    if (doubleAnswerActive && firstSelectedAnswer == -1) {
+      firstSelectedAnswer = index;
+      setState(() => selectedAnswer = index);
       await player.play(AssetSource("sounds/wrong.mp3"));
-      lottieController.forward(from: 0.0);
-      await Future.delayed(Duration(seconds: 2));
-
-      // İlk yanlışta TimeFinishPage'e yönlendir
-      timer.cancel();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder:
-              (context) => QuizGameOver(
-                correctAnswersBeforeMistake: currentQuestionIndex,
-                scoreBeforeMistake: score,
-              ),
-        ),
-      );
+      await Future.delayed(const Duration(seconds: 1));
+      setState(() {
+        selectedAnswer = -1;
+        // waiting for second attempt
+      });
       return;
     }
 
-    if (doubleAnswerActive) {
-      if (firstSelectedAnswer == -1) {
-        firstSelectedAnswer = index;
-
-        if (index == correctAnswerIndex) {
-          timer.cancel();
-          setState(() {
-            selectedAnswer = index;
-            showLottie = true;
-            questionAnswered = true;
-            lottieFile = 'assets/animations/correct.json';
-            score += 10;
-            doubleAnswerActive = false;
-          });
-          await player.play(AssetSource("sounds/correct.mp3"));
-          await lottieController.forward(from: 0.0);
-          await Future.delayed(Duration(seconds: 2));
-          goToNextQuestion();
-        } else {
-          setState(() => selectedAnswer = index);
-          await player.play(AssetSource("sounds/wrong.mp3"));
-          await Future.delayed(Duration(seconds: 1));
-        }
-        return;
-      } else {
-        timer.cancel();
-        setState(() {
-          selectedAnswer = index;
-          showLottie = true;
-          questionAnswered = true;
-          lottieFile =
-              index == correctAnswerIndex
-                  ? 'assets/animations/correct.json'
-                  : 'assets/animations/wrong.json';
-        });
-
-        if (index == correctAnswerIndex) {
-          await player.play(AssetSource("sounds/correct.mp3"));
-          setState(() => score += 10);
-          await lottieController.forward(from: 0.0);
-          await Future.delayed(Duration(seconds: 2));
-          setState(() => doubleAnswerActive = false);
-          goToNextQuestion();
-        } else {
-          await player.play(AssetSource("sounds/wrong.mp3"));
-          await lottieController.forward(from: 0.0);
-          await Future.delayed(Duration(seconds: 2));
-
-          // İkinci cevap da yanlışsa oyun bitsin
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder:
-                  (context) => QuizGameOver(
-                    correctAnswersBeforeMistake: currentQuestionIndex,
-                    scoreBeforeMistake: score,
-                  ),
-            ),
-          );
-        }
-        return;
-      }
-    }
-
-    timer.cancel();
+    // Evaluate final answer
     setState(() {
       selectedAnswer = index;
-      showLottie = true;
       questionAnswered = true;
+      showLottie = true;
       lottieFile =
-          index == correctAnswerIndex
+          index == correctIndex
               ? 'assets/animations/correct.json'
               : 'assets/animations/wrong.json';
     });
 
-    if (index == correctAnswerIndex) {
-      await player.play(AssetSource("sounds/correct.mp3"));
+    await player.play(
+      AssetSource(
+        index == correctIndex ? "sounds/correct.mp3" : "sounds/wrong.mp3",
+      ),
+    );
+    await lottieController.forward(from: 0.0);
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (index == correctIndex) {
       setState(() => score += 10);
-      await lottieController.forward(from: 0.0);
-      await Future.delayed(Duration(seconds: 2));
       goToNextQuestion();
     } else {
-      await player.play(AssetSource("sounds/wrong.mp3"));
-      await lottieController.forward(from: 0.0);
-      await Future.delayed(Duration(seconds: 2));
-
-      // Yanlışsa direkt TimeFinishPage'e git
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder:
-              (context) => QuizGameOver(
-                correctAnswersBeforeMistake: currentQuestionIndex,
-                scoreBeforeMistake: score,
-              ),
-        ),
-      );
+      gameOver();
     }
+  }
+
+  void useFiftyFifty() {
+    if (usedFiftyFifty || questionAnswered) return;
+    final question = QuestionList.list[currentQuestionIndex];
+    final correctIndex = question.correctAnswerIndex;
+    List<int> options = List.generate(question.options.length, (i) => i)
+      ..remove(correctIndex);
+    options.shuffle();
+    setState(() {
+      usedFiftyFifty = true;
+      hiddenOptions = [options[0], options[1]];
+    });
+  }
+
+  void useDoubleAnswer() {
+    if (usedDoubleAnswer || questionAnswered) return;
+    setState(() {
+      usedDoubleAnswer = true;
+      doubleAnswerActive = true;
+    });
+  }
+
+  void skipQuestion() {
+    if (usedSkipQuestion || questionAnswered) return;
+    setState(() => usedSkipQuestion = true);
+    timer?.cancel();
+    goToNextQuestion();
   }
 
   void goToNextQuestion() async {
     setState(() {
-      isTimeUp = false;
-      questionAnswered = false;
+      currentQuestionIndex++;
       selectedAnswer = -1;
+      questionAnswered = false;
       showLottie = false;
-      lottieFile = '';
-      hiddenOptions = [];
+      isTimeUp = false;
+      doubleAnswerActive = false;
+      hiddenOptions.clear();
       firstSelectedAnswer = -1;
-      usedDoubleAnswer = false;
+      timeLeft = 40;
     });
-
-    if (currentQuestionIndex < QuestionList.list.length - 1) {
-      setState(() {
-        currentQuestionIndex++;
-        timeLeft = 40;
-      });
+    if (currentQuestionIndex < QuestionList.list.length) {
       await pageTransition.reverse();
       await pageTransition.forward();
       startTimer();
     } else {
-      timer.cancel();
       ScoreList.ekle(ScoreList(kullaniciAdi: "İrem", score: score));
       Navigator.pushReplacement(
         context,
@@ -243,122 +184,67 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     }
   }
 
-  void useFiftyFifty() {
-    if (usedFiftyFifty || questionAnswered) return;
-
-    final currentQuestion = QuestionList.list[currentQuestionIndex];
-    final correctAnswerIndex = currentQuestion.correctAnswerIndex;
-    List<int> incorrectOptions = [];
-    for (int i = 0; i < currentQuestion.options.length; i++) {
-      if (i != correctAnswerIndex) incorrectOptions.add(i);
-    }
-    incorrectOptions.shuffle();
-
-    setState(() {
-      usedFiftyFifty = true;
-      hiddenOptions = [incorrectOptions.first, incorrectOptions.last];
-    });
-  }
-
-  void skipQuestion() {
-    if (usedSkipQuestion || questionAnswered) return;
-    setState(() => usedSkipQuestion = true);
-    timer.cancel();
-    goToNextQuestion();
-  }
-
-  void useDoubleAnswer() {
-    if (usedDoubleAnswer || questionAnswered || doubleAnswerActive) return;
-
-    setState(() {
-      usedDoubleAnswer = true;
-      doubleAnswerActive = true;
-    });
+  void gameOver() {
+    timer?.cancel();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizGameOver(scoreBeforeMistake: score),
+      ),
+    );
   }
 
   Widget buildAnswer(int index) {
-    final currentQuestion = QuestionList.list[currentQuestionIndex];
-    final correctAnswerIndex = currentQuestion.correctAnswerIndex;
-    final isCorrect = index == correctAnswerIndex;
-    final isSelected = index == selectedAnswer;
-    final isFirstSelectedWrong =
+    final question = QuestionList.list[currentQuestionIndex];
+    final correctIndex = question.correctAnswerIndex;
+    if (usedFiftyFifty && hiddenOptions.contains(index))
+      return const SizedBox.shrink();
+
+    bool isCorrect = index == correctIndex;
+    bool isSelected = index == selectedAnswer;
+    bool isFirstWrong =
         doubleAnswerActive &&
         firstSelectedAnswer != -1 &&
-        firstSelectedAnswer != correctAnswerIndex &&
+        firstSelectedAnswer != correctIndex &&
         index == firstSelectedAnswer;
-    final isFirstSelected = doubleAnswerActive && firstSelectedAnswer == index;
-
-    if (usedFiftyFifty && hiddenOptions.contains(index)) {
-      return const SizedBox.shrink();
-    }
 
     Color bgColor = Colors.white;
     if (questionAnswered) {
-      if (isCorrect) {
+      if (isCorrect)
         bgColor = Colors.green;
-      } else if (isSelected && !isFirstSelectedWrong) {
+      else if (isSelected || isFirstWrong)
         bgColor = Colors.red;
-      } else if (isFirstSelectedWrong && index == firstSelectedAnswer) {
-        bgColor = Colors.red.withOpacity(0.7);
-      }
-    } else if (isFirstSelected) {
+    } else if (doubleAnswerActive && index == firstSelectedAnswer) {
       bgColor = Colors.orangeAccent;
     }
 
     return SizedBox(
-      width: 200.0,
+      width: 200,
       child: GestureDetector(
-        onTap: () => !questionAnswered ? checkAnswer(index) : null,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 100),
-            curve: Curves.easeInOut,
-            decoration: BoxDecoration(
-              color: bgColor,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color.fromARGB(
-                    255,
-                    245,
-                    231,
-                    36,
-                  ).withOpacity(0.5),
-                  blurRadius: 10,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 24.0,
-                horizontal: 12.0,
+        onTap: questionAnswered ? null : () => checkAnswer(index),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 5,
+                offset: Offset(2, 2),
               ),
-              child: Center(
-                child: Text(
-                  currentQuestion.options[index],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color:
-                        bgColor == Colors.white ? Colors.black : Colors.white,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 1.5,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 2,
-                        color: const Color.fromARGB(
-                          255,
-                          245,
-                          231,
-                          36,
-                        ).withOpacity(0.5),
-                      ),
-                    ],
-                  ),
-                ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              question.options[index],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                color: bgColor == Colors.white ? Colors.black : Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -367,11 +253,11 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget buildJokerButton(String assetPath, VoidCallback? onTap, bool used) {
+  Widget buildJokerButton(String asset, VoidCallback onTap, bool used) {
     return GestureDetector(
-      onTap: used || questionAnswered || doubleAnswerActive ? null : onTap,
+      onTap: used || questionAnswered ? null : onTap,
       child: Opacity(
-        opacity: used || questionAnswered || doubleAnswerActive ? 0.4 : 1.0,
+        opacity: used ? 0.4 : 1.0,
         child: Container(
           width: 60,
           height: 60,
@@ -379,15 +265,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: Colors.white24,
             borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                blurRadius: 8,
-                offset: Offset(2, 2),
-              ),
-            ],
           ),
-          child: Image.asset(assetPath, fit: BoxFit.contain),
+          child: Image.asset(asset),
         ),
       ),
     );
@@ -395,20 +274,18 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = QuestionList.list[currentQuestionIndex];
-
+    final question = QuestionList.list[currentQuestionIndex];
     return Scaffold(
       backgroundColor: Colors.deepPurple[700],
       body: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SafeArea(
-                  child: FadeTransition(
-                    opacity: pageTransition,
-                    child: Padding(
+          SafeArea(
+            child: FadeTransition(
+              opacity: pageTransition,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: [
@@ -424,7 +301,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                 vertical: 10,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Row(
                                     children: [
@@ -432,6 +310,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                         Icons.emoji_events,
                                         color: Colors.amberAccent,
                                       ),
+                                      SizedBox(width: 6),
                                       Text(
                                         "Skor: $score",
                                         style: TextStyle(
@@ -441,7 +320,6 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: 40),
                                   Row(
                                     children: [
                                       Icon(
@@ -463,97 +341,71 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                             ),
                           ),
                           const SizedBox(height: 20),
-
-                          Column(
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  // Numara Yuvarlakları
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: List.generate(
-                                      QuestionList.list.length,
-                                      (index) {
-                                        bool isActive =
-                                            index == currentQuestionIndex;
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 4.0,
-                                          ),
-                                          child: AnimatedContainer(
-                                            duration: Duration(
-                                              milliseconds: 300,
-                                            ),
-                                            width: isActive ? 30 : 20,
-                                            height: isActive ? 30 : 20,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color:
-                                                  isActive
-                                                      ? Colors.orangeAccent
-                                                      : Colors.white,
-                                            ),
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              '${index + 1}',
-                                              style: TextStyle(
-                                                color:
-                                                    isActive
-                                                        ? Colors.white
-                                                        : Colors.deepPurple,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: isActive ? 16 : 12,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(QuestionList.list.length, (
+                              i,
+                            ) {
+                              bool active = i == currentQuestionIndex;
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4.0,
+                                ),
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                  width: active ? 30 : 20,
+                                  height: active ? 30 : 20,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        active
+                                            ? Colors.orangeAccent
+                                            : Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '${i + 1}',
+                                    style: TextStyle(
+                                      color:
+                                          active
+                                              ? Colors.white
+                                              : Colors.deepPurple,
+                                      fontSize: active ? 16 : 12,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-
-                                  const SizedBox(height: 20),
-                                ],
-                              ),
-
-                              Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                color: Colors.deepPurple[300],
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        currentQuestion.questionText,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          letterSpacing: 1.5,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              );
+                            }),
+                          ),
+                          const SizedBox(height: 20),
+                          Card(
+                            color: Colors.deepPurple[300],
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                question.questionText,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                           const SizedBox(height: 20),
                           Column(
-                            children:
-                                currentQuestion.options
-                                    .asMap()
-                                    .entries
-                                    .map((entry) => buildAnswer(entry.key))
-                                    .toList(),
+                            children: List.generate(
+                              question.options.length,
+                              (i) => buildAnswer(i),
+                            ),
                           ),
                           const SizedBox(height: 20),
-                          if (isTimeUp) const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -578,27 +430,21 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
           if (showLottie)
             Positioned.fill(
               child: Center(
                 child: Opacity(
-                  opacity: 0.7,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 2.0,
-                    height: MediaQuery.of(context).size.height * 2.0,
-                    child: Lottie.asset(
-                      lottieFile,
-                      controller: lottieController,
-                      onLoaded: (composition) {
-                        lottieController.duration = composition.duration;
-                      },
-                      fit: BoxFit.contain,
-                    ),
+                  opacity: 0.8,
+                  child: Lottie.asset(
+                    lottieFile,
+                    controller: lottieController,
+                    onLoaded:
+                        (comp) => lottieController.duration = comp.duration,
                   ),
                 ),
               ),
@@ -607,15 +453,15 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
             top: 20,
             left: 20,
             child: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuizHomePage(category: 'bilim'),
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed:
+                  () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => QuizHomePage(category: widget.category),
+                    ),
                   ),
-                );
-              },
             ),
           ),
         ],

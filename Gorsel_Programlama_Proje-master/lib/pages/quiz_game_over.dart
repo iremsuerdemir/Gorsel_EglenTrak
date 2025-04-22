@@ -5,14 +5,9 @@ import 'package:lottie/lottie.dart';
 import 'quizhomepage.dart';
 
 class QuizGameOver extends StatefulWidget {
-  final int correctAnswersBeforeMistake; // İlk hataya kadar doğru cevap sayısı
   final int scoreBeforeMistake; // İlk hataya kadar alınan skor
 
-  QuizGameOver({
-    Key? key,
-    this.correctAnswersBeforeMistake = 0,
-    this.scoreBeforeMistake = 0,
-  }) : super(key: key);
+  QuizGameOver({Key? key, this.scoreBeforeMistake = 0}) : super(key: key);
 
   @override
   State<QuizGameOver> createState() => _QuizGameOverState();
@@ -122,7 +117,7 @@ class _QuizGameOverState extends State<QuizGameOver>
                     SizedBox(height: 20),
                     // Doğru cevap sayısı ve puan bilgileri
                     Text(
-                      "✅ Doğru Cevap Sayısı: ${widget.correctAnswersBeforeMistake}",
+                      "✅ Doğru Cevap Sayısı: ${widget.scoreBeforeMistake / 10}",
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
