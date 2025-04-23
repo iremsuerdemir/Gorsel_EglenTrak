@@ -89,7 +89,7 @@ class _AddCardPageState extends State<AddCardPage> {
       reader.readAsDataUrl(files[0]);
       reader.onLoadEnd.listen((e) {
         final imageUrl = reader.result as String;
-        final fileName = files[0].name; // Dosya adı
+        final fileName = files[0].name.split(".")[0]; // Dosya adı
 
         // Resim URL'ini ve dosya adını listeye ekleyelim
         setState(() {
@@ -127,7 +127,7 @@ class _AddCardPageState extends State<AddCardPage> {
         reader.onLoadEnd.listen((e) {
           setState(() {
             editedImageUrl = reader.result as String;
-            editNameController.text = files[0].name;
+            editNameController.text = files[0].name.split(".")[0];
           });
         });
       });
