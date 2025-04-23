@@ -85,7 +85,7 @@ namespace ProjeBackend.Controllers
         }
 
         [HttpPost("UploadCard")]
-        public async Task<IActionResult> UploadCard([FromForm] UploadCardRequest request)
+        public async Task<ActionResult<Card>> UploadCard([FromForm] UploadCardRequest request)
         {
             if (request.File == null || request.File.Length == 0)
                 return BadRequest("Dosya seçilmedi!");
@@ -115,7 +115,7 @@ namespace ProjeBackend.Controllers
             _context.Card.Add(card);
             await _context.SaveChangesAsync();
 
-            return Ok(new { card.Id, card.Name, card.ImagePath });
+            return Ok(card);
         }
 
 

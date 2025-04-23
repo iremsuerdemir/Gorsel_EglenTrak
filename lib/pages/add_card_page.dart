@@ -5,6 +5,9 @@ import 'package:gorsel_programlama_proje/components/custom_text_field.dart';
 import 'package:gorsel_programlama_proje/components/gradient_border.dart';
 import 'package:gorsel_programlama_proje/components/zoom_dialog.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
+import 'package:gorsel_programlama_proje/models/upload_card_model.dart';
+import 'package:gorsel_programlama_proje/services/game_service.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
 
 class AddCardPage extends StatefulWidget {
   final List<CardModel>? cards;
@@ -27,7 +30,7 @@ class _AddCardPageState extends State<AddCardPage> {
   final TextEditingController headerController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  final List<CardModel> imagePaths =
+  final List<UploadCardModel> imagePaths =
       []; // Her resim için hem URL hem de dosya adı tutacağız
 
   int? selectedValue = 32;
@@ -41,7 +44,9 @@ class _AddCardPageState extends State<AddCardPage> {
       if (widget.title != null &&
           widget.round != null &&
           widget.description != null) {
-        imagePaths.addAll(widget.cards!);
+        imagePaths.addAll(
+          widget.cards!.map((e) => UploadCardModel.fromCard(e)),
+        );
         isWillUpdate = true;
         headerController.text = widget.title!;
         descriptionController.text = widget.description!;
@@ -89,10 +94,11 @@ class _AddCardPageState extends State<AddCardPage> {
         // Resim URL'ini ve dosya adını listeye ekleyelim
         setState(() {
           imagePaths.add(
-            CardModel(
+            UploadCardModel(
               id: DateTime.now().millisecondsSinceEpoch,
               name: fileName,
               imagePath: imageUrl,
+              rawFile: files[0],
             ),
           );
         });
@@ -150,7 +156,7 @@ class _AddCardPageState extends State<AddCardPage> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    imagePaths[index] = CardModel(
+                    imagePaths[index] = UploadCardModel(
                       id: imagePaths[index].id,
                       name: editNameController.text,
                       imagePath: editedImageUrl!,
@@ -319,7 +325,10 @@ class _AddCardPageState extends State<AddCardPage> {
                         onTap: () {
                           ZoomDialog.show(
                             context: context,
-                            image: Image.network(imagePaths[i].imagePath),
+                            image:
+                                imagePaths[i].name == "Empty"
+                                    ? Image.asset("assets/icons/cross.png")
+                                    : Image.network(imagePaths[i].imagePath),
                           );
                         },
                         child: Padding(
@@ -435,8 +444,15 @@ class _AddCardPageState extends State<AddCardPage> {
                           SnackBar(content: Text("Başarıyla güncellendi!")),
                         );
                       } else {
-                        // ➕ YENİ KAYIT İŞLEMİ
-                        // Buraya veri tabanı kayıt kodunu koyacaksın.
+                        GameService.uploadGameWithCards(
+                          name: headerController.text,
+                          description: descriptionController.text,
+                          round: selectedValue!,
+                          userId: UserService.user.id,
+                          gameImage: imagePaths[selectedHeaderIndex],
+                          cards: imagePaths,
+                        );
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Başarıyla kaydedildi!")),
                         );

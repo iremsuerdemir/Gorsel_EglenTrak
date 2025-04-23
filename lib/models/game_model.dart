@@ -27,7 +27,7 @@ class GameModel {
       description: json["description"],
       imagePath: json["imagePath"],
       cards:
-          (json["cards"]["\$values"] as List)
+          (json["cards"] as List)
               .map((cardJson) => CardModel.fromJson(cardJson))
               .toList(),
     );

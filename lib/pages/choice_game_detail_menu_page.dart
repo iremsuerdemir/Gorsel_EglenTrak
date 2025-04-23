@@ -48,9 +48,12 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                     onTap: () {
                       ZoomDialog.show(
                         context: context,
-                        image: Image.network(
-                          "${BaseUrl.imageBaseUrl}/${cards[i].imagePath}",
-                        ),
+                        image:
+                            cards[i].name == "Empty"
+                                ? Image.asset("assets/icons/cross.png")
+                                : Image.network(
+                                  "${BaseUrl.imageBaseUrl}/${cards[i].imagePath}",
+                                ),
                       );
                     },
                     child: Padding(

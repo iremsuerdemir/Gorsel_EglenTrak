@@ -33,9 +33,12 @@ class GameOverBody extends StatelessWidget {
                   onTap: () {
                     ZoomDialog.show(
                       context: context,
-                      image: Image.network(
-                        "${BaseUrl.imageBaseUrl}/${card.imagePath}",
-                      ),
+                      image:
+                          card.name == "Empty"
+                              ? Image.asset("assets/icons/cross.png")
+                              : Image.network(
+                                "${BaseUrl.imageBaseUrl}/${card.imagePath}",
+                              ),
                     );
                   },
                   child: Padding(
@@ -50,12 +53,15 @@ class GameOverBody extends StatelessWidget {
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10),
                             ),
-                            child: Image.network(
-                              "${BaseUrl.imageBaseUrl}/${card.imagePath}",
-                              width: 120,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                            child:
+                                card.name == "Empty"
+                                    ? Image.asset("assets/icons/cross.png")
+                                    : Image.network(
+                                      "${BaseUrl.imageBaseUrl}/${card.imagePath}",
+                                      width: 120,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
                           ),
                           SizedBox(width: 10),
                           Expanded(

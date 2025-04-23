@@ -47,10 +47,13 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
                     Positioned.fill(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          "${BaseUrl.imageBaseUrl}/${widget.game.cards[0].imagePath}",
-                          fit: BoxFit.cover,
-                        ),
+                        child:
+                            widget.game.cards[0].name == "Empty"
+                                ? Image.asset("assets/icons/cross.png")
+                                : Image.network(
+                                  "${BaseUrl.imageBaseUrl}/${widget.game.cards[0].imagePath}",
+                                  fit: BoxFit.cover,
+                                ),
                       ),
                     ),
                     Positioned(
@@ -100,10 +103,13 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
                     Positioned.fill(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          "${BaseUrl.imageBaseUrl}/${widget.game.cards[1].imagePath}",
-                          fit: BoxFit.cover,
-                        ),
+                        child:
+                            widget.game.cards[1].name == "Empty"
+                                ? Image.asset("assets/icons/cross.png")
+                                : Image.network(
+                                  "${BaseUrl.imageBaseUrl}/${widget.game.cards[1].imagePath}",
+                                  fit: BoxFit.cover,
+                                ),
                       ),
                     ),
                     Positioned(
@@ -141,9 +147,12 @@ class _ChoiceGamePageBodyState extends State<ChoiceGamePageBody> {
       onTap: () {
         ZoomDialog.show(
           context: context,
-          image: Image.network(
-            "${BaseUrl.imageBaseUrl}/${widget.game.cards[i].imagePath}",
-          ),
+          image:
+              widget.game.cards[i].name == "Empty"
+                  ? Image.asset("assets/icons/cross.png")
+                  : Image.network(
+                    "${BaseUrl.imageBaseUrl}/${widget.game.cards[i].imagePath}",
+                  ),
         );
       },
       child: Container(

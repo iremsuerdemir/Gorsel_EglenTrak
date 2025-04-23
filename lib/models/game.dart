@@ -16,7 +16,7 @@ class Game {
     while (cards.length < round * 2) {
       cards.add(
         CardModel(
-          id: cards.length,
+          id: cards.length, // boş id
           name: "Empty",
           imagePath: "assets/icons/cross.png",
         ),
