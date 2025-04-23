@@ -69,7 +69,7 @@ class GameService {
       http.MultipartFile.fromBytes(
         'GameImage',
         gameBytes,
-        filename: gameImage.name,
+        filename: gameImage.fileName,
       ),
     );
 
@@ -85,7 +85,7 @@ class GameService {
         http.MultipartFile.fromBytes(
           'Cards[$i].File',
           cardBytes,
-          filename: card.name,
+          filename: card.fileName,
         ),
       );
     }

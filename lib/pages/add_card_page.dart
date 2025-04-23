@@ -89,16 +89,17 @@ class _AddCardPageState extends State<AddCardPage> {
       reader.readAsDataUrl(files[0]);
       reader.onLoadEnd.listen((e) {
         final imageUrl = reader.result as String;
-        final fileName = files[0].name.split(".")[0]; // Dosya adı
+        final name = files[0].name.split(".")[0]; // Dosya adı
 
         // Resim URL'ini ve dosya adını listeye ekleyelim
         setState(() {
           imagePaths.add(
             UploadCardModel(
               id: DateTime.now().millisecondsSinceEpoch,
-              name: fileName,
+              name: name,
               imagePath: imageUrl,
               rawFile: files[0],
+              fileName: files[0].name,
             ),
           );
         });

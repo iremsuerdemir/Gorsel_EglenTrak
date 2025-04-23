@@ -3,8 +3,10 @@ import 'package:gorsel_programlama_proje/models/card_model.dart';
 
 class UploadCardModel extends CardModel {
   html.File? rawFile;
+  String? fileName;
   UploadCardModel({
     this.rawFile,
+    this.fileName,
     required super.id,
     required super.name,
     required super.imagePath,
