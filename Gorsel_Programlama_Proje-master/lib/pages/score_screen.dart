@@ -211,7 +211,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                               ],
                             ),
                             child: const Text(
-                              "Skor Geçmişi",
+                              "Skor Tablosu",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

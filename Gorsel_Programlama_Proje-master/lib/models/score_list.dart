@@ -1,21 +1,29 @@
 import 'package:gorsel_programlama_proje/models/score_history_item.dart';
+import 'package:gorsel_programlama_proje/models/user.dart';
 
 class ScoreList {
-  String kullaniciAdi;
+  User kullanici;
   int score;
 
-  ScoreList({required this.kullaniciAdi, required this.score});
+  ScoreList({required this.kullanici, required this.score});
 
   static List<ScoreList> list = [
-    ScoreList(kullaniciAdi: "Ali", score: 10),
-    ScoreList(kullaniciAdi: "Veli", score: 40),
-    ScoreList(kullaniciAdi: "Ayşe", score: 50),
-    ScoreList(kullaniciAdi: "Fatma", score: 80),
-    ScoreList(kullaniciAdi: "Mehmet", score: 90),
-    ScoreList(kullaniciAdi: "Zeynep", score: 100),
-    ScoreList(kullaniciAdi: "Can", score: 20),
-    ScoreList(kullaniciAdi: "Ece", score: 30),
-    ScoreList(kullaniciAdi: "Burak", score: 70),
+    ScoreList(
+      kullanici: User(id: 1, username: "Beyza", email: "beyza@gmail.com"),
+      score: 70,
+    ),
+    ScoreList(
+      kullanici: User(id: 2, username: "İrem", email: "irem@gmail.com"),
+      score: 60,
+    ),
+    ScoreList(
+      kullanici: User(id: 3, username: "Berk", email: "berk@gmail.com"),
+      score: 50,
+    ),
+    ScoreList(
+      kullanici: User(id: 4, username: "Polat", email: "polat@gmail.com"),
+      score: 40,
+    ),
   ];
 
   static void ekle(ScoreList yeniList) {
@@ -29,7 +37,8 @@ class ScoreList {
       int index = entry.key;
       var item = entry.value;
       return ScoreHistoryItem(
-        kullaniciAdi: item.kullaniciAdi,
+        kullaniciAdi:
+            item.kullanici.username, // kullanıcı adını User'dan alıyoruz
         score: item.score,
         timestamp: now.subtract(
           Duration(days: index),

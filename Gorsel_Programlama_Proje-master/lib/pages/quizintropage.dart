@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/category_page.dart';
 import 'package:gorsel_programlama_proje/pages/home_page.dart';
 import 'package:gorsel_programlama_proje/pages/informatin_quiz_intro.dart';
+import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 import 'package:lottie/lottie.dart';
 
 class QuizIntroPage extends StatefulWidget {
@@ -27,7 +28,9 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
   void navigateToHome(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const CategoryPage()),
+      MaterialPageRoute(
+        builder: (context) => const QuizHomePage(category: "bilim"),
+      ),
     );
   }
 

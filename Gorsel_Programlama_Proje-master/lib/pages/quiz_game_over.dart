@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
+import 'package:gorsel_programlama_proje/pages/score_history_page.dart';
 import 'package:lottie/lottie.dart';
 
 import 'quizhomepage.dart';
@@ -49,6 +50,13 @@ class _QuizGameOverState extends State<QuizGameOver>
       MaterialPageRoute(
         builder: (context) => QuizHomePage(category: 'bilim'),
       ), // QuizHomePage yönlendirmesi
+    );
+  }
+
+  void _scoreTable() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => ScoreHistoryPage()),
     );
   }
 
@@ -153,6 +161,41 @@ class _QuizGameOverState extends State<QuizGameOver>
                         ),
                         child: Text(
                           "Yeniden Dene",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 10,
+                                color: Colors.purpleAccent,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: ElevatedButton(
+                        onPressed: _scoreTable, // Yeniden dene butonu
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple[300],
+                          foregroundColor: Colors.black,
+                          elevation: 8,
+                          shadowColor: Colors.amberAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 40,
+                            vertical: 15,
+                          ),
+                        ),
+                        child: Text(
+                          "Skor Tablosuna Git",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

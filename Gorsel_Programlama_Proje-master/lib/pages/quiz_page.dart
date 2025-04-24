@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:gorsel_programlama_proje/models/user.dart';
 import 'package:lottie/lottie.dart';
 import 'package:gorsel_programlama_proje/models/question_list.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
@@ -77,10 +78,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         }
       } else {
         t.cancel();
-        setState(() => isTimeUp = true);
+        // Süre dolunca skoru kaydet
+        ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
+        // ScoreScreen'e yönlendir
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (ContextAction) => TimeFinishPage()),
+          MaterialPageRoute(builder: (_) => ScoreScreen(score: score)),
         );
       }
     });
@@ -215,6 +218,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     goToNextQuestion();
   }
 
+  User currentUser = User(
+    id: 2,
+    email: 'user@example.com',
+    username: 'user123',
+  );
+
   void goToNextQuestion() async {
     setState(() {
       currentQuestionIndex++;
@@ -232,7 +241,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       await pageTransition.forward();
       startTimer();
     } else {
-      ScoreList.ekle(ScoreList(kullaniciAdi: "İrem", score: score));
+      ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => ScoreScreen(score: score)),
@@ -242,11 +252,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 
   void gameOver() {
     timer?.cancel();
+    // Skoru kaydet
+    ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
+    // ScoreScreen'e yönlendir
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (context) => QuizGameOver(scoreBeforeMistake: score),
-      ),
+      MaterialPageRoute(builder: (_) => ScoreScreen(score: score)),
     );
   }
 

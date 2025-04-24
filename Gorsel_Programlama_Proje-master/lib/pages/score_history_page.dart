@@ -48,12 +48,7 @@ class ScoreHistoryPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ScoreScreen(score: 0),
-                  ),
-                );
+                Navigator.pop(context);
               },
             ),
             backgroundColor: Colors.transparent,
@@ -75,9 +70,30 @@ class ScoreHistoryPage extends StatelessWidget {
           itemCount: skorGecmisi.length,
           itemBuilder: (context, index) {
             final skorKaydi = skorGecmisi[index];
-            final formattedDate = DateFormat(
-              'dd MMM yyyy - HH:mm:ss',
-            ).format(skorKaydi.timestamp);
+
+            // Tarihi al
+            DateTime tarih = skorKaydi.timestamp;
+
+            // Şu anki tarih
+            DateTime now = DateTime.now();
+
+            // Sadece yıl-ay-gün karşılaştırması için
+            DateTime onlyTarih = DateTime(tarih.year, tarih.month, tarih.day);
+            DateTime today = DateTime(now.year, now.month, now.day);
+
+            String formattedDate;
+            if (onlyTarih == today) {
+              // Bugünse başına “Bugün –” ekle ve tam tarih-saat’i göster
+              formattedDate =
+                  '${DateFormat('dd MMM yyyy - HH:mm:ss', 'tr').format(tarih)}';
+            } else {
+              // Değilse direkt tam tarih-saat
+              formattedDate = DateFormat(
+                'dd MMM yyyy - HH:mm:ss',
+                'tr',
+              ).format(tarih);
+            }
+
             final isTop3 = index < 3;
             final String? medalEmoji = switch (index) {
               0 => '🥇',

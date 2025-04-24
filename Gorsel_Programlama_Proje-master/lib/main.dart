@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
 import 'package:gorsel_programlama_proje/pages/quiz_page.dart';
 import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // ← ekledik
+  await initializeDateFormatting('tr', null); // ← ② ekledik
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
   const backgroundColor = Color.fromARGB(255, 50, 59, 63);
 
