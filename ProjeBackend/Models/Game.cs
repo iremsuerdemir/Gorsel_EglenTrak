@@ -19,6 +19,9 @@ namespace ProjeBackend.Models
         [Required]
         public required string ImagePath { get; set; }
 
+        [Required]
+        public int PlayCount { get; set; } = 0;
+
         // Bir oyun birden fazla karta sahip olabilir
         public ICollection<Card>? Cards { get; set; } // Game'den Card'a doğru ilişki
 

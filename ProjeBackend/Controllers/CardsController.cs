@@ -73,6 +73,48 @@ namespace ProjeBackend.Controllers
             return NoContent();
         }
 
+        [HttpPut("UpdateWinAndPlayCount/{cardId}")]
+        public async Task<IActionResult> UpdateWinAndPlayCount(int cardId, [FromBody] int newWinCount)
+        {
+            var card = await _context.Card.FindAsync(cardId);
+
+            if (card == null)
+            {
+                return NotFound(new { message = "Card not found." });
+            }
+
+            // WinCount güncelleniyor
+            card.WinCount = newWinCount;
+
+            // Kartın ait olduğu Game nesnesi getiriliyor
+            var game = await _context.Games.FindAsync(card.GameId);
+
+            if (game == null)
+            {
+                return NotFound(new { message = "Related game not found." });
+            }
+
+            // PlayCount 1 artırılıyor
+            game.PlayCount += 1;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = "WinCount and PlayCount updated successfully.",
+                    cardId = card.Id,
+                    updatedWinCount = card.WinCount,
+                    updatedPlayCount = game.PlayCount
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error while updating.", error = ex.Message });
+            }
+        }
+
+
         // POST: api/Cards
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

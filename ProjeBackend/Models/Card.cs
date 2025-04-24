@@ -13,6 +13,9 @@ namespace ProjeBackend.Models
         [Required]
         public required string ImagePath { get; set; }
 
+        [Required]
+        public int WinCount { get; set; } = 0;
+
         // Her kartın bir Game'e ait olduğunu belirtmek için Foreign Key
         public int GameId { get; set; }  // Game modeline ait referans
         public Game? Game { get; set; }  // İlişkili Game nesnesi

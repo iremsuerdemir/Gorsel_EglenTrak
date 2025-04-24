@@ -3,6 +3,7 @@ import 'package:gorsel_programlama_proje/models/card_model.dart';
 class GameModel {
   int id;
   int round;
+  int playCount;
   String name;
   String username;
   String description;
@@ -11,6 +12,7 @@ class GameModel {
   GameModel({
     required this.id,
     required this.round,
+    this.playCount = 0,
     required this.name,
     required this.username,
     required this.cards,
@@ -26,6 +28,7 @@ class GameModel {
       username: json["user"]["userName"],
       description: json["description"],
       imagePath: json["imagePath"],
+      playCount: json["playCount"],
       cards:
           (json["cards"] as List)
               .map((cardJson) => CardModel.fromJson(cardJson))
@@ -41,6 +44,7 @@ class GameModel {
       "name": name,
       "description": description,
       "imagePath": imagePath,
+      "playCount": playCount,
       "cards": cards.map((e) => e.toJson()).toList(),
     };
   }

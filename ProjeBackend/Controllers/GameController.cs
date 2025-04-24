@@ -76,6 +76,7 @@ namespace ProjeBackend.Controllers
                 Round = request.Round,
                 ImagePath = $"images/games/{gameImageName}",
                 UserId = request.UserId,
+                PlayCount = 0,
                 Cards = new List<Card>()
             };
 
@@ -99,6 +100,7 @@ namespace ProjeBackend.Controllers
                     Name = cardItem.Name,
                     ImagePath = $"images/cards/{cardImageName}",
                     GameId = cardItem.GameId,
+                    WinCount = 0,
                 });
             }
 
@@ -133,6 +135,29 @@ namespace ProjeBackend.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("UpdatePlayCount/{id}")]
+        public async Task<IActionResult> UpdatePlayCount(int id, [FromBody] int newPlayCount)
+        {
+            var game = await _context.Games.FindAsync(id);
+            if (game == null)
+            {
+                return NotFound(new { message = "Game not found." });
+            }
+
+            game.PlayCount = newPlayCount;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "PlayCount updated successfully.", playCount = game.PlayCount });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while updating PlayCount.", error = ex.Message });
+            }
+        }
+
 
         // DELETE: api/Games/5
         [HttpDelete("{id}")]

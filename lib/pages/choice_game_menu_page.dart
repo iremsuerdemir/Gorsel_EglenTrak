@@ -100,6 +100,7 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
                                           round: games[i].round,
                                           title: games[i].name,
                                           description: games[i].description,
+                                          gamePlayCount: games[i].playCount,
                                         ),
                                   ),
                                 );

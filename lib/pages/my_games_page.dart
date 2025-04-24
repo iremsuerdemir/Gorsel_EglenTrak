@@ -74,6 +74,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
                               round: games[i].round,
                               title: games[i].name,
                               description: games[i].description,
+                              gamePlayCount: games[i].playCount,
                             ),
                       ),
                     );

@@ -10,6 +10,7 @@ class UploadCardModel extends CardModel {
     required super.id,
     required super.name,
     required super.imagePath,
+    required super.winCount,
   });
 
   factory UploadCardModel.fromCard(CardModel card) {
@@ -17,6 +18,7 @@ class UploadCardModel extends CardModel {
       id: card.id,
       name: card.name,
       imagePath: card.imagePath,
+      winCount: card.winCount,
     );
   }
 

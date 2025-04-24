@@ -19,6 +19,7 @@ class Game {
           id: cards.length, // boş id
           name: "Empty",
           imagePath: "assets/icons/cross.png",
+          winCount: 0,
         ),
       );
     }

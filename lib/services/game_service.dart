@@ -115,4 +115,15 @@ class GameService {
 
     return completer.future;
   }
+
+  static Future<void> updateCardWinCountAndGamePlayCount(
+    int cardId,
+    int newWinCount,
+  ) async {
+    await http.put(
+      Uri.parse("${BaseUrl.baseUrl}/Cards/UpdateWinAndPlayCount/$cardId"),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(newWinCount),
+    );
+  }
 }

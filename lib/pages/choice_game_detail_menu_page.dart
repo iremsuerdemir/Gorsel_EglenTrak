@@ -11,6 +11,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
   final int round;
   final String title;
   final String description;
+  final int gamePlayCount;
   final bool isGameOver;
   const ChoiceGameDetailMenuPage({
     super.key,
@@ -18,6 +19,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
     required this.title,
     required this.description,
     required this.round,
+    required this.gamePlayCount,
     this.isGameOver = false,
   });
 
@@ -92,7 +94,9 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.only(right: 10),
                                     child: LinearProgressIndicator(
-                                      value: 0.6, // Örnek olarak %60 dolu
+                                      value:
+                                          (cards[i].winCount /
+                                              gamePlayCount), // Örnek olarak %60 dolu
                                       backgroundColor: Colors.grey.shade300,
                                       color: Colors.blue,
                                       minHeight: 8,
@@ -100,7 +104,8 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                   ),
                                   SizedBox(height: 4),
                                   Text(
-                                    "%60",
+                                    ((cards[i].winCount / gamePlayCount) * 100)
+                                        .toStringAsFixed(2),
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey[700],

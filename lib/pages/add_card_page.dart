@@ -100,6 +100,7 @@ class _AddCardPageState extends State<AddCardPage> {
               imagePath: imageUrl,
               rawFile: files[0],
               fileName: files[0].name,
+              winCount: 0,
             ),
           );
         });
@@ -161,6 +162,7 @@ class _AddCardPageState extends State<AddCardPage> {
                       id: imagePaths[index].id,
                       name: editNameController.text,
                       imagePath: editedImageUrl!,
+                      winCount: 0,
                     );
                   });
                   Navigator.pop(context);

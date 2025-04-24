@@ -4,6 +4,7 @@ import 'package:gorsel_programlama_proje/components/gradient_border.dart';
 import 'package:gorsel_programlama_proje/components/zoom_dialog.dart';
 import 'package:gorsel_programlama_proje/models/game.dart';
 import 'package:gorsel_programlama_proje/services/base_url.dart';
+import 'package:gorsel_programlama_proje/services/game_service.dart';
 
 class GameOverBody extends StatelessWidget {
   final Game game;
@@ -13,6 +14,11 @@ class GameOverBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    game.rankCard[0].winCount++;
+    GameService.updateCardWinCountAndGamePlayCount(
+      game.rankCard[0].id,
+      game.rankCard[0].winCount,
+    );
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(

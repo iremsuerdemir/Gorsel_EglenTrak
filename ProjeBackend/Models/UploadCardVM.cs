@@ -10,4 +10,6 @@ public class UploadCardRequest
 
     [FromForm]
     public int GameId { get; set; }
+
+    public int WinCount { get; set; }
 }
