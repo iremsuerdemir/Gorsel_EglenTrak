@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
 import 'package:gorsel_programlama_proje/pages/category_page.dart';
-import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,8 +70,6 @@ class _QuizHomePageState extends State<QuizHomePage>
   }
 
   void startQuiz() async {
-    //await _pauseBackgroundMusic(); // 🎵 Oyuna başlamadan müziği durdur.
-
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -81,19 +78,15 @@ class _QuizHomePageState extends State<QuizHomePage>
           Navigator.pop(context); // Kapat loading
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => QuizPage(category: widget.category),
-            ),
+            MaterialPageRoute(builder: (context) => CategoryPage()),
           );
         });
-
         return Center(
           child: Lottie.asset('assets/animations/loading.json', width: 150),
         );
       },
     );
   }
-
   /* void toggleMusic() {
     if (isMusicPlaying) {
       _pauseBackgroundMusic();

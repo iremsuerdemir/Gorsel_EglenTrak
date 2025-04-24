@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/home_page.dart';
+import 'package:gorsel_programlama_proje/pages/quiz_page.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 
@@ -10,7 +11,11 @@ class CategoryPage extends StatelessWidget {
   void navigateToQuiz(BuildContext context, String category) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => QuizHomePage(category: category)),
+      MaterialPageRoute(
+        builder:
+            (context) =>
+                QuizPage(category: category), // Kategori bilgisi ile geçiş
+      ),
     );
   }
 

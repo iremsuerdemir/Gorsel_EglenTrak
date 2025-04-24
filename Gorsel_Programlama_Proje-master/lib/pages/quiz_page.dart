@@ -41,6 +41,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   int firstSelectedAnswer = -1;
   List<int> hiddenOptions = [];
 
+  late List<Question> _questions;
+
   @override
   void initState() {
     super.initState();
@@ -53,6 +55,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       vsync: this,
       duration: const Duration(seconds: 2),
     );
+    _questions = QuestionList.getByCategory(widget.category);
     startTimer();
   }
 
@@ -86,7 +89,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   void checkAnswer(int index) async {
     if (questionAnswered) return;
 
-    final question = QuestionList.list[currentQuestionIndex];
+    final question = _questions[currentQuestionIndex];
     final correctIndex = question.correctAnswerIndex;
 
     timer?.cancel();
@@ -94,17 +97,70 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     // Double Answer first attempt
     if (doubleAnswerActive && firstSelectedAnswer == -1) {
       firstSelectedAnswer = index;
-      setState(() => selectedAnswer = index);
-      await player.play(AssetSource("sounds/wrong.mp3"));
-      await Future.delayed(const Duration(seconds: 1));
-      setState(() {
-        selectedAnswer = -1;
-        // waiting for second attempt
-      });
+
+      // Eğer ilk seçilen cevap doğruysa
+      if (index == correctIndex) {
+        setState(() {
+          selectedAnswer = index;
+          questionAnswered = true;
+          showLottie = true;
+          lottieFile = 'assets/animations/correct.json';
+          score += 10;
+        });
+
+        await player.play(AssetSource("sounds/correct.mp3"));
+        await lottieController.forward(from: 0.0);
+        await Future.delayed(const Duration(seconds: 2));
+
+        doubleAnswerActive = false; // Joker hakkı bitti
+        goToNextQuestion();
+      } else {
+        // Yanlışsa beklet ve ikinci şansı tanı
+        setState(() => selectedAnswer = index);
+        await player.play(AssetSource("sounds/wrong.mp3"));
+        await Future.delayed(const Duration(seconds: 1));
+        setState(() {
+          selectedAnswer = -1;
+          // ikinci deneme için bekliyor
+        });
+      }
       return;
     }
 
-    // Evaluate final answer
+    // Double Answer second attempt
+    if (doubleAnswerActive && firstSelectedAnswer != -1) {
+      if (index == correctIndex) {
+        setState(() {
+          selectedAnswer = index;
+          questionAnswered = true;
+          showLottie = true;
+          lottieFile = 'assets/animations/correct.json';
+          score += 10;
+        });
+
+        await player.play(AssetSource("sounds/correct.mp3"));
+        await lottieController.forward(from: 0.0);
+        await Future.delayed(const Duration(seconds: 2));
+        goToNextQuestion();
+      } else {
+        setState(() {
+          selectedAnswer = index;
+          questionAnswered = true;
+          showLottie = true;
+          lottieFile = 'assets/animations/wrong.json';
+        });
+
+        await player.play(AssetSource("sounds/wrong.mp3"));
+        await lottieController.forward(from: 0.0);
+        await Future.delayed(const Duration(seconds: 2));
+        gameOver();
+      }
+
+      doubleAnswerActive = false; // Joker hakkı kullanıldı
+      return;
+    }
+
+    // Normal değerlendirme (joker yoksa)
     setState(() {
       selectedAnswer = index;
       questionAnswered = true;
@@ -133,7 +189,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
 
   void useFiftyFifty() {
     if (usedFiftyFifty || questionAnswered) return;
-    final question = QuestionList.list[currentQuestionIndex];
+    final question = _questions[currentQuestionIndex];
     final correctIndex = question.correctAnswerIndex;
     List<int> options = List.generate(question.options.length, (i) => i)
       ..remove(correctIndex);
@@ -171,7 +227,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       firstSelectedAnswer = -1;
       timeLeft = 40;
     });
-    if (currentQuestionIndex < QuestionList.list.length) {
+    if (currentQuestionIndex < _questions.length) {
       await pageTransition.reverse();
       await pageTransition.forward();
       startTimer();
@@ -195,7 +251,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   }
 
   Widget buildAnswer(int index) {
-    final question = QuestionList.list[currentQuestionIndex];
+    final question = _questions[currentQuestionIndex];
     final correctIndex = question.correctAnswerIndex;
     if (usedFiftyFifty && hiddenOptions.contains(index))
       return const SizedBox.shrink();
@@ -272,9 +328,10 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     );
   }
 
+  Question get currentQuestion => _questions[currentQuestionIndex];
   @override
   Widget build(BuildContext context) {
-    final question = QuestionList.list[currentQuestionIndex];
+    final question = _questions[currentQuestionIndex];
     return Scaffold(
       backgroundColor: Colors.deepPurple[700],
       body: Stack(
@@ -343,9 +400,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
                           const SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(QuestionList.list.length, (
-                              i,
-                            ) {
+                            children: List.generate(_questions.length, (i) {
                               bool active = i == currentQuestionIndex;
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
