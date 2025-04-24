@@ -90,7 +90,7 @@ namespace ProjeBackend.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<UserVM>> Login(LoginRequest loginRequest)
         {
-            User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email && u.Password == loginRequest.Password);
+            User? user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email && u.Password == loginRequest.Password);
             
             if(user == null)
             {

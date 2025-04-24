@@ -6,6 +6,7 @@ import 'package:gorsel_programlama_proje/components/gradient_border.dart';
 import 'package:gorsel_programlama_proje/components/zoom_dialog.dart';
 import 'package:gorsel_programlama_proje/models/card_model.dart';
 import 'package:gorsel_programlama_proje/models/upload_card_model.dart';
+import 'package:gorsel_programlama_proje/services/base_url.dart';
 import 'package:gorsel_programlama_proje/services/game_service.dart';
 import 'package:gorsel_programlama_proje/services/user_service.dart';
 
@@ -199,7 +200,9 @@ class _AddCardPageState extends State<AddCardPage> {
                 height: 180,
                 backgroundImage:
                     imagePaths.isNotEmpty
-                        ? imagePaths[selectedHeaderIndex].imagePath
+                        ? isWillUpdate
+                            ? "${BaseUrl.imageBaseUrl}/${imagePaths[selectedHeaderIndex].imagePath}"
+                            : imagePaths[selectedHeaderIndex].imagePath
                         : null,
                 child: Center(
                   child:
@@ -331,14 +334,20 @@ class _AddCardPageState extends State<AddCardPage> {
                             image:
                                 imagePaths[i].name == "Empty"
                                     ? Image.asset("assets/icons/cross.png")
-                                    : Image.network(imagePaths[i].imagePath),
+                                    : Image.network(
+                                      isWillUpdate
+                                          ? "${BaseUrl.imageBaseUrl}/${imagePaths[i].imagePath}"
+                                          : imagePaths[i].imagePath,
+                                    ),
                           );
                         },
                         child: Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: ListTile(
                             leading: Image.network(
-                              imagePaths[i].imagePath, // URL kullanılıyor
+                              isWillUpdate
+                                  ? "${BaseUrl.imageBaseUrl}/${imagePaths[i].imagePath}"
+                                  : imagePaths[i].imagePath, // URL kullanılıyor
                               width: 100,
                               fit: BoxFit.contain,
                             ),

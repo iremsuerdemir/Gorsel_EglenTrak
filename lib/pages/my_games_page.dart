@@ -59,7 +59,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
             child: Stack(
               children: [
                 CustomCard(
-                  round: 32,
+                  round: games[i].round,
                   cardHeaderImageIndex: 1,
                   cards: games[i].cards,
                   title: games[i].name,

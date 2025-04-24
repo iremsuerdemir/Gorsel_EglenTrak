@@ -23,8 +23,16 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
     this.isGameOver = false,
   });
 
+  void sortCardByWinRate() {
+    cards.sort(
+      (a, b) =>
+          (b.winCount / gamePlayCount).compareTo(a.winCount / gamePlayCount),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    sortCardByWinRate();
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -94,6 +102,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.only(right: 10),
                                     child: LinearProgressIndicator(
+                                      borderRadius: BorderRadius.circular(10),
                                       value:
                                           (cards[i].winCount /
                                               gamePlayCount), // Örnek olarak %60 dolu
@@ -104,8 +113,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                   ),
                                   SizedBox(height: 4),
                                   Text(
-                                    ((cards[i].winCount / gamePlayCount) * 100)
-                                        .toStringAsFixed(2),
+                                    "Kazanma Oranı: %${((cards[i].winCount / gamePlayCount) * 100).toStringAsFixed(2)}",
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey[700],

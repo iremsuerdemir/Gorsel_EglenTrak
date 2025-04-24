@@ -64,12 +64,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
         actions: [
           UserService.user == null
               ? IconButton(

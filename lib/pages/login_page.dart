@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage>
   late AnimationController _animationController;
   late Animation<Offset> _loginAnimation;
   late Animation<Offset> _registerAnimation;
+  bool isLoginOrRegister = false;
 
   @override
   void initState() {
@@ -117,15 +118,44 @@ class _LoginPageState extends State<LoginPage>
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
+                              setState(() {
+                                isLoginOrRegister = true;
+                              });
                               UserService.login(
-                                email: _emailController.text,
+                                email: _emailController.text.toLowerCase(),
                                 password: _passwordController.text,
                               ).then((_) {
                                 if (!context.mounted) return;
+                                setState(() {
+                                  isLoginOrRegister = false;
+                                });
+                                if (UserService.user == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Email veya parola yanlış!",
+                                      ),
+                                      showCloseIcon: true,
+                                    ),
+                                  );
+                                  return;
+                                }
                                 Navigator.pop(context);
                               });
                             },
-                            child: Text("Giriş Yap"),
+                            child:
+                                isLoginOrRegister
+                                    ? SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                      ),
+                                    )
+                                    : Text("Giriş Yap"),
                           ),
                         ),
                         SizedBox(height: 10),
@@ -197,16 +227,48 @@ class _LoginPageState extends State<LoginPage>
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
+                              if (_registerEmailController.text.isEmpty ||
+                                  _registerNameController.text.isEmpty ||
+                                  _registerPasswordController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Lütfen tüm alanları doldurun!",
+                                    ),
+                                    showCloseIcon: true,
+                                  ),
+                                );
+                                return;
+                              }
+                              setState(() {
+                                isLoginOrRegister = true;
+                              });
                               UserService.register(
-                                email: _registerEmailController.text,
+                                email:
+                                    _registerEmailController.text.toLowerCase(),
                                 username: _registerNameController.text,
                                 password: _registerPasswordController.text,
                               ).then((_) {
                                 if (!context.mounted) return;
+                                setState(() {
+                                  isLoginOrRegister = false;
+                                });
                                 Navigator.pop(context);
                               });
                             },
-                            child: Text("Kayıt Ol"),
+                            child:
+                                isLoginOrRegister
+                                    ? SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                      ),
+                                    )
+                                    : Text("Kayıt Ol"),
                           ),
                         ),
                         SizedBox(height: 10),
