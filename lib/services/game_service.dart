@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html' as html;
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:gorsel_programlama_proje/models/game_model.dart';
 import 'package:gorsel_programlama_proje/models/upload_card_model.dart';
@@ -55,6 +56,11 @@ class GameService {
     required UploadCardModel gameImage,
     required List<UploadCardModel> cards,
   }) async {
+    //rawFile boş ise ve imagepath varsa onu rawfile'a çevir
+    if (gameImage.rawFile == null && gameImage.imagePath.isNotEmpty) {
+      gameImage.rawFile = File(gameImage.imagePath) as html.File?;
+    }
+
     var uri = Uri.parse('${BaseUrl.baseUrl}/Games/UploadGame');
     var request = http.MultipartRequest('POST', uri);
 

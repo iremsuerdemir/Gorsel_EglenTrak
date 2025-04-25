@@ -86,7 +86,7 @@ class _ChoiceGameMenuPageState extends State<ChoiceGameMenuPage> {
                             padding: EdgeInsets.all(5),
                             child: CustomCard(
                               round: games[i].round,
-                              cardHeaderImageIndex: 1,
+                              cardHeaderImageIndex: 0,
                               cards: games[i].cards,
                               title: games[i].name,
                               description: games[i].description,

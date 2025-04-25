@@ -25,8 +25,10 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
 
   void sortCardByWinRate() {
     cards.sort(
-      (a, b) =>
-          (b.winCount / gamePlayCount).compareTo(a.winCount / gamePlayCount),
+      (a, b) => ((gamePlayCount == 0 ? 0 : b.winCount / gamePlayCount) * 100)
+          .compareTo(
+            (gamePlayCount == 0 ? 0 : a.winCount / gamePlayCount) * 100,
+          ),
     );
   }
 
@@ -54,6 +56,11 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: cards.length,
                 itemBuilder: (context, i) {
+                  final winRate =
+                      (gamePlayCount == 0
+                          ? 0
+                          : cards[i].winCount / gamePlayCount) *
+                      100;
                   return GestureDetector(
                     onTap: () {
                       ZoomDialog.show(
@@ -103,9 +110,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                     padding: EdgeInsets.only(right: 10),
                                     child: LinearProgressIndicator(
                                       borderRadius: BorderRadius.circular(10),
-                                      value:
-                                          (cards[i].winCount /
-                                              gamePlayCount), // Örnek olarak %60 dolu
+                                      value: winRate / 100,
                                       backgroundColor: Colors.grey.shade300,
                                       color: Colors.blue,
                                       minHeight: 8,
@@ -113,7 +118,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                   ),
                                   SizedBox(height: 4),
                                   Text(
-                                    "Kazanma Oranı: %${((cards[i].winCount / gamePlayCount) * 100).toStringAsFixed(2)}",
+                                    "Kazanma Oranı: %${winRate.toStringAsFixed(2)}",
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.grey[700],

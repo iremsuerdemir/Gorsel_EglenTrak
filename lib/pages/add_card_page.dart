@@ -68,7 +68,7 @@ class _AddCardPageState extends State<AddCardPage> {
         selectedValue = 32;
       });
     }
-    if (imagePaths.length >= selectedValue!) {
+    if (imagePaths.length >= selectedValue! * 2) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Eklenen görsel sayısısı $selectedValue sayısını aştı"),
@@ -286,7 +286,7 @@ class _AddCardPageState extends State<AddCardPage> {
                 focusColor: Colors.transparent,
                 borderRadius: BorderRadius.circular(10),
                 onChanged: (int? newValue) {
-                  if (imagePaths.length > newValue!) {
+                  if (imagePaths.length > newValue! * 2) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text("Görsel sayısı bu miktar için çok büyük"),
@@ -469,6 +469,7 @@ class _AddCardPageState extends State<AddCardPage> {
                           SnackBar(content: Text("Başarıyla kaydedildi!")),
                         );
                       }
+                      Navigator.pop(context);
                     },
                     height: 30,
                     text: "Kaydet",

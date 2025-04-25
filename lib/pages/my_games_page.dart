@@ -21,7 +21,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
 
     GameService.getUserGames().then((g) {
       setState(() {
-        games = g;
+        games = g; //hata kontrolu eklenebilir
       });
     });
   }
@@ -35,7 +35,11 @@ class _MyGamesPageState extends State<MyGamesPage> {
             context,
             MaterialPageRoute(builder: (context) => AddCardPage()),
           ).then((_) {
-            setState(() {});
+            GameService.getUserGames().then((g) {
+              setState(() {
+                games = g; //hata kontrolu eklenebilir
+              });
+            });
           });
         },
         child: Icon(Icons.add),
@@ -60,7 +64,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
               children: [
                 CustomCard(
                   round: games[i].round,
-                  cardHeaderImageIndex: 1,
+                  cardHeaderImageIndex: 0,
                   cards: games[i].cards,
                   title: games[i].name,
                   description: games[i].description,
