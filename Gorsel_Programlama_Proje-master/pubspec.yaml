@@ -1,0 +1,44 @@
+name: gorsel_programlama_proje
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  intl: ^0.18.1
+  fl_score_bar: ^0.2.4
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0
+  lottie: ^2.6.0
+  audioplayers: ^5.2.0
+  cupertino_icons: ^1.0.8
+  shimmer: ^3.0.0
+  shared_preferences: ^2.5.3
+  image_picker: ^1.1.2
+  simple_gradient_text: ^1.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0 # Correct placement under dev_dependencies
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/sounds/
+    - assets/animations/
+    - assets/animations/time_over.json
+    - assets/animations/background.json
+    - assets/animations/gameover.json
+    - assets/animations/quiz_start.json
+    - assets/animations/intro.json
+    - assets/animations/congrats.json
+    - assets/animations/star.json
+    - assets/animations/gold_medal.json
+    - assets/animations/silver_medal.json
+    - assets/animations/bronz_medal.json
