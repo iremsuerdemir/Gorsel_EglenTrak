@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/home_page.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('tr', null); // Türkçe için gerekli
+
   const primaryColor = Color.fromARGB(255, 207, 47, 35);
   const backgroundColor = Color.fromARGB(255, 50, 59, 63);
 
