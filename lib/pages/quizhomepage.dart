@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
 import 'package:gorsel_programlama_proje/pages/category_page.dart';
+import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -112,7 +113,7 @@ class _QuizHomePageState extends State<QuizHomePage>
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CategoryPage()),
+                  MaterialPageRoute(builder: (context) => QuizIntroPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
