@@ -257,7 +257,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     // ScoreScreen'e yönlendir
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => QuizGameOver(),
+      MaterialPageRoute(builder: (_) => QuizGameOver()),
     );
   }
 
