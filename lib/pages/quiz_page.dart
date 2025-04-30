@@ -225,6 +225,18 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   );
 
   void goToNextQuestion() async {
+    // 1) Eğer bir sonraki soru yoksa, timer'ı durdur, skoru kaydet ve ScoreScreen'e git
+    if (currentQuestionIndex + 1 >= _questions.length) {
+      timer?.cancel();
+      ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => ScoreScreen(score: score)),
+      );
+      return;
+    }
+
+    // 2) Hala soru varsa: index'i ilerlet, durumu sıfırla
     setState(() {
       currentQuestionIndex++;
       selectedAnswer = -1;
@@ -236,18 +248,11 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       firstSelectedAnswer = -1;
       timeLeft = 40;
     });
-    if (currentQuestionIndex < _questions.length) {
-      await pageTransition.reverse();
-      await pageTransition.forward();
-      startTimer();
-    } else {
-      ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ScoreScreen(score: score)),
-      );
-    }
+    // 3) Sayfa animasyonunu tersine çevir, yeniden oynat ve timer'ı başlat
+    await pageTransition.reverse();
+    await pageTransition.forward();
+    startTimer();
   }
 
   void gameOver() {
