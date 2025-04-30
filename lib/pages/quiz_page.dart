@@ -7,6 +7,8 @@ import 'package:gorsel_programlama_proje/models/question_list.dart';
 import 'package:gorsel_programlama_proje/models/score_list.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
+import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
+import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
 
 class QuizPage extends StatefulWidget {
   final String category;
@@ -81,7 +83,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
         // ScoreScreen'e yönlendir
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => ScoreScreen(score: score)),
+          MaterialPageRoute(builder: (_) => TimeFinishPage()),
         );
       }
     });
@@ -255,7 +257,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     // ScoreScreen'e yönlendir
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => ScoreScreen(score: score)),
+      MaterialPageRoute(builder: (_) => QuizGameOver(),
     );
   }
 
