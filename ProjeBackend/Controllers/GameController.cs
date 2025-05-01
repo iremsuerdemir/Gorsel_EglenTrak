@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjeBackend.Models;
@@ -203,36 +204,67 @@ namespace ProjeBackend.Controllers
 
             foreach (var card in gameRequest.Cards)
             {
-                var existingCard = await _context.Card.FindAsync(card.id);
+                
+                if(card.id != -1){ // -1 yeni eklenen kartlar için
 
-                if (existingCard == null) continue;
+                    //var olan kartları güncelle
+                    var existingCard = await _context.Card.FindAsync(card.id);
 
-                existingCard.Name = card.Name;
+                    if (existingCard == null) continue;
 
-                var cardUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
-                if (!Directory.Exists(cardUploadsDir))
-                    Directory.CreateDirectory(cardUploadsDir);
+                    existingCard.Name = card.Name;
 
-                // 💥 ESKİ GÖRSELİ SİL
-                if (!string.IsNullOrEmpty(existingCard.ImagePath))
-                {
-                    var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingCard.ImagePath);
-                    if (System.IO.File.Exists(oldImageFullPath))
+                    var cardUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
+                    if (!Directory.Exists(cardUploadsDir))
+                        Directory.CreateDirectory(cardUploadsDir);
+
+                    // 💥 ESKİ GÖRSELİ SİL
+                    if (!string.IsNullOrEmpty(existingCard.ImagePath))
                     {
-                        System.IO.File.Delete(oldImageFullPath);
+                        var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingCard.ImagePath);
+                        if (System.IO.File.Exists(oldImageFullPath))
+                        {
+                            System.IO.File.Delete(oldImageFullPath);
+                        }
                     }
+
+                    // 📷 YENİ GÖRSELİ KAYDET
+                    var cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
+                    var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
+
+                    using (var stream = new FileStream(cardImagePath, FileMode.Create))
+                    {
+                        await card.File.CopyToAsync(stream);
+                    }
+
+                    existingCard.ImagePath = $"images/cards/{cardImageName}";
                 }
+                else{
+                    // yeni kart ekle
 
-                // 📷 YENİ GÖRSELİ KAYDET
-                var cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
-                var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
+                    var cardUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
+                    if (!Directory.Exists(cardUploadsDir))
+                        Directory.CreateDirectory(cardUploadsDir);
 
-                using (var stream = new FileStream(cardImagePath, FileMode.Create))
-                {
-                    await card.File.CopyToAsync(stream);
+                    // 📷 YENİ GÖRSELİ KAYDET
+                    var cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
+                    var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
+
+                    using (var stream = new FileStream(cardImagePath, FileMode.Create))
+                    {
+                        await card.File.CopyToAsync(stream);
+                    }
+                    if(game.Cards == null)
+                        game.Cards = new List<Card>();
+                    game.Cards.Add(new Card{
+                        Name = card.Name,
+                        WinCount = 0,
+                        GameId = id,
+                        ImagePath = Path.Combine("images/cards", cardImageName),
+                    }
+                    );
+
                 }
-
-                existingCard.ImagePath = $"images/cards/{cardImageName}";
             }
 
             try

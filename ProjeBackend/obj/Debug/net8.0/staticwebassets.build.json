@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5o4IoFWN9ggp+frNC1hJDcgxxbbUI2W370YLQlIc89k=",
+  "Hash": "/UMv1ouA2+6hKej7zYLGVAkiTkzbrzqqkmU+jO/WUmY=",
   "Source": "ProjeBackend",
   "BasePath": "_content/ProjeBackend",
   "Mode": "Default",
@@ -10,17 +10,59 @@
     {
       "Name": "ProjeBackend\\wwwroot",
       "Source": "ProjeBackend",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\16231c21-4c47-46bf-a093-6b832817c3db.png",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/16231c21-4c47-46bf-a093-6b832817c3db#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ebsb87mcis",
+      "Integrity": "GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\16231c21-4c47-46bf-a093-6b832817c3db.png"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/9f398d92-7942-4b82-a298-defe5deeb1f1#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qgufksfv7r",
+      "Integrity": "BoQbCZcvKZylXVfYL85xaX6ztd3+4TESJs44ExcawKg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/aydin#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -38,10 +80,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\aydin.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/cem#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -59,10 +101,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\cem.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\deniz.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\deniz.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/deniz#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -80,10 +122,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\deniz.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/derya#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -101,10 +143,31 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\derya.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e50675cc-a18f-4c18-8fe8-929cf271be64.png",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/e50675cc-a18f-4c18-8fe8-929cf271be64#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "km58zob003",
+      "Integrity": "hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\e50675cc-a18f-4c18-8fe8-929cf271be64.png"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/emir#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -122,10 +185,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\emir.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emirPrime.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emirPrime.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/emirPrime#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -143,10 +206,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\emirPrime.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatma.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatma.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/fatma#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -164,10 +227,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\fatma.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/fatmaPrime#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -185,10 +248,31 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\fatmaPrime.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "rfj6elxijv",
+      "Integrity": "GYbk1TNeO3TdwBmpl2fgc7LJJHZ8O7T0sXhoLFQuW0I=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/isil#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -206,10 +290,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\isil.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\kemal.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\kemal.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/kemal#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -227,10 +311,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\kemal.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\oguz.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\oguz.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/oguz#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -248,10 +332,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\oguz.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\ozlem.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\ozlem.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/ozlem#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -269,10 +353,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\ozlem.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tarikPrime.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tarikPrime.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/tarikPrime#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -290,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\tarikPrime.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tolga.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tolga.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/tolga#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -311,10 +395,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\tolga.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tugba.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tugba.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/tugba#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -332,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\images\\cards\\tugba.jpeg"
     },
     {
-      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
       "SourceId": "ProjeBackend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
       "BasePath": "_content/ProjeBackend",
       "RelativePath": "images/cards/turgut#[.{fingerprint}]?.jpeg",
       "AssetKind": "All",
@@ -351,12 +435,197 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\cards\\turgut.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\af7c8e09-8640-45e8-94a3-01e89951b837.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/games/af7c8e09-8640-45e8-94a3-01e89951b837#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ebsb87mcis",
+      "Integrity": "GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\games\\af7c8e09-8640-45e8-94a3-01e89951b837.png"
     }
   ],
   "Endpoints": [
     {
+      "Route": "images/cards/16231c21-4c47-46bf-a093-6b832817c3db.ebsb87mcis.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\16231c21-4c47-46bf-a093-6b832817c3db.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "357944"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:51:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ebsb87mcis"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/16231c21-4c47-46bf-a093-6b832817c3db.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/16231c21-4c47-46bf-a093-6b832817c3db.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\16231c21-4c47-46bf-a093-6b832817c3db.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "357944"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:51:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/9f398d92-7942-4b82-a298-defe5deeb1f1.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "230427"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BoQbCZcvKZylXVfYL85xaX6ztd3+4TESJs44ExcawKg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BoQbCZcvKZylXVfYL85xaX6ztd3+4TESJs44ExcawKg="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/9f398d92-7942-4b82-a298-defe5deeb1f1.qgufksfv7r.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "230427"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BoQbCZcvKZylXVfYL85xaX6ztd3+4TESJs44ExcawKg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qgufksfv7r"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/9f398d92-7942-4b82-a298-defe5deeb1f1.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BoQbCZcvKZylXVfYL85xaX6ztd3+4TESJs44ExcawKg="
+        }
+      ]
+    },
+    {
       "Route": "images/cards/aydin.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -377,7 +646,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -393,7 +662,7 @@
     },
     {
       "Route": "images/cards/aydin.pu4bgqzl6s.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -414,7 +683,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -438,7 +707,7 @@
     },
     {
       "Route": "images/cards/cem.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -459,7 +728,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -475,7 +744,7 @@
     },
     {
       "Route": "images/cards/cem.yqkev4q6vg.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -496,7 +765,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -520,7 +789,7 @@
     },
     {
       "Route": "images/cards/deniz.9l971u291n.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\deniz.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\deniz.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -541,7 +810,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -565,7 +834,7 @@
     },
     {
       "Route": "images/cards/deniz.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\deniz.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\deniz.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -586,7 +855,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -602,7 +871,7 @@
     },
     {
       "Route": "images/cards/derya.cxly6hgt3j.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -623,7 +892,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -647,7 +916,7 @@
     },
     {
       "Route": "images/cards/derya.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -668,7 +937,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -683,8 +952,90 @@
       ]
     },
     {
+      "Route": "images/cards/e50675cc-a18f-4c18-8fe8-929cf271be64.km58zob003.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e50675cc-a18f-4c18-8fe8-929cf271be64.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "266449"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "km58zob003"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/e50675cc-a18f-4c18-8fe8-929cf271be64.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/e50675cc-a18f-4c18-8fe8-929cf271be64.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e50675cc-a18f-4c18-8fe8-929cf271be64.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "266449"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA="
+        }
+      ]
+    },
+    {
       "Route": "images/cards/emir.8mlkb61hg8.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -705,7 +1056,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -729,7 +1080,7 @@
     },
     {
       "Route": "images/cards/emir.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -750,7 +1101,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -766,7 +1117,7 @@
     },
     {
       "Route": "images/cards/emirPrime.9qsghchbq2.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emirPrime.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emirPrime.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -787,7 +1138,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -811,7 +1162,7 @@
     },
     {
       "Route": "images/cards/emirPrime.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emirPrime.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emirPrime.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -832,7 +1183,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -848,7 +1199,7 @@
     },
     {
       "Route": "images/cards/fatma.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatma.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatma.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -869,7 +1220,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -885,7 +1236,7 @@
     },
     {
       "Route": "images/cards/fatma.kl8fgodtld.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatma.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatma.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -906,7 +1257,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -930,7 +1281,7 @@
     },
     {
       "Route": "images/cards/fatmaPrime.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -951,7 +1302,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -967,7 +1318,7 @@
     },
     {
       "Route": "images/cards/fatmaPrime.mpd6a74qym.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -988,7 +1339,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1011,8 +1362,90 @@
       ]
     },
     {
+      "Route": "images/cards/fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1571085"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GYbk1TNeO3TdwBmpl2fgc7LJJHZ8O7T0sXhoLFQuW0I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GYbk1TNeO3TdwBmpl2fgc7LJJHZ8O7T0sXhoLFQuW0I="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.rfj6elxijv.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1571085"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GYbk1TNeO3TdwBmpl2fgc7LJJHZ8O7T0sXhoLFQuW0I=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rfj6elxijv"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GYbk1TNeO3TdwBmpl2fgc7LJJHZ8O7T0sXhoLFQuW0I="
+        }
+      ]
+    },
+    {
       "Route": "images/cards/isil.7cji8vkuih.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1033,7 +1466,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1057,7 +1490,7 @@
     },
     {
       "Route": "images/cards/isil.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1078,7 +1511,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1094,7 +1527,7 @@
     },
     {
       "Route": "images/cards/kemal.36s5ztakpb.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\kemal.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\kemal.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1115,7 +1548,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1139,7 +1572,7 @@
     },
     {
       "Route": "images/cards/kemal.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\kemal.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\kemal.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1160,7 +1593,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1176,7 +1609,7 @@
     },
     {
       "Route": "images/cards/oguz.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\oguz.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\oguz.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1197,7 +1630,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1213,7 +1646,7 @@
     },
     {
       "Route": "images/cards/oguz.xsbuyh57p2.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\oguz.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\oguz.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1234,7 +1667,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1258,7 +1691,7 @@
     },
     {
       "Route": "images/cards/ozlem.iclvfdq4qv.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\ozlem.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\ozlem.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1279,7 +1712,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1303,7 +1736,7 @@
     },
     {
       "Route": "images/cards/ozlem.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\ozlem.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\ozlem.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1324,7 +1757,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1340,7 +1773,7 @@
     },
     {
       "Route": "images/cards/tarikPrime.3vo552baf8.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tarikPrime.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tarikPrime.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1361,7 +1794,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1385,7 +1818,7 @@
     },
     {
       "Route": "images/cards/tarikPrime.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tarikPrime.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tarikPrime.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1406,7 +1839,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1422,7 +1855,7 @@
     },
     {
       "Route": "images/cards/tolga.8r3yqgceu9.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tolga.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tolga.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1443,7 +1876,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1467,7 +1900,7 @@
     },
     {
       "Route": "images/cards/tolga.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tolga.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tolga.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1488,7 +1921,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1504,7 +1937,7 @@
     },
     {
       "Route": "images/cards/tugba.4wfjf26fq3.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tugba.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tugba.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1525,7 +1958,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1549,7 +1982,7 @@
     },
     {
       "Route": "images/cards/tugba.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tugba.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\tugba.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1570,7 +2003,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1586,7 +2019,7 @@
     },
     {
       "Route": "images/cards/turgut.8710xcwvg1.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1607,7 +2040,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1631,7 +2064,7 @@
     },
     {
       "Route": "images/cards/turgut.jpeg",
-      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\git\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1652,7 +2085,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:20:09 GMT"
+          "Value": "Thu, 01 May 2025 19:48:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1663,6 +2096,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-FDdd9Miv6Gcst0EenHszKGomEHjUyWS28j//RPmLnwM="
+        }
+      ]
+    },
+    {
+      "Route": "images/games/af7c8e09-8640-45e8-94a3-01e89951b837.ebsb87mcis.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\af7c8e09-8640-45e8-94a3-01e89951b837.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "357944"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:51:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ebsb87mcis"
+        },
+        {
+          "Name": "label",
+          "Value": "images/games/af7c8e09-8640-45e8-94a3-01e89951b837.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0="
+        }
+      ]
+    },
+    {
+      "Route": "images/games/af7c8e09-8640-45e8-94a3-01e89951b837.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\af7c8e09-8640-45e8-94a3-01e89951b837.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "357944"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 19:51:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0="
         }
       ]
     }

@@ -99,7 +99,7 @@ class _AddCardPageState extends State<AddCardPage> {
         setState(() {
           imagePaths.add(
             UploadCardModel(
-              id: DateTime.now().millisecondsSinceEpoch,
+              id: -1, // id = -1 yeni eklenen anlamında kullanılıyor
               name: name,
               imagePath: imageUrl,
               rawFile: files[0],
