@@ -99,6 +99,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
                                 title: games[i].name,
                                 description: games[i].description,
                                 round: games[i].round,
+                                gameId: games[i].id,
                               ),
                         ),
                       );

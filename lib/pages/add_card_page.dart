@@ -11,6 +11,7 @@ import 'package:gorsel_programlama_proje/services/game_service.dart';
 import 'package:gorsel_programlama_proje/services/user_service.dart';
 
 class AddCardPage extends StatefulWidget {
+  final int? gameId;
   final List<CardModel>? cards;
   final String? title;
   final String? description;
@@ -21,6 +22,7 @@ class AddCardPage extends StatefulWidget {
     this.title,
     this.round,
     this.description,
+    this.gameId,
   });
 
   @override
@@ -44,7 +46,8 @@ class _AddCardPageState extends State<AddCardPage> {
     if (widget.cards != null) {
       if (widget.title != null &&
           widget.round != null &&
-          widget.description != null) {
+          widget.description != null &&
+          widget.gameId != null) {
         imagePaths.addAll(
           widget.cards!.map((e) => UploadCardModel.fromCard(e)),
         );
@@ -53,7 +56,7 @@ class _AddCardPageState extends State<AddCardPage> {
         descriptionController.text = widget.description!;
       } else {
         throw Exception(
-          "Düzenleme yapılacağından title, description ve round null olamaz",
+          "Düzenleme yapılacağından title, description, gameId ve round null olamaz",
         );
       }
     } else {
@@ -102,6 +105,8 @@ class _AddCardPageState extends State<AddCardPage> {
               rawFile: files[0],
               fileName: files[0].name,
               winCount: 0,
+              isChanged:
+                  isWillUpdate, // güncelleme varsa yeni eklenen kartta bir değişiklik olarak sayılır
             ),
           );
         });
@@ -114,6 +119,9 @@ class _AddCardPageState extends State<AddCardPage> {
       text: imagePaths[index].name,
     );
     String? editedImageUrl = imagePaths[index].imagePath;
+    String? editedFileName = imagePaths[index].fileName;
+    html.File? editedRawfile = imagePaths[index].rawFile;
+    // String fileName =
 
     void pickNewImage() async {
       final html.FileUploadInputElement uploadInput =
@@ -131,7 +139,10 @@ class _AddCardPageState extends State<AddCardPage> {
           setState(() {
             editedImageUrl = reader.result as String;
             editNameController.text = files[0].name.split(".")[0];
+            editedFileName = files[0].name;
+            editedRawfile = files[0];
           });
+          print(editedFileName);
         });
       });
     }
@@ -163,7 +174,10 @@ class _AddCardPageState extends State<AddCardPage> {
                       id: imagePaths[index].id,
                       name: editNameController.text,
                       imagePath: editedImageUrl!,
+                      rawFile: editedRawfile!,
+                      fileName: editedFileName,
                       winCount: 0,
+                      isChanged: true,
                     );
                   });
                   Navigator.pop(context);
@@ -335,7 +349,7 @@ class _AddCardPageState extends State<AddCardPage> {
                                 imagePaths[i].name == "Empty"
                                     ? Image.asset("assets/icons/cross.png")
                                     : Image.network(
-                                      isWillUpdate
+                                      isWillUpdate && !imagePaths[i].isChanged
                                           ? "${BaseUrl.imageBaseUrl}/${imagePaths[i].imagePath}"
                                           : imagePaths[i].imagePath,
                                     ),
@@ -345,7 +359,7 @@ class _AddCardPageState extends State<AddCardPage> {
                           padding: EdgeInsets.only(bottom: 10),
                           child: ListTile(
                             leading: Image.network(
-                              isWillUpdate
+                              isWillUpdate && !imagePaths[i].isChanged
                                   ? "${BaseUrl.imageBaseUrl}/${imagePaths[i].imagePath}"
                                   : imagePaths[i].imagePath, // URL kullanılıyor
                               width: 100,
@@ -432,7 +446,7 @@ class _AddCardPageState extends State<AddCardPage> {
                 SizedBox(width: 10),
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (imagePaths.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -450,13 +464,27 @@ class _AddCardPageState extends State<AddCardPage> {
                       }
 
                       if (isWillUpdate) {
-                        // 🔄 GÜNCELLEME İŞLEMİ
-                        // Buraya veri tabanı güncelleme kodunu koyacaksın.
+                        final updateCards =
+                            imagePaths.where((e) => e.isChanged).toList();
+
+                        await GameService.updateGame(
+                          gameId: widget.gameId!,
+                          cards: updateCards.isNotEmpty ? updateCards : null,
+                          description: descriptionController.text,
+                          name: headerController.text,
+                          round: selectedValue,
+                          gameImage: imagePaths[2],
+                          /* imagePaths[selectedHeaderIndex].isChanged
+                                  ? imagePaths[selectedHeaderIndex]
+                                  : null,*/
+                        );
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Başarıyla güncellendi!")),
                         );
+                        Navigator.pop(context);
                       } else {
-                        GameService.uploadGameWithCards(
+                        await GameService.uploadGameWithCards(
                           name: headerController.text,
                           description: descriptionController.text,
                           round: selectedValue!,
@@ -464,12 +492,12 @@ class _AddCardPageState extends State<AddCardPage> {
                           gameImage: imagePaths[selectedHeaderIndex],
                           cards: imagePaths,
                         );
-
+                        if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Başarıyla kaydedildi!")),
                         );
+                        Navigator.pop(context);
                       }
-                      Navigator.pop(context);
                     },
                     height: 30,
                     text: "Kaydet",

@@ -9,7 +9,7 @@ public class UploadGameRequest
     public int PlayCount { get; set; }
     
     [FromForm]
-    public IFormFile GameImage { get; set; } = null!;
+    public IFormFile? GameImage { get; set; }
     public int UserId { get; set; }
 
     public List<UploadCardRequest> Cards { get; set; } = new();

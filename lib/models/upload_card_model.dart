@@ -4,9 +4,11 @@ import 'package:gorsel_programlama_proje/models/card_model.dart';
 class UploadCardModel extends CardModel {
   html.File? rawFile;
   String? fileName;
+  bool isChanged;
   UploadCardModel({
     this.rawFile,
     this.fileName,
+    this.isChanged = false,
     required super.id,
     required super.name,
     required super.imagePath,

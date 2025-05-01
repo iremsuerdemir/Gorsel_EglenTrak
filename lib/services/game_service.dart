@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html' as html;
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:gorsel_programlama_proje/models/game_model.dart';
 import 'package:gorsel_programlama_proje/models/upload_card_model.dart';
@@ -56,9 +55,11 @@ class GameService {
     required UploadCardModel gameImage,
     required List<UploadCardModel> cards,
   }) async {
-    //rawFile boş ise ve imagepath varsa onu rawfile'a çevir
     if (gameImage.rawFile == null && gameImage.imagePath.isNotEmpty) {
-      gameImage.rawFile = File(gameImage.imagePath) as html.File?;
+      gameImage.rawFile = await fileFromBase64(
+        gameImage.imagePath,
+        gameImage.fileName!,
+      );
     }
 
     var uri = Uri.parse('${BaseUrl.baseUrl}/Games/UploadGame');
@@ -69,7 +70,6 @@ class GameService {
     request.fields['Round'] = round.toString();
     request.fields['UserId'] = userId.toString();
 
-    // 🎮 Game görseli
     final gameBytes = await fileToBytes(gameImage.rawFile!);
     request.files.add(
       http.MultipartFile.fromBytes(
@@ -79,13 +79,19 @@ class GameService {
       ),
     );
 
-    // 🃏 Kartlar
     for (int i = 0; i < cards.length; i++) {
       final card = cards[i];
+
+      if (card.rawFile == null && card.imagePath.isNotEmpty) {
+        card.rawFile = await fileFromBase64(card.imagePath, card.fileName!);
+      }
+
       final cardBytes = await fileToBytes(card.rawFile!);
 
       request.fields['Cards[$i].Name'] = card.name;
-      request.fields['Cards[$i].GameId'] = "0"; // örnek değer
+      request.fields['Cards[$i].GameId'] = "0";
+      request.fields['Cards[$i].ImagePath'] =
+          card.imagePath; // imagePath eklenmeli
 
       request.files.add(
         http.MultipartFile.fromBytes(
@@ -104,6 +110,8 @@ class GameService {
       print(resStr);
     } else {
       print('Hata kodu: ${response.statusCode}');
+      var errorStr = await response.stream.bytesToString();
+      print('Sunucu yanıtı: $errorStr');
     }
   }
 
@@ -122,6 +130,22 @@ class GameService {
     return completer.future;
   }
 
+  static Future<html.File> fileFromBase64(
+    String base64DataUrl,
+    String fileName,
+  ) async {
+    // "data:image/png;base64,..." formatında geliyor, ',' ile bölüyoruz
+    final splitted = base64DataUrl.split(',');
+    if (splitted.length != 2) {
+      throw Exception('Geçersiz Base64 formatı');
+    }
+    final base64Str = splitted[1]; // ikinci kısım asıl base64 datası
+    final bytes = base64Decode(base64Str);
+    final blob = html.Blob([bytes]);
+    final file = html.File([blob], fileName);
+    return file;
+  }
+
   static Future<void> updateCardWinCountAndGamePlayCount(
     int cardId,
     int newWinCount,
@@ -131,5 +155,61 @@ class GameService {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(newWinCount),
     );
+  }
+
+  static Future<void> updateGame({
+    required int gameId,
+    String? name,
+    String? description,
+    int? round,
+    UploadCardModel? gameImage,
+    List<UploadCardModel>? cards,
+  }) async {
+    var uri = Uri.parse('${BaseUrl.baseUrl}/Games/Update/$gameId');
+    var request = http.MultipartRequest('POST', uri);
+
+    if (name != null) request.fields['Name'] = name;
+    if (description != null) request.fields['Description'] = description;
+    if (round != null) request.fields['Round'] = round.toString();
+
+    if (gameImage != null && gameImage.rawFile != null) {
+      final gameBytes = await fileToBytes(gameImage.rawFile!);
+      request.files.add(
+        http.MultipartFile.fromBytes(
+          'GameImage',
+          gameBytes,
+          filename: gameImage.fileName,
+        ),
+      );
+    }
+    if (cards != null) {
+      for (int i = 0; i < cards.length; i++) {
+        final card = cards[i];
+        final cardBytes = await fileToBytes(card.rawFile!);
+
+        request.fields['Cards[$i].Name'] = card.name;
+        request.fields['Cards[$i].id'] = card.id.toString();
+        request.fields['Cards[$i].ImagePath'] = card.imagePath;
+        request.fields['Cards[$i].GameId'] = gameId.toString(); // örnek değer
+
+        request.files.add(
+          http.MultipartFile.fromBytes(
+            'Cards[$i].File',
+            cardBytes,
+            filename: card.fileName,
+          ),
+        );
+      }
+    }
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print('Başarılı!');
+      var resStr = await response.stream.bytesToString();
+      print(resStr);
+    } else {
+      print('Hata kodu: ${response.statusCode}');
+      print('Hata: ${await response.stream.bytesToString()}');
+    }
   }
 }

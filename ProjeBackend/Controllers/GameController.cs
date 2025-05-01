@@ -159,6 +159,95 @@ namespace ProjeBackend.Controllers
         }
 
 
+        [HttpPost("Update/{id}")]
+        public async Task<IActionResult> UpdateGame(int id, UploadGameRequest gameRequest)
+        {
+            var game = await _context.Games.FindAsync(id);
+            if (game == null)
+            {
+                return NotFound(new { message = "Game not found." });
+            }
+
+            game.Description = gameRequest.Description;
+            game.Name = gameRequest.Name;
+            game.Round = gameRequest.Round;
+
+            // ✅ Game Image varsa güncelle
+            if (gameRequest.GameImage != null && gameRequest.GameImage.Length > 0)
+            {
+                var gameImageUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/games");
+                if (!Directory.Exists(gameImageUploadsDir))
+                    Directory.CreateDirectory(gameImageUploadsDir);
+
+                var gameImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot",game.ImagePath);
+
+                // Eski dosyayı sil
+                if (!string.IsNullOrEmpty(gameImagePath))
+                {
+                    var existingGameImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", game.ImagePath);
+                    if (System.IO.File.Exists(existingGameImagePath))
+                        System.IO.File.Delete(existingGameImagePath);
+                }
+
+                // Yeni resmi kaydet
+                var gameImageName = Guid.NewGuid() + Path.GetExtension(gameRequest.GameImage.FileName);
+                var newGameImagePath = Path.Combine(gameImageUploadsDir, gameImageName);
+                using (var stream = new FileStream(newGameImagePath, FileMode.Create))
+                {
+                    await gameRequest.GameImage.CopyToAsync(stream);
+                }
+
+                game.ImagePath = $"images/games/{gameImageName}";
+            }
+
+
+            foreach (var card in gameRequest.Cards)
+            {
+                var existingCard = await _context.Card.FindAsync(card.id);
+
+                if (existingCard == null) continue;
+
+                existingCard.Name = card.Name;
+
+                var cardUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
+                if (!Directory.Exists(cardUploadsDir))
+                    Directory.CreateDirectory(cardUploadsDir);
+
+                // 💥 ESKİ GÖRSELİ SİL
+                if (!string.IsNullOrEmpty(existingCard.ImagePath))
+                {
+                    var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingCard.ImagePath);
+                    if (System.IO.File.Exists(oldImageFullPath))
+                    {
+                        System.IO.File.Delete(oldImageFullPath);
+                    }
+                }
+
+                // 📷 YENİ GÖRSELİ KAYDET
+                var cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
+                var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
+
+                using (var stream = new FileStream(cardImagePath, FileMode.Create))
+                {
+                    await card.File.CopyToAsync(stream);
+                }
+
+                existingCard.ImagePath = $"images/cards/{cardImageName}";
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Game updated successfully.", game});
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while updating game.", error = ex.Message });
+            }
+        }
+
+
+
         // DELETE: api/Games/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGame(int id)

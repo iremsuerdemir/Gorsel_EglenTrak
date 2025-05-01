@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 public class UploadCardRequest
 {
+    public int id { get; set; }
+    public required string ImagePath { get; set; }
     [FromForm]
     public required IFormFile File { get; set; }
 
