@@ -6,7 +6,7 @@ import 'package:gorsel_programlama_proje/models/card_model.dart';
 import 'package:gorsel_programlama_proje/pages/choice_game_page.dart';
 import 'package:gorsel_programlama_proje/services/base_url.dart';
 
-class ChoiceGameDetailMenuPage extends StatelessWidget {
+class ChoiceGameDetailMenuPage extends StatefulWidget {
   final List<CardModel> cards;
   final int round;
   final String title;
@@ -23,12 +23,23 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
     this.isGameOver = false,
   });
 
+  @override
+  State<ChoiceGameDetailMenuPage> createState() =>
+      _ChoiceGameDetailMenuPageState();
+}
+
+class _ChoiceGameDetailMenuPageState extends State<ChoiceGameDetailMenuPage> {
   void sortCardByWinRate() {
-    cards.sort(
-      (a, b) => ((gamePlayCount == 0 ? 0 : b.winCount / gamePlayCount) * 100)
-          .compareTo(
-            (gamePlayCount == 0 ? 0 : a.winCount / gamePlayCount) * 100,
-          ),
+    widget.cards.sort(
+      (a, b) =>
+          ((widget.gamePlayCount == 0 ? 0 : b.winCount / widget.gamePlayCount) *
+                  100)
+              .compareTo(
+                (widget.gamePlayCount == 0
+                        ? 0
+                        : a.winCount / widget.gamePlayCount) *
+                    100,
+              ),
     );
   }
 
@@ -54,22 +65,22 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: cards.length,
+                itemCount: widget.cards.length,
                 itemBuilder: (context, i) {
                   final winRate =
-                      (gamePlayCount == 0
+                      (widget.gamePlayCount == 0
                           ? 0
-                          : cards[i].winCount / gamePlayCount) *
+                          : widget.cards[i].winCount / widget.gamePlayCount) *
                       100;
                   return GestureDetector(
                     onTap: () {
                       ZoomDialog.show(
                         context: context,
                         image:
-                            cards[i].name == "Empty"
+                            widget.cards[i].name == "Empty"
                                 ? Image.asset("assets/icons/cross.png")
                                 : Image.network(
-                                  "${BaseUrl.imageBaseUrl}/${cards[i].imagePath}",
+                                  "${BaseUrl.imageBaseUrl}/${widget.cards[i].imagePath}",
                                 ),
                       );
                     },
@@ -86,7 +97,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                 bottomLeft: Radius.circular(10),
                               ),
                               child: Image.network(
-                                "${BaseUrl.imageBaseUrl}/${cards[i].imagePath}",
+                                "${BaseUrl.imageBaseUrl}/${widget.cards[i].imagePath}",
                                 width: 120,
                                 height: double.infinity,
                                 fit: BoxFit.cover,
@@ -99,7 +110,7 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    cards[i].name,
+                                    widget.cards[i].name,
                                     style:
                                         Theme.of(
                                           context,
@@ -146,11 +157,11 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
       padding: 10,
       child: Column(
         children: [
-          Text(title, style: Theme.of(context).textTheme.displayLarge),
+          Text(widget.title, style: Theme.of(context).textTheme.displayLarge),
           SizedBox(height: 10),
-          Text(description),
+          Text(widget.description),
           SizedBox(height: 10),
-          isGameOver
+          widget.isGameOver
               ? SizedBox()
               : CustomButton(
                 text: "Oyna",
@@ -161,13 +172,15 @@ class ChoiceGameDetailMenuPage extends StatelessWidget {
                     MaterialPageRoute(
                       builder:
                           (context) => CohiceGamePage(
-                            cards: cards,
-                            round: round,
-                            title: title,
-                            description: description,
+                            cards: widget.cards,
+                            round: widget.round,
+                            title: widget.title,
+                            description: widget.description,
                           ),
                     ),
-                  );
+                  ).then((_) {
+                    setState(() {});
+                  });
                 },
               ),
         ],
