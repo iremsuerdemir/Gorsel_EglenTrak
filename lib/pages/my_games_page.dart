@@ -71,7 +71,7 @@ class _MyGamesPageState extends State<MyGamesPage> {
                       children: [
                         CustomCard(
                           round: games[i].round,
-                          cardHeaderImageIndex: 0,
+                          headerImage: games[i].imagePath,
                           cards: games[i].cards,
                           title: games[i].name,
                           description: games[i].description,

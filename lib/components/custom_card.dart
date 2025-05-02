@@ -7,13 +7,13 @@ class CustomCard extends StatelessWidget {
   final int round;
   final String title;
   final String description;
-  final int cardHeaderImageIndex;
+  final String headerImage;
   final List<CardModel> cards;
   final Function? onPressed;
   const CustomCard({
     super.key,
     required this.round,
-    required this.cardHeaderImageIndex,
+    required this.headerImage,
     required this.cards,
     this.onPressed,
     required this.title,
@@ -39,7 +39,7 @@ class CustomCard extends StatelessWidget {
                       top: Radius.circular(10),
                     ),
                     child: Image.network(
-                      "${BaseUrl.imageBaseUrl}/${cards[cardHeaderImageIndex].imagePath}",
+                      "${BaseUrl.imageBaseUrl}/$headerImage",
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
