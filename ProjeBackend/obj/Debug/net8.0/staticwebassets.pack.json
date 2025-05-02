@@ -1,22 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\0f0302d0-4089-4d54-a845-e3e062712c8b.png",
-      "PackagePath": "staticwebassets\\images\\cards\\0f0302d0-4089-4d54-a845-e3e062712c8b.png"
-    },
-    {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\560f65c0-e743-41c2-952d-cef9bced67ec.png",
-      "PackagePath": "staticwebassets\\images\\cards\\560f65c0-e743-41c2-952d-cef9bced67ec.png"
-    },
-    {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\5818d4e2-45b3-429b-8d6a-559acfd95351.png",
-      "PackagePath": "staticwebassets\\images\\cards\\5818d4e2-45b3-429b-8d6a-559acfd95351.png"
-    },
-    {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png",
-      "PackagePath": "staticwebassets\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png"
-    },
-    {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\aydin.jpeg"
     },
@@ -33,10 +17,6 @@
       "PackagePath": "staticwebassets\\images\\cards\\derya.jpeg"
     },
     {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e50675cc-a18f-4c18-8fe8-929cf271be64.png",
-      "PackagePath": "staticwebassets\\images\\cards\\e50675cc-a18f-4c18-8fe8-929cf271be64.png"
-    },
-    {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\emir.jpeg"
     },
@@ -51,10 +31,6 @@
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fatmaPrime.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\fatmaPrime.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png",
-      "PackagePath": "staticwebassets\\images\\cards\\fd16a9e2-d1aa-4cd0-8647-a0fe77dcb3f0.png"
     },
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\isil.jpeg",
@@ -87,10 +63,6 @@
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\turgut.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\af7c8e09-8640-45e8-94a3-01e89951b837.png",
-      "PackagePath": "staticwebassets\\images\\games\\af7c8e09-8640-45e8-94a3-01e89951b837.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProjeBackend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

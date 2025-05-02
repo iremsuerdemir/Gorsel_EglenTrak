@@ -8,7 +8,7 @@ class UploadCardModel extends CardModel {
   bool isImageChanged;
   UploadCardModel({
     this.rawFile,
-    this.fileName,
+    this.fileName = "",
     this.isChanged = false,
     this.isImageChanged = false,
     required super.id,

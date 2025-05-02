@@ -177,7 +177,10 @@ class _AddCardPageState extends State<AddCardPage> {
                       name: editNameController.text,
                       imagePath: editedImageUrl!,
                       rawFile: editedRawfile,
-                      fileName: isImageChanged ? editedFileName : "",
+                      fileName:
+                          isImageChanged
+                              ? editedFileName
+                              : imagePaths[index].fileName,
                       winCount: 0,
                       isChanged: true,
                       isImageChanged: isImageChanged,
@@ -469,6 +472,7 @@ class _AddCardPageState extends State<AddCardPage> {
                       }
 
                       if (isWillUpdate) {
+                        // oyun güncelleme
                         final updateCards =
                             imagePaths.where((e) => e.isChanged).toList();
 
@@ -489,6 +493,7 @@ class _AddCardPageState extends State<AddCardPage> {
                         );
                         Navigator.pop(context);
                       } else {
+                        //oyun ekleme
                         await GameService.uploadGameWithCards(
                           name: headerController.text,
                           description: descriptionController.text,

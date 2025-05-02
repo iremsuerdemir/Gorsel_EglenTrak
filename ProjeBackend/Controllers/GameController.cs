@@ -61,6 +61,10 @@ namespace ProjeBackend.Controllers
             if (!Directory.Exists(uploadsDir))
                 Directory.CreateDirectory(uploadsDir);
 
+            if(request.GameImage == null){
+                return BadRequest("Oyun kayıt edilirken GameImage null olamaz!");
+            }
+
             var gameImageName = Guid.NewGuid() + Path.GetExtension(request.GameImage.FileName);
             var gameImagePath = Path.Combine(uploadsDir, gameImageName);
 
@@ -88,6 +92,10 @@ namespace ProjeBackend.Controllers
 
             foreach (var cardItem in request.Cards)
             {
+                if(cardItem.File == null){
+                    return BadRequest("Oyun kayıt edilirken Card.File null olamaz!");
+                }
+                
                 var cardImageName = Guid.NewGuid() + Path.GetExtension(cardItem.File.FileName);
                 var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
 
