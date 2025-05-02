@@ -448,14 +448,68 @@ class _AddCardPageState extends State<AddCardPage> {
                 Expanded(
                   child: CustomButton(
                     onPressed: () {
-                      setState(() {
-                        imagePaths.clear();
-                        headerController.clear();
-                        descriptionController.clear();
-                        selectedHeaderIndex = 0;
-                      });
+                      showDialog(
+                        context: context,
+                        builder:
+                            (context) => AlertDialog(
+                              content: Text(
+                                "Bu işlem tüm oyunu silecek! Emin misiniz?",
+                              ),
+                              actions: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    CustomButton(
+                                      text: "Hayır",
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                          0.1,
+                                    ),
+                                    SizedBox(width: 10),
+                                    CustomButton(
+                                      text: "Evet",
+                                      color:
+                                          Theme.of(
+                                            context,
+                                          ).colorScheme.secondary,
+                                      onPressed: () {
+                                        if (isWillUpdate) {
+                                          // güncelleme ekranındaysak eski oyunu siler
+                                          // ekleme ekranıysas zaten veri tabanı boş
+                                          GameService.deleteGame(
+                                            widget.gameId!,
+                                          ).then((_) {
+                                            if (!context.mounted) return;
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          });
+                                        } else {
+                                          setState(() {
+                                            imagePaths.clear();
+                                            headerController.clear();
+                                            descriptionController.clear();
+                                            deletedCards.clear();
+                                            selectedHeaderIndex = 0;
+                                          });
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                          0.1,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                      );
                     },
-                    text: "Tümünü temizle",
+                    text: isWillUpdate ? "Oyunu sil" : "Tümünü temizle",
                     height: 30,
                     icon: Icon(Icons.close),
                   ),
@@ -468,6 +522,7 @@ class _AddCardPageState extends State<AddCardPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text("Lütfen en az bir görsel ekleyin!"),
+                            showCloseIcon: true,
                           ),
                         );
                         return;
@@ -475,7 +530,10 @@ class _AddCardPageState extends State<AddCardPage> {
 
                       if (headerController.text.trim().isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Başlık boş olamaz!")),
+                          SnackBar(
+                            content: Text("Başlık boş olamaz!"),
+                            showCloseIcon: true,
+                          ),
                         );
                         return;
                       }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Scripting.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ProjeBackend.Models;
 
@@ -314,9 +315,38 @@ namespace ProjeBackend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGame(int id)
         {
-            var game = await _context.Games.FindAsync(id);
+            var game = await _context.Games
+                .Include(g => g.Cards)  // Cards ilişkisini dahil et
+                .FirstOrDefaultAsync(g => g.Id == id);
+
             if (game == null)
                 return NotFound();
+
+            // Card'ların görselleri sil
+            if (game.Cards != null)
+            {
+                foreach (var card in game.Cards)
+                {
+                    if (!string.IsNullOrEmpty(card.ImagePath))
+                    {
+                        var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", card.ImagePath);
+                        if (System.IO.File.Exists(oldImageFullPath))
+                        {
+                            System.IO.File.Delete(oldImageFullPath);
+                        }
+                    }
+                }
+            }
+
+            // Game görseli sil
+            if (!string.IsNullOrEmpty(game.ImagePath))
+            {
+                var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", game.ImagePath);
+                if (System.IO.File.Exists(oldImageFullPath))
+                {
+                    System.IO.File.Delete(oldImageFullPath);
+                }
+            }
 
             _context.Games.Remove(game);
             await _context.SaveChangesAsync();

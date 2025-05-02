@@ -221,4 +221,8 @@ class GameService {
       print('Hata: ${await response.stream.bytesToString()}');
     }
   }
+
+  static Future<void> deleteGame(int id) async {
+    await http.delete(Uri.parse("${BaseUrl.baseUrl}/Games/$id"));
+  }
 }
