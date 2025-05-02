@@ -123,7 +123,7 @@ class _AddCardPageState extends State<AddCardPage> {
     String? editedImageUrl = imagePaths[index].imagePath;
     String? editedFileName = imagePaths[index].fileName;
     html.File? editedRawfile = imagePaths[index].rawFile;
-    bool isImageChanged = false;
+    bool isImageChanged = imagePaths[index].isImageChanged;
 
     void pickNewImage() async {
       final html.FileUploadInputElement uploadInput =

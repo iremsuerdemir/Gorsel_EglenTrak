@@ -1,5 +1,41 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\5e2b7507-b821-4cb3-afd8-0cc5dfce8df7.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjeBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjeBackend</BasePath>
+      <RelativePath>images/cards/5e2b7507-b821-4cb3-afd8-0cc5dfce8df7.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>98cvsvlnbu</Fingerprint>
+      <Integrity>Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\5e2b7507-b821-4cb3-afd8-0cc5dfce8df7.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\6db7987d-b5e2-4a74-8b47-67c234465421.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjeBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjeBackend</BasePath>
+      <RelativePath>images/cards/6db7987d-b5e2-4a74-8b47-67c234465421.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>677vtogc5l</Fingerprint>
+      <Integrity>MtMxrY11ECZOYygio79z3yr1Ms8CfXfuGcEdqlukr7M=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\6db7987d-b5e2-4a74-8b47-67c234465421.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\aydin.jpeg'))">
       <SourceType>Package</SourceType>
       <SourceId>ProjeBackend</SourceId>
@@ -36,6 +72,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\cem.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\dc697b06-88b9-4b02-8d23-e0989cdf4fe1.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjeBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjeBackend</BasePath>
+      <RelativePath>images/cards/dc697b06-88b9-4b02-8d23-e0989cdf4fe1.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>98cvsvlnbu</Fingerprint>
+      <Integrity>Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\dc697b06-88b9-4b02-8d23-e0989cdf4fe1.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\deniz.jpeg'))">
       <SourceType>Package</SourceType>
       <SourceId>ProjeBackend</SourceId>
@@ -71,6 +125,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\derya.jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\eac39b77-1caf-45ef-8998-261545392bcf.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjeBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjeBackend</BasePath>
+      <RelativePath>images/cards/eac39b77-1caf-45ef-8998-261545392bcf.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>277ir9hzuw</Fingerprint>
+      <Integrity>EnwuXDBLebjvdLc/e0Gy9GzFshg4l7Xou5HipTr9REU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\eac39b77-1caf-45ef-8998-261545392bcf.png'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\emir.jpeg'))">
       <SourceType>Package</SourceType>
@@ -287,6 +359,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\cards\turgut.jpeg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\games\757b03fb-b236-4dd3-81a4-a6256b9fab79.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjeBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjeBackend</BasePath>
+      <RelativePath>images/games/757b03fb-b236-4dd3-81a4-a6256b9fab79.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>677vtogc5l</Fingerprint>
+      <Integrity>MtMxrY11ECZOYygio79z3yr1Ms8CfXfuGcEdqlukr7M=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\games\757b03fb-b236-4dd3-81a4-a6256b9fab79.png'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>
