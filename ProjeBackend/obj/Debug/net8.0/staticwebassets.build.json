@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "P7KaTlNGQ7cmc5kqsZr6BZgE+ypDStfBGfT8LQW6lXg=",
+  "Hash": "LStmUWa0iAG0tBgHGBWVtyiE3WgsTaczvUOtASHvTyI=",
   "Source": "ProjeBackend",
   "BasePath": "_content/ProjeBackend",
   "Mode": "Default",
@@ -16,6 +16,48 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\8754c86f-f114-44cb-ba56-150f75bac9c7.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/8754c86f-f114-44cb-ba56-150f75bac9c7#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "km58zob003",
+      "Integrity": "hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\8754c86f-f114-44cb-ba56-150f75bac9c7.png"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9861f256-5de6-4a79-b280-14d9b3e559de.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/9861f256-5de6-4a79-b280-14d9b3e559de#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ebsb87mcis",
+      "Integrity": "GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\9861f256-5de6-4a79-b280-14d9b3e559de.png"
+    },
     {
       "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
       "SourceId": "ProjeBackend",
@@ -36,6 +78,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\cards\\aydin.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\c5985ff6-7dde-43de-a8d5-42979d458f2b.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/c5985ff6-7dde-43de-a8d5-42979d458f2b#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "98cvsvlnbu",
+      "Integrity": "Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\c5985ff6-7dde-43de-a8d5-42979d458f2b.png"
     },
     {
       "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
@@ -99,6 +162,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\cards\\derya.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/cards/e80a04c3-5ba3-449b-9709-d1fb002ffc8c#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fqtoxfyaci",
+      "Integrity": "h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cards\\e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png"
     },
     {
       "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
@@ -351,9 +435,194 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\cards\\turgut.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\ae102254-a671-484a-8e25-c169d6dd4038.png",
+      "SourceId": "ProjeBackend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\",
+      "BasePath": "_content/ProjeBackend",
+      "RelativePath": "images/games/ae102254-a671-484a-8e25-c169d6dd4038#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fqtoxfyaci",
+      "Integrity": "h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\games\\ae102254-a671-484a-8e25-c169d6dd4038.png"
     }
   ],
   "Endpoints": [
+    {
+      "Route": "images/cards/8754c86f-f114-44cb-ba56-150f75bac9c7.km58zob003.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\8754c86f-f114-44cb-ba56-150f75bac9c7.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "266449"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 14:00:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "km58zob003"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/8754c86f-f114-44cb-ba56-150f75bac9c7.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/8754c86f-f114-44cb-ba56-150f75bac9c7.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\8754c86f-f114-44cb-ba56-150f75bac9c7.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "266449"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 14:00:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hB5IiJjkRSPMMIxVVeDzwykX4d1KJ+YHOt4IDTDovfA="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/9861f256-5de6-4a79-b280-14d9b3e559de.ebsb87mcis.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9861f256-5de6-4a79-b280-14d9b3e559de.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "357944"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ebsb87mcis"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/9861f256-5de6-4a79-b280-14d9b3e559de.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/9861f256-5de6-4a79-b280-14d9b3e559de.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9861f256-5de6-4a79-b280-14d9b3e559de.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "357944"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GkiII0PuIwcNm0fnebvxLxAplQ6XPJhrMdclGWpMjQ0="
+        }
+      ]
+    },
     {
       "Route": "images/cards/aydin.jpeg",
       "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
@@ -377,7 +646,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -414,7 +683,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -433,6 +702,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-URWX7sOmexxyPo+xBTFftaEf9PVNwhofI6zlZKe7/Dk="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/c5985ff6-7dde-43de-a8d5-42979d458f2b.98cvsvlnbu.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\c5985ff6-7dde-43de-a8d5-42979d458f2b.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "27864"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "98cvsvlnbu"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/c5985ff6-7dde-43de-a8d5-42979d458f2b.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/c5985ff6-7dde-43de-a8d5-42979d458f2b.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\c5985ff6-7dde-43de-a8d5-42979d458f2b.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "27864"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Vyh7dTfhu02SUnPFRZQDRzAhP0GLfXdWonS5wzXjLZI="
         }
       ]
     },
@@ -459,7 +810,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -496,7 +847,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -541,7 +892,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -586,7 +937,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -623,7 +974,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -668,7 +1019,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -679,6 +1030,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-gHILC6meUu6Ygy2qZvnlcUvCtR0InRoeqMY/7qCTjCU="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/e80a04c3-5ba3-449b-9709-d1fb002ffc8c.fqtoxfyaci.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "114535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fqtoxfyaci"
+        },
+        {
+          "Name": "label",
+          "Value": "images/cards/e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig="
+        }
+      ]
+    },
+    {
+      "Route": "images/cards/e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "114535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig="
         }
       ]
     },
@@ -705,7 +1138,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -750,7 +1183,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -787,7 +1220,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -832,7 +1265,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -869,7 +1302,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -906,7 +1339,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -951,7 +1384,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -988,7 +1421,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1033,7 +1466,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1078,7 +1511,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1115,7 +1548,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1160,7 +1593,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1197,7 +1630,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1234,7 +1667,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1279,7 +1712,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1324,7 +1757,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1361,7 +1794,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1406,7 +1839,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1443,7 +1876,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1488,7 +1921,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1525,7 +1958,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1570,7 +2003,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1607,7 +2040,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1652,7 +2085,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 01 May 2025 19:48:41 GMT"
+          "Value": "Fri, 02 May 2025 13:48:04 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1663,6 +2096,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-FDdd9Miv6Gcst0EenHszKGomEHjUyWS28j//RPmLnwM="
+        }
+      ]
+    },
+    {
+      "Route": "images/games/ae102254-a671-484a-8e25-c169d6dd4038.fqtoxfyaci.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\ae102254-a671-484a-8e25-c169d6dd4038.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "114535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fqtoxfyaci"
+        },
+        {
+          "Name": "label",
+          "Value": "images/games/ae102254-a671-484a-8e25-c169d6dd4038.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig="
+        }
+      ]
+    },
+    {
+      "Route": "images/games/ae102254-a671-484a-8e25-c169d6dd4038.png",
+      "AssetFile": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\ae102254-a671-484a-8e25-c169d6dd4038.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "114535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 02 May 2025 13:57:56 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-h6mxwc6Mc7cFH0qM2ylN3cug2Fw4Mld2JTI/8dOGrig="
         }
       ]
     }

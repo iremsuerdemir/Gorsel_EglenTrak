@@ -1,8 +1,20 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\8754c86f-f114-44cb-ba56-150f75bac9c7.png",
+      "PackagePath": "staticwebassets\\images\\cards\\8754c86f-f114-44cb-ba56-150f75bac9c7.png"
+    },
+    {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9861f256-5de6-4a79-b280-14d9b3e559de.png",
+      "PackagePath": "staticwebassets\\images\\cards\\9861f256-5de6-4a79-b280-14d9b3e559de.png"
+    },
+    {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\aydin.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\aydin.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\c5985ff6-7dde-43de-a8d5-42979d458f2b.png",
+      "PackagePath": "staticwebassets\\images\\cards\\c5985ff6-7dde-43de-a8d5-42979d458f2b.png"
     },
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\cem.jpeg",
@@ -15,6 +27,10 @@
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\derya.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\derya.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png",
+      "PackagePath": "staticwebassets\\images\\cards\\e80a04c3-5ba3-449b-9709-d1fb002ffc8c.png"
     },
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\emir.jpeg",
@@ -63,6 +79,10 @@
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\turgut.jpeg",
       "PackagePath": "staticwebassets\\images\\cards\\turgut.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\games\\ae102254-a671-484a-8e25-c169d6dd4038.png",
+      "PackagePath": "staticwebassets\\images\\games\\ae102254-a671-484a-8e25-c169d6dd4038.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProjeBackend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

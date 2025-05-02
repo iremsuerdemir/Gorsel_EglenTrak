@@ -164,6 +164,7 @@ class GameService {
     int? round,
     UploadCardModel? gameImage,
     List<UploadCardModel>? cards,
+    List<UploadCardModel>? deleteCards,
   }) async {
     var uri = Uri.parse('${BaseUrl.baseUrl}/Games/Update/$gameId');
     var request = http.MultipartRequest('POST', uri);
@@ -203,6 +204,12 @@ class GameService {
         }
       }
     }
+    if (deleteCards != null && deleteCards.isNotEmpty) {
+      for (int i = 0; i < deleteCards.length; i++) {
+        request.fields["DeleteCardsId[$i]"] = deleteCards[i].id.toString();
+      }
+    }
+
     var response = await request.send();
 
     if (response.statusCode == 200) {

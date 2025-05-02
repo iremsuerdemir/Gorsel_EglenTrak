@@ -279,6 +279,23 @@ namespace ProjeBackend.Controllers
 
                 }
             }
+            if(gameRequest.DeleteCardsId != null && gameRequest.DeleteCardsId.Count > 0 ){
+                foreach( var cardId in gameRequest.DeleteCardsId){
+                    var card = await _context.Card.FindAsync(cardId);
+                    if(card == null){
+                        continue;
+                    }
+                    if (!string.IsNullOrEmpty(card.ImagePath))
+                    {
+                        var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", card.ImagePath);
+                        if (System.IO.File.Exists(oldImageFullPath))
+                        {
+                            System.IO.File.Delete(oldImageFullPath);
+                        }
+                    }
+                    _context.Card.Remove(card);
+                }
+            }
 
             try
             {

@@ -7,6 +7,8 @@ public class UploadGameRequest
     public string Description { get; set; } = string.Empty;
     public int Round { get; set; }
     public int PlayCount { get; set; }
+
+    public List<int>? DeleteCardsId { get; set; }
     
     [FromForm]
     public IFormFile? GameImage { get; set; }

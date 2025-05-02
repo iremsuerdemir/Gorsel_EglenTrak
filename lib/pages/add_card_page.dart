@@ -35,6 +35,7 @@ class _AddCardPageState extends State<AddCardPage> {
 
   final List<UploadCardModel> imagePaths =
       []; // Her resim için hem URL hem de dosya adı tutacağız
+  final List<UploadCardModel> deletedCards = [];
 
   int? selectedValue = 32;
   int selectedHeaderIndex = 0;
@@ -379,23 +380,25 @@ class _AddCardPageState extends State<AddCardPage> {
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      selectedHeaderIndex = i;
-                                    });
-                                  },
-                                  icon:
-                                      selectedHeaderIndex != i
-                                          ? Icon(
-                                            Icons.check_box_outline_blank,
-                                            color: Colors.white,
-                                          )
-                                          : Icon(
-                                            Icons.check,
-                                            color: Colors.green,
-                                          ),
-                                ),
+                                !isWillUpdate
+                                    ? IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          selectedHeaderIndex = i;
+                                        });
+                                      },
+                                      icon:
+                                          selectedHeaderIndex != i
+                                              ? Icon(
+                                                Icons.check_box_outline_blank,
+                                                color: Colors.white,
+                                              )
+                                              : Icon(
+                                                Icons.check,
+                                                color: Colors.green,
+                                              ),
+                                    )
+                                    : SizedBox(),
                                 IconButton(
                                   onPressed: () {
                                     showEditDialog(context, i);
@@ -409,7 +412,12 @@ class _AddCardPageState extends State<AddCardPage> {
                                 IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      imagePaths.removeAt(i);
+                                      var deletedCard = imagePaths.removeAt(i);
+                                      if (deletedCard.id != -1) {
+                                        // -1 yeni eklenen kartı ifade eder.
+                                        // yeni eklenen kart db de yok silinmeye gerek yok
+                                        deletedCards.add(deletedCard);
+                                      }
                                       if (imagePaths.isEmpty ||
                                           selectedHeaderIndex == i) {
                                         selectedHeaderIndex = 0;
@@ -443,6 +451,7 @@ class _AddCardPageState extends State<AddCardPage> {
                       setState(() {
                         imagePaths.clear();
                         headerController.clear();
+                        descriptionController.clear();
                         selectedHeaderIndex = 0;
                       });
                     },
@@ -482,7 +491,7 @@ class _AddCardPageState extends State<AddCardPage> {
                           description: descriptionController.text,
                           name: headerController.text,
                           round: selectedValue,
-                          gameImage: imagePaths[2],
+                          deleteCards: deletedCards,
                           /* imagePaths[selectedHeaderIndex].isChanged
                                   ? imagePaths[selectedHeaderIndex]
                                   : null,*/
