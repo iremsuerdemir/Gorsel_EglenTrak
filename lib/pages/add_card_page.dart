@@ -489,7 +489,10 @@ class _AddCardPageState extends State<AddCardPage> {
                         );
                         if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Başarıyla güncellendi!")),
+                          SnackBar(
+                            content: Text("Başarıyla güncellendi!"),
+                            showCloseIcon: true,
+                          ),
                         );
                         Navigator.pop(context);
                       } else {
@@ -504,7 +507,10 @@ class _AddCardPageState extends State<AddCardPage> {
                         );
                         if (!context.mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Başarıyla kaydedildi!")),
+                          SnackBar(
+                            content: Text("Başarıyla kaydedildi!"),
+                            showCloseIcon: true,
+                          ),
                         );
                         Navigator.pop(context);
                       }
