@@ -107,6 +107,8 @@ class _AddCardPageState extends State<AddCardPage> {
               winCount: 0,
               isChanged:
                   isWillUpdate, // güncelleme varsa yeni eklenen kartta bir değişiklik olarak sayılır
+              isImageChanged:
+                  isWillUpdate, // güncelleme varsa yeni eklenen kartın image'i değişiklik sayılır
             ),
           );
         });
@@ -121,7 +123,7 @@ class _AddCardPageState extends State<AddCardPage> {
     String? editedImageUrl = imagePaths[index].imagePath;
     String? editedFileName = imagePaths[index].fileName;
     html.File? editedRawfile = imagePaths[index].rawFile;
-    // String fileName =
+    bool isImageChanged = false;
 
     void pickNewImage() async {
       final html.FileUploadInputElement uploadInput =
@@ -141,8 +143,8 @@ class _AddCardPageState extends State<AddCardPage> {
             editNameController.text = files[0].name.split(".")[0];
             editedFileName = files[0].name;
             editedRawfile = files[0];
+            isImageChanged = true;
           });
-          print(editedFileName);
         });
       });
     }
@@ -174,10 +176,11 @@ class _AddCardPageState extends State<AddCardPage> {
                       id: imagePaths[index].id,
                       name: editNameController.text,
                       imagePath: editedImageUrl!,
-                      rawFile: editedRawfile!,
-                      fileName: editedFileName,
+                      rawFile: editedRawfile,
+                      fileName: isImageChanged ? editedFileName : "",
                       winCount: 0,
                       isChanged: true,
+                      isImageChanged: isImageChanged,
                     );
                   });
                   Navigator.pop(context);
@@ -214,7 +217,8 @@ class _AddCardPageState extends State<AddCardPage> {
                 height: 180,
                 backgroundImage:
                     imagePaths.isNotEmpty
-                        ? isWillUpdate
+                        ? isWillUpdate &&
+                                !imagePaths[selectedHeaderIndex].isImageChanged
                             ? "${BaseUrl.imageBaseUrl}/${imagePaths[selectedHeaderIndex].imagePath}"
                             : imagePaths[selectedHeaderIndex].imagePath
                         : null,
@@ -349,7 +353,8 @@ class _AddCardPageState extends State<AddCardPage> {
                                 imagePaths[i].name == "Empty"
                                     ? Image.asset("assets/icons/cross.png")
                                     : Image.network(
-                                      isWillUpdate && !imagePaths[i].isChanged
+                                      isWillUpdate &&
+                                              !imagePaths[i].isImageChanged
                                           ? "${BaseUrl.imageBaseUrl}/${imagePaths[i].imagePath}"
                                           : imagePaths[i].imagePath,
                                     ),
@@ -359,7 +364,7 @@ class _AddCardPageState extends State<AddCardPage> {
                           padding: EdgeInsets.only(bottom: 10),
                           child: ListTile(
                             leading: Image.network(
-                              isWillUpdate && !imagePaths[i].isChanged
+                              isWillUpdate && !imagePaths[i].isImageChanged
                                   ? "${BaseUrl.imageBaseUrl}/${imagePaths[i].imagePath}"
                                   : imagePaths[i].imagePath, // URL kullanılıyor
                               width: 100,

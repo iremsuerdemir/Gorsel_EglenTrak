@@ -1,8 +1,16 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\16231c21-4c47-46bf-a093-6b832817c3db.png",
-      "PackagePath": "staticwebassets\\images\\cards\\16231c21-4c47-46bf-a093-6b832817c3db.png"
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\0f0302d0-4089-4d54-a845-e3e062712c8b.png",
+      "PackagePath": "staticwebassets\\images\\cards\\0f0302d0-4089-4d54-a845-e3e062712c8b.png"
+    },
+    {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\560f65c0-e743-41c2-952d-cef9bced67ec.png",
+      "PackagePath": "staticwebassets\\images\\cards\\560f65c0-e743-41c2-952d-cef9bced67ec.png"
+    },
+    {
+      "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\5818d4e2-45b3-429b-8d6a-559acfd95351.png",
+      "PackagePath": "staticwebassets\\images\\cards\\5818d4e2-45b3-429b-8d6a-559acfd95351.png"
     },
     {
       "Id": "C:\\Users\\polat\\OneDrive\\Masaüstü\\Gorsel_Programlama_Proje\\ProjeBackend\\wwwroot\\images\\cards\\9f398d92-7942-4b82-a298-defe5deeb1f1.png",

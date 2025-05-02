@@ -5,10 +5,12 @@ class UploadCardModel extends CardModel {
   html.File? rawFile;
   String? fileName;
   bool isChanged;
+  bool isImageChanged;
   UploadCardModel({
     this.rawFile,
     this.fileName,
     this.isChanged = false,
+    this.isImageChanged = false,
     required super.id,
     required super.name,
     required super.imagePath,

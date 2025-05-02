@@ -185,20 +185,22 @@ class GameService {
     if (cards != null) {
       for (int i = 0; i < cards.length; i++) {
         final card = cards[i];
-        final cardBytes = await fileToBytes(card.rawFile!);
 
         request.fields['Cards[$i].Name'] = card.name;
         request.fields['Cards[$i].id'] = card.id.toString();
         request.fields['Cards[$i].ImagePath'] = card.imagePath;
         request.fields['Cards[$i].GameId'] = gameId.toString(); // örnek değer
 
-        request.files.add(
-          http.MultipartFile.fromBytes(
-            'Cards[$i].File',
-            cardBytes,
-            filename: card.fileName,
-          ),
-        );
+        if (card.rawFile != null) {
+          final cardBytes = await fileToBytes(card.rawFile!);
+          request.files.add(
+            http.MultipartFile.fromBytes(
+              'Cards[$i].File',
+              cardBytes,
+              filename: card.fileName,
+            ),
+          );
+        }
       }
     }
     var response = await request.send();

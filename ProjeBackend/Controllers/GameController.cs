@@ -214,30 +214,32 @@ namespace ProjeBackend.Controllers
 
                     existingCard.Name = card.Name;
 
-                    var cardUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
-                    if (!Directory.Exists(cardUploadsDir))
-                        Directory.CreateDirectory(cardUploadsDir);
+                    if (card.File != null && card.File.Length > 0){
+                        var cardUploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/cards");
+                        if (!Directory.Exists(cardUploadsDir))
+                            Directory.CreateDirectory(cardUploadsDir);
 
-                    // 💥 ESKİ GÖRSELİ SİL
-                    if (!string.IsNullOrEmpty(existingCard.ImagePath))
-                    {
-                        var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingCard.ImagePath);
-                        if (System.IO.File.Exists(oldImageFullPath))
+                        // 💥 ESKİ GÖRSELİ SİL
+                        if (!string.IsNullOrEmpty(existingCard.ImagePath))
                         {
-                            System.IO.File.Delete(oldImageFullPath);
+                            var oldImageFullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingCard.ImagePath);
+                            if (System.IO.File.Exists(oldImageFullPath))
+                            {
+                                System.IO.File.Delete(oldImageFullPath);
+                            }
                         }
+
+                        // 📷 YENİ GÖRSELİ KAYDET
+                        string cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
+                        var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
+
+                        using (var stream = new FileStream(cardImagePath, FileMode.Create))
+                        {
+                            await card.File.CopyToAsync(stream);
+                        }
+
+                        existingCard.ImagePath = $"images/cards/{cardImageName}";
                     }
-
-                    // 📷 YENİ GÖRSELİ KAYDET
-                    var cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
-                    var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
-
-                    using (var stream = new FileStream(cardImagePath, FileMode.Create))
-                    {
-                        await card.File.CopyToAsync(stream);
-                    }
-
-                    existingCard.ImagePath = $"images/cards/{cardImageName}";
                 }
                 else{
                     // yeni kart ekle
@@ -246,6 +248,9 @@ namespace ProjeBackend.Controllers
                     if (!Directory.Exists(cardUploadsDir))
                         Directory.CreateDirectory(cardUploadsDir);
 
+                    if(card.File == null){
+                        return BadRequest("Yeni kart eklenecek. Card.File null olamaz!");
+                    }
                     // 📷 YENİ GÖRSELİ KAYDET
                     var cardImageName = Guid.NewGuid() + Path.GetExtension(card.File.FileName);
                     var cardImagePath = Path.Combine(cardUploadsDir, cardImageName);
