@@ -3,17 +3,55 @@ import 'package:flutter/material.dart';
 class InformationQuizIntro extends StatelessWidget {
   final List<Map<String, dynamic>> rules = [
     {"emoji": "✔️", "text": "Her doğru cevap 10 puan kazandırır."},
-    {"emoji": "❌", "text": "Yanlış cevapta puan kaybı yok."},
-    {"emoji": "⏱️", "text": "Soru başına 20 saniye süren var."},
-    {"emoji": "🏆", "text": "En yüksek puanını hedefle!"},
-    {"emoji": "📊", "text": "Her 5 sorudan sonra kısa bir mola verilecektir."},
-    {"emoji": "🎯", "text": "Sorular rastgele sırayla karşına çıkacaktır."},
-    {"emoji": "💡", "text": "Hızlı düşün ve doğru cevabı ver!"},
-    {"emoji": "📅", "text": "Sorular kategorilere göre hazırlanmıştır."},
-    {"emoji": "🔒", "text": "Oyun ilerledikçe sorular zorlaşacaktır."},
     {
-      "emoji": "📈",
-      "text": "En yüksek puanını kaydet ve arkadaşlarınla paylaş!",
+      "emoji": "❌",
+      "text": "Yanlış cevapta elenirsin, puanın geçerli sayılmaz.",
+    },
+    {"emoji": "⏱️", "text": "Soru başına 40 saniye süren var."},
+    {"emoji": "🏆", "text": "En yüksek puanını hedefle!"},
+
+    {
+      "emoji": "🥇",
+      "text": "Altın, gümüş ve bronz madalya ile en iyi 3 skor ödüllendirilir.",
+    },
+    {"emoji": "📈", "text": "Skor tablosunda zirveye adını yazdır."},
+    {"emoji": "🎯", "text": "Sorular rastgele sırayla karşına çıkacaktır."},
+    {"emoji": "📅", "text": "Sorular kategorilere göre hazırlanmıştır."},
+    {"emoji": "💡", "text": "Hızlı düşün ve doğru cevabı ver!"},
+
+    // Joker tanımı
+    {
+      "emoji": "🃏",
+      "text":
+          "50:50, çift cevap ve soru atlama olmak üzere 3 farklı joker hakkın var.",
+    },
+    {"emoji": "🚫", "text": "Her joker yalnızca bir kez kullanılabilir."},
+
+    // Joker açıklamaları
+    {
+      "emoji": Image.asset('assets/icons/fifty.png', width: 32, height: 32),
+      "text": "50:50 jokeri ile iki yanlış şık elenir.",
+    },
+    {
+      "emoji": Image.asset('assets/icons/double.png', width: 32, height: 32),
+      "text":
+          "Çift cevap jokeri: Bir soruda iki farklı cevap deneme hakkı verir.",
+    },
+    {
+      "emoji": Image.asset('assets/icons/skip.png', width: 32, height: 32),
+      "text":
+          "Soru atlama jokeri: Bir soruyu pas geçip sonraya bırakmanı sağlar.",
+    },
+
+    // ✅ Yeni ek kurallar
+    {
+      "emoji": "☠️",
+      "text": "Cevabını onayladıktan sonra geri dönüş yok, dikkatli seç!",
+    },
+    {
+      "emoji": "⏳",
+      "text":
+          " Zamanı kaçırma! Süre dolduğunda cevap vermezsen, skorun geçersiz sayılır.",
     },
   ];
 
@@ -63,7 +101,10 @@ class InformationQuizIntro extends StatelessWidget {
               ),
               elevation: 4,
               child: ListTile(
-                leading: Text(rule["emoji"], style: TextStyle(fontSize: 24)),
+                leading:
+                    rule["emoji"] is String
+                        ? Text(rule["emoji"], style: TextStyle(fontSize: 24))
+                        : rule["emoji"],
                 title: Text(
                   rule["text"],
                   style: TextStyle(

@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/models/score_history_item.dart';
-import 'package:gorsel_programlama_proje/models/score_list.dart';
+import 'package:gorsel_programlama_proje/models/score_history_item.dart'; // Yeni ScoreHistoryItem modelini import edin
 import 'package:gorsel_programlama_proje/pages/awards.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-class ScoreHistoryPage extends StatelessWidget {
-  const ScoreHistoryPage({super.key});
+class ScoreHistoryPage extends StatefulWidget {
+  final int userId; // Giriş yapan kullanıcının ID’si
+  final ScoreHistoryItem? recentEntry; // Yeni eklenen skor kaydını al
+
+  const ScoreHistoryPage({super.key, required this.userId, this.recentEntry});
+
+  @override
+  State<ScoreHistoryPage> createState() => _ScoreHistoryPageState();
+}
+
+class _ScoreHistoryPageState extends State<ScoreHistoryPage> {
+  late Future<List<ScoreHistoryItem>> _skorGecmisiGelecegi;
+
+  @override
+  void initState() {
+    super.initState();
+    _skorGecmisiGelecegi = fetchScoreHistory(
+      widget.userId,
+    ); // Yeni fetch fonksiyonunu kullanın
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<ScoreHistoryItem> skorGecmisi =
-        ScoreList.toScoreHistoryList()..sort((a, b) {
-          int skorKarsilastirma = b.score.compareTo(a.score);
-          if (skorKarsilastirma != 0) return skorKarsilastirma;
-          return b.timestamp.compareTo(a.timestamp);
-        });
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -64,174 +74,188 @@ class ScoreHistoryPage extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: skorGecmisi.length,
-          itemBuilder: (context, index) {
-            final skorKaydi = skorGecmisi[index];
-
-            // Tarihi al
-            DateTime tarih = skorKaydi.timestamp;
-
-            // Şu anki tarih
-            DateTime now = DateTime.now();
-
-            // Sadece yıl-ay-gün karşılaştırması için
-            DateTime onlyTarih = DateTime(tarih.year, tarih.month, tarih.day);
-            DateTime today = DateTime(now.year, now.month, now.day);
-
-            String formattedDate;
-            if (onlyTarih == today) {
-              // Bugünse başına “Bugün –” ekle ve tam tarih-saat’i göster
-              formattedDate = DateFormat(
-                'dd MMM yyyy - HH:mm:ss',
-                'tr',
-              ).format(tarih);
-            } else {
-              // Değilse direkt tam tarih-saat
-              formattedDate = DateFormat(
-                'dd MMM yyyy - HH:mm:ss',
-                'tr',
-              ).format(tarih);
-            }
-
-            final isTop3 = index < 3;
-            final String? medalEmoji = switch (index) {
-              0 => '🥇',
-              1 => '🥈',
-              2 => '🥉',
-              _ => null,
-            };
-
-            return Stack(
-              clipBehavior: Clip.none,
-              children: [
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 500 + (index * 100)),
-                  curve: Curves.easeOutBack,
-                  margin: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.6),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                    border: Border.all(
-                      color:
-                          isTop3
-                              ? (index == 0
-                                  ? Colors.amberAccent
-                                  : Colors.white.withValues(alpha: 0.3))
-                              : Colors.white.withValues(alpha: 0.3),
-                      width: 2,
-                    ),
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 26,
-                      backgroundColor: Colors.white24,
-                      child: Text(
-                        medalEmoji ?? '👤',
-                        style: const TextStyle(fontSize: 22),
-                      ),
-                    ),
-                    title: Text(
-                      skorKaydi.kullaniciAdi,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '$formattedDate\nSkor: ${skorKaydi.score}',
-                      style: const TextStyle(color: Colors.white70),
-                    ),
-                    isThreeLine: true,
-                    trailing:
-                        isTop3
-                            ? ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder:
-                                        (context) => Awards(
-                                          skorKaydi: skorKaydi,
-                                          siralama: index,
-                                        ),
-                                  ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.limeAccent.shade400,
-                                foregroundColor: Colors.deepPurple.shade800,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                textStyle: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.1,
-                                  shadows: [
-                                    Shadow(
-                                      color: Colors.black26,
-                                      offset: Offset(1, 1),
-                                      blurRadius: 2,
-                                    ),
-                                  ],
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  side: BorderSide(
-                                    color: Colors.yellow.shade700,
-                                    width: 1.5,
-                                  ),
-                                ),
-                                elevation: 6,
-                                animationDuration: const Duration(
-                                  milliseconds: 150,
-                                ),
-                              ),
-                              child: const Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                    size: 20,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text('Ödülü Kap!'),
-                                ],
-                              ),
-                            )
-                            : null,
-                  ),
+        child: FutureBuilder<List<ScoreHistoryItem>>(
+          future: _skorGecmisiGelecegi,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  'Veri alınırken bir hata oluştu: ${snapshot.error}',
                 ),
-                if (isTop3 && index == 0)
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: Lottie.asset(
-                          'assets/animations/star.json',
-                          repeat: true,
+              );
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('Henüz skor kaydı bulunmuyor.'));
+            } else {
+              // DB'den gelen skor listesi
+              final List<ScoreHistoryItem> skorGecmisi = snapshot.data!;
+
+              // Eğer yeni eklenen skor varsa listeye ekle
+              if (widget.recentEntry != null) {
+                skorGecmisi.add(widget.recentEntry!);
+              }
+
+              // Skor ve zaman sırasına göre sırala
+              skorGecmisi.sort((a, b) {
+                int skorKarsilastirma = b.scorePuan.compareTo(a.scorePuan);
+                return skorKarsilastirma != 0
+                    ? skorKarsilastirma
+                    : b.datetime.compareTo(a.datetime);
+              });
+
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: skorGecmisi.length,
+                itemBuilder: (context, index) {
+                  final skorKaydi = skorGecmisi[index];
+                  String formattedDate = DateFormat(
+                    'dd MMM - HH:mm:ss',
+                    'tr',
+                  ).format(skorKaydi.datetime);
+
+                  final isTop3 = index < 3;
+                  final String? medalEmoji = switch (index) {
+                    0 => '🥇',
+                    1 => '🥈',
+                    2 => '🥉',
+                    _ => null,
+                  };
+
+                  return Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      AnimatedContainer(
+                        duration: Duration(milliseconds: 500 + (index * 100)),
+                        curve: Curves.easeOutBack,
+                        margin: const EdgeInsets.symmetric(vertical: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.6),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                          border: Border.all(
+                            color:
+                                isTop3
+                                    ? (index == 0
+                                        ? Colors.amberAccent
+                                        : Colors.white.withValues(alpha: 0.3))
+                                    : Colors.white.withValues(alpha: 0.3),
+                            width: 2,
+                          ),
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 26,
+                            backgroundColor: Colors.white24,
+                            child: Text(
+                              medalEmoji ?? '👤',
+                              style: const TextStyle(fontSize: 22),
+                            ),
+                          ),
+                          title: Text(
+                            'Kullanıcı Adı: ${skorKaydi.userName}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            '$formattedDate\nSkor: ${skorKaydi.scorePuan}',
+                            style: const TextStyle(color: Colors.white70),
+                          ),
+                          isThreeLine: true,
+                          trailing:
+                              isTop3
+                                  ? ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) => Awards(
+                                                skorKaydi: skorKaydi,
+                                                siralama: index,
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Colors.limeAccent.shade400,
+                                      foregroundColor:
+                                          Colors.deepPurple.shade800,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 8,
+                                      ),
+                                      textStyle: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.1,
+                                        shadows: [
+                                          Shadow(
+                                            color: Colors.black26,
+                                            offset: Offset(1, 1),
+                                            blurRadius: 2,
+                                          ),
+                                        ],
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        side: BorderSide(
+                                          color: Colors.yellow.shade700,
+                                          width: 1.5,
+                                        ),
+                                      ),
+                                      elevation: 6,
+                                      animationDuration: const Duration(
+                                        milliseconds: 150,
+                                      ),
+                                    ),
+                                    child: const Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.yellow,
+                                          size: 20,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text('Ödülü Kap!'),
+                                      ],
+                                    ),
+                                  )
+                                  : null,
                         ),
                       ),
-                    ),
-                  ),
-              ],
-            );
+                      if (isTop3 && index == 0)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: SizedBox(
+                              width: 80,
+                              height: 80,
+                              child: Lottie.asset(
+                                'assets/animations/star.json',
+                                repeat: true,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              );
+            }
           },
         ),
       ),

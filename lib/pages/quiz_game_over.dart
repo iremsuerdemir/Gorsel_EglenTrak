@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:gorsel_programlama_proje/pages/score_history_page.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
 import 'package:lottie/lottie.dart';
 
 import 'quizhomepage.dart';
@@ -17,7 +18,7 @@ class QuizGameOver extends StatefulWidget {
 class _QuizGameOverState extends State<QuizGameOver>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
+  late Animation<double> _scaleAnimation; // <double> eklendi
 
   @override
   void initState() {
@@ -48,16 +49,57 @@ class _QuizGameOverState extends State<QuizGameOver>
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => QuizHomePage(category: 'bilim'),
+        builder:
+            (context) => QuizHomePage(
+              category: '',
+            ), // category parametresi duruyor, kontrol edin
       ), // QuizHomePage yönlendirmesi
     );
   }
 
   void _scoreTable() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => ScoreHistoryPage()),
-    );
+    if (UserService.user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ScoreHistoryPage(userId: UserService.user!.id),
+        ),
+      );
+    } else {
+      // Kullanıcı giriş yapmamışsa veya kullanıcı bilgisi alınamamışsa
+      // buraya bir hata mesajı gösterebilir veya başka bir işlem yapabilirsiniz.
+      //DEBUG için koydum . Bir gün elbet yok olacak :(
+      //print('Hata: Kullanıcı bilgisi alınamadı.');
+      // Örneğin:
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.redAccent, // Arka plan rengi
+          duration: const Duration(seconds: 3), // Ne kadar süre görüneceği
+          behavior:
+              SnackBarBehavior
+                  .floating, // Ekranın altında kaymak yerine yukarıda yüzer
+          shape: RoundedRectangleBorder(
+            // Köşeleri yuvarlak yapar
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          content: Row(
+            children: const [
+              Icon(Icons.warning, color: Colors.white), // Uyarı ikonu
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Lütfen giriş yapınız.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -125,7 +167,7 @@ class _QuizGameOverState extends State<QuizGameOver>
                     SizedBox(height: 20),
                     // Doğru cevap sayısı ve puan bilgileri
                     Text(
-                      "✅ Doğru Cevap Sayısı: ${widget.scoreBeforeMistake / 10}",
+                      "✅ Doğru Cevap Sayısı: ${widget.scoreBeforeMistake / 10}", // Eğer her doğru 10 puan ise doğru
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -180,7 +222,7 @@ class _QuizGameOverState extends State<QuizGameOver>
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: ElevatedButton(
-                        onPressed: _scoreTable, // Yeniden dene butonu
+                        onPressed: _scoreTable, // Skor tablosu butonu
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple[300],
                           foregroundColor: Colors.black,
@@ -252,6 +294,7 @@ class _QuizGameOverState extends State<QuizGameOver>
 
   // Animasyon dosyasını yüklemek için yardımcı fonksiyon
   Future<void> _loadLottieAnimation() async {
+    // async ve Future<void> eklendi
     Lottie.asset('assets/animations/gameover.json');
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:gorsel_programlama_proje/models/user.dart';
 import 'package:gorsel_programlama_proje/services/base_url.dart';
 import 'package:http/http.dart' as http;
@@ -29,6 +30,10 @@ class UserService {
     return _user;
   }
 
+  static String? getUsername() {
+    return _user?.username;
+  }
+
   static void logout() {
     _user = null;
   }
@@ -47,7 +52,7 @@ class UserService {
       body: jsonEncode({
         "email": email,
         "password": password,
-        "username": username,
+        "userName": username,
       }),
     );
 

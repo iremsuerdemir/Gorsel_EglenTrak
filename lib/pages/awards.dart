@@ -92,7 +92,7 @@ class Awards extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    '🎉 Harika iş çıkardın ${skorKaydi.kullaniciAdi}!\n⭐ Skorun: ${skorKaydi.score}',
+                    '🎉 Harika iş çıkardın ${skorKaydi.userName}!\n⭐ Skorun: ${skorKaydi.scorePuan}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20,

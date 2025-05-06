@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/components/box.dart';
 import 'package:gorsel_programlama_proje/components/slide_animation.dart';
 import 'package:gorsel_programlama_proje/pages/add_card_page.dart';
+import 'package:gorsel_programlama_proje/pages/choice_game_menu_page.dart';
 import 'package:gorsel_programlama_proje/pages/login_page.dart';
 import 'package:gorsel_programlama_proje/pages/my_games_page.dart';
+import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
 import 'package:gorsel_programlama_proje/services/user_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,6 +57,7 @@ class _HomePageState extends State<HomePage> {
                                 );
                               },
                             ),
+                            SizedBox(height: 30),
                           ],
                         ),
                   );
@@ -103,7 +106,14 @@ class _HomePageState extends State<HomePage> {
                 startOffsetX: 1.5,
                 startOffsetY: -1.5,
                 child: Box(
-                  onpressed: () {},
+                  onpressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChoiceGameMenuPage(),
+                      ),
+                    );
+                  },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
@@ -123,12 +133,17 @@ class _HomePageState extends State<HomePage> {
                 startOffsetX: -1.5,
                 startOffsetY: 1.5,
                 child: Box(
-                  onpressed: () {},
+                  onpressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => QuizIntroPage()),
+                    );
+                  },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMiRp56ehUts3rR_luctaPGEx7TXd1AH4CiQ&s",
-                      fit: BoxFit.cover,
+                    child: Image.asset(
+                      "assets/icons/tanitim.png",
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),

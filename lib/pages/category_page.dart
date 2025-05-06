@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gorsel_programlama_proje/pages/quiz_page.dart';
-import 'package:gorsel_programlama_proje/pages/quizintropage.dart';
+import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -97,7 +97,9 @@ class CategoryPage extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => QuizIntroPage()),
+              MaterialPageRoute(
+                builder: (context) => QuizHomePage(category: ''),
+              ),
             );
           },
         ),

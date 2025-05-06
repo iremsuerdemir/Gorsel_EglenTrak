@@ -1,14 +1,17 @@
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/models/user.dart';
-import 'package:lottie/lottie.dart';
-import 'package:gorsel_programlama_proje/models/question_list.dart';
-import 'package:gorsel_programlama_proje/models/score_list.dart';
+import 'package:gorsel_programlama_proje/models/question.dart';
+import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
 import 'package:gorsel_programlama_proje/pages/score_screen.dart';
-import 'package:gorsel_programlama_proje/pages/quiz_game_over.dart';
 import 'package:gorsel_programlama_proje/pages/time_finish_page.dart';
+import 'package:gorsel_programlama_proje/services/base_url.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
+import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 
 class QuizPage extends StatefulWidget {
   final String category;
@@ -42,7 +45,7 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   int firstSelectedAnswer = -1;
   List<int> hiddenOptions = [];
 
-  late List<Question> _questions;
+  late Future<List<Question>> _questionsFuture;
 
   @override
   void initState() {
@@ -56,8 +59,21 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    _questions = QuestionList.getByCategory(widget.category);
+    _questionsFuture = fetchQuestions();
     startTimer();
+  }
+
+  Future<List<Question>> fetchQuestions() async {
+    final response = await http.get(
+      Uri.parse('${BaseUrl.baseUrl}/questions/by-category/${widget.category}'),
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      return data.map((json) => Question.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load questions');
+    }
   }
 
   @override
@@ -69,8 +85,51 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  Future<void> _saveScoreToBackend() async {
+    if (UserService.user == null) {
+      return;
+    }
+
+    final questions = await _questionsFuture;
+    final currentQuestion =
+        questions[currentQuestionIndex]; // Şu anki veya son sorunun bilgisini alabilirsiniz.
+
+    final scoreData = {
+      'questionId': currentQuestion.id, // Veya son sorunun ID'si
+      'userId': UserService.user?.id,
+      'userName': UserService.user.username,
+      'scorePuan': score,
+      'category': widget.category,
+    };
+    /*
+    {
+  "userName": "Beyza",-----
+  "questionId": 1,----
+  "userId": 12,-----
+  "category": "Bilim",-----
+  "scorePuan": 70,-----
+}
+    */
+
+    final response = await http.post(
+      Uri.parse('${BaseUrl.baseUrl}/scores'), // Backend API endpoint'iniz
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(scoreData),
+    );
+
+    if (response.statusCode == 201) {
+      print('Skor başarıyla kaydedildi.');
+      // İsteğe bağlı olarak kullanıcıyı bilgilendirebilirsiniz.
+    } else {
+      print('Skor kaydedilirken bir hata oluştu: ${response.statusCode}');
+      // Hata durumunda kullanıcıyı bilgilendirebilirsiniz.
+    }
+  }
+
   void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (t) async {
+    timer = Timer.periodic(Duration(seconds: 1), (t) async {
       if (timeLeft > 0) {
         setState(() => timeLeft--);
         if (timeLeft == 10) {
@@ -79,8 +138,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
       } else {
         t.cancel();
         // Süre dolunca skoru kaydet
-        ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
-        // ScoreScreen'e yönlendir
+        await _saveScoreToBackend();
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => TimeFinishPage()),
@@ -92,7 +151,8 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
   void checkAnswer(int index) async {
     if (questionAnswered) return;
 
-    final question = _questions[currentQuestionIndex];
+    final questions = await _questionsFuture;
+    final question = questions[currentQuestionIndex];
     final correctIndex = question.correctAnswerIndex;
 
     timer?.cancel();
@@ -190,10 +250,12 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     }
   }
 
-  void useFiftyFifty() {
+  void useFiftyFifty() async {
     if (usedFiftyFifty || questionAnswered) return;
-    final question = _questions[currentQuestionIndex];
+    final questions = await _questionsFuture;
+    final question = questions[currentQuestionIndex];
     final correctIndex = question.correctAnswerIndex;
+
     List<int> options = List.generate(question.options.length, (i) => i)
       ..remove(correctIndex);
     options.shuffle();
@@ -218,20 +280,23 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     goToNextQuestion();
   }
 
-  User currentUser = User(
-    id: 2,
-    email: 'user@example.com',
-    username: 'user123',
-  );
-
   void goToNextQuestion() async {
+    final questions = await _questionsFuture;
+
     // 1) Eğer bir sonraki soru yoksa, timer'ı durdur, skoru kaydet ve ScoreScreen'e git
-    if (currentQuestionIndex + 1 >= _questions.length) {
+    if (currentQuestionIndex + 1 >= questions.length) {
       timer?.cancel();
-      ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
+      await _saveScoreToBackend();
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => ScoreScreen(score: score)),
+        MaterialPageRoute(
+          builder:
+              (_) => ScoreScreen(
+                score: score,
+                userId: UserService.user?.id, // Kullanıcı ID'sini gönder
+              ),
+        ),
       );
       return;
     }
@@ -255,19 +320,22 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     startTimer();
   }
 
-  void gameOver() {
+  void gameOver() async {
     timer?.cancel();
     // Skoru kaydet
-    ScoreList.ekle(ScoreList(score: score, kullanici: currentUser));
-    // ScoreScreen'e yönlendir
+    await _saveScoreToBackend();
+    // QuizGameOver sayfasına skoru parametre olarak göndererek yönlendir
+    if (!mounted) return;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => QuizGameOver()),
+      MaterialPageRoute(
+        builder: (context) => QuizGameOver(scoreBeforeMistake: score),
+      ),
     );
   }
 
-  Widget buildAnswer(int index) {
-    final question = _questions[currentQuestionIndex];
+  Widget buildAnswer(int index, List<Question> questions) {
+    final question = questions[currentQuestionIndex];
     final correctIndex = question.correctAnswerIndex;
     if (usedFiftyFifty && hiddenOptions.contains(index)) {
       return const SizedBox.shrink();
@@ -346,199 +414,221 @@ class _QuizPageState extends State<QuizPage> with TickerProviderStateMixin {
     );
   }
 
-  Question get currentQuestion => _questions[currentQuestionIndex];
+  Future<List<Question>> get currentQuestion => _questionsFuture;
+  @override
   @override
   Widget build(BuildContext context) {
-    final question = _questions[currentQuestionIndex];
-    return Scaffold(
-      backgroundColor: Colors.deepPurple[700],
-      body: Stack(
-        children: [
-          SafeArea(
-            child: FadeTransition(
-              opacity: pageTransition,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
+    return FutureBuilder<List<Question>>(
+      future: _questionsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Hata: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('Soru bulunamadı.'));
+        } else {
+          final questions = snapshot.data!;
+          final question = questions[currentQuestionIndex];
+          return Scaffold(
+            backgroundColor: Colors.deepPurple[700],
+            body: Stack(
+              children: [
+                SafeArea(
+                  child: FadeTransition(
+                    opacity: pageTransition,
+                    child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Card(
-                            color: Colors.deepPurple[300],
-                            elevation: 8,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 10,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.emoji_events,
-                                        color: Colors.amberAccent,
-                                      ),
-                                      SizedBox(width: 6),
-                                      Text(
-                                        "Skor: $score",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                Card(
+                                  color: Colors.deepPurple[300],
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 10,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.emoji_events,
+                                              color: Colors.amberAccent,
+                                            ),
+                                            SizedBox(width: 6),
+                                            Text(
+                                              "Skor: $score",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.timer,
-                                        color: Colors.redAccent,
-                                      ),
-                                      SizedBox(width: 6),
-                                      Text(
-                                        "Süre: $timeLeft",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.timer,
+                                              color: Colors.redAccent,
+                                            ),
+                                            SizedBox(width: 6),
+                                            Text(
+                                              "Süre: $timeLeft",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(_questions.length, (i) {
-                              bool active = i == currentQuestionIndex;
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 4.0,
-                                ),
-                                child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 300),
-                                  width: active ? 30 : 20,
-                                  height: active ? 30 : 20,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        active
-                                            ? Colors.orangeAccent
-                                            : Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    '${i + 1}',
-                                    style: TextStyle(
-                                      color:
-                                          active
-                                              ? Colors.white
-                                              : Colors.deepPurple,
-                                      fontSize: active ? 16 : 12,
-                                      fontWeight: FontWeight.bold,
+                                      ],
                                     ),
                                   ),
                                 ),
-                              );
-                            }),
-                          ),
-                          const SizedBox(height: 20),
-                          Card(
-                            color: Colors.deepPurple[300],
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                question.questionText,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                const SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: List.generate(questions.length, (
+                                    i,
+                                  ) {
+                                    bool active = i == currentQuestionIndex;
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0,
+                                      ),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 300,
+                                        ),
+                                        width: active ? 30 : 20,
+                                        height: active ? 30 : 20,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              active
+                                                  ? Colors.orangeAccent
+                                                  : Colors.white,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          '${i + 1}',
+                                          style: TextStyle(
+                                            color:
+                                                active
+                                                    ? Colors.white
+                                                    : Colors.deepPurple,
+                                            fontSize: active ? 16 : 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
                                 ),
-                              ),
+                                const SizedBox(height: 20),
+                                Card(
+                                  color: Colors.deepPurple[300],
+                                  elevation: 10,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Text(
+                                      question.questionText,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                Column(
+                                  children: List.generate(
+                                    question.options.length,
+                                    (i) => buildAnswer(i, questions),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    buildJokerButton(
+                                      'assets/icons/fifty.png',
+                                      useFiftyFifty,
+                                      usedFiftyFifty,
+                                    ),
+                                    buildJokerButton(
+                                      'assets/icons/double.png',
+                                      useDoubleAnswer,
+                                      usedDoubleAnswer,
+                                    ),
+                                    buildJokerButton(
+                                      'assets/icons/skip.png',
+                                      skipQuestion,
+                                      usedSkipQuestion,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 20),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          Column(
-                            children: List.generate(
-                              question.options.length,
-                              (i) => buildAnswer(i),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              buildJokerButton(
-                                'assets/icons/fifty.png',
-                                useFiftyFifty,
-                                usedFiftyFifty,
-                              ),
-                              buildJokerButton(
-                                'assets/icons/double.png',
-                                useDoubleAnswer,
-                                usedDoubleAnswer,
-                              ),
-                              buildJokerButton(
-                                'assets/icons/skip.png',
-                                skipQuestion,
-                                usedSkipQuestion,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          if (showLottie)
-            Positioned.fill(
-              child: Center(
-                child: Opacity(
-                  opacity: 0.8,
-                  child: Lottie.asset(
-                    lottieFile,
-                    controller: lottieController,
-                    onLoaded:
-                        (comp) => lottieController.duration = comp.duration,
                   ),
                 ),
-              ),
-            ),
-          Positioned(
-            top: 20,
-            left: 20,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed:
-                  () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => QuizHomePage(category: widget.category),
+                if (showLottie)
+                  Positioned.fill(
+                    child: Center(
+                      child: Opacity(
+                        opacity: 0.8,
+                        child: Lottie.asset(
+                          lottieFile,
+                          controller: lottieController,
+                          onLoaded:
+                              (comp) =>
+                                  lottieController.duration = comp.duration,
+                        ),
+                      ),
                     ),
                   ),
+                Positioned(
+                  top: 20,
+                  left: 20,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed:
+                        () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    QuizHomePage(category: widget.category),
+                          ),
+                        ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gorsel_programlama_proje/pages/home_page.dart';
 import 'package:gorsel_programlama_proje/pages/information_quiz_intro.dart';
 import 'package:gorsel_programlama_proje/pages/quizhomepage.dart';
+import 'package:gorsel_programlama_proje/services/user_service.dart';
 import 'package:lottie/lottie.dart';
 
 class QuizIntroPage extends StatefulWidget {
@@ -41,10 +41,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
   }
 
   void navigateToLoginPage(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-    );
+    Navigator.pop(context);
   }
 
   @override
@@ -60,9 +57,9 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 5),
                     Text(
-                      "Bilgi Yarışmasına Hoş Geldiniz!",
+                      "Bilgi Yarışmasına Hoş Geldin ${UserService.user?.username ?? 'Misafir'}!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 32,
@@ -78,9 +75,9 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 8),
                     Lottie.asset('assets/animations/intro.json', height: 300),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 8),
                     if (_showSpeechBubble)
                       GestureDetector(
                         onTap: () => navigateToInformationPage(context),
@@ -144,7 +141,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                           ),
                         ),
                       ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 15),
                     GestureDetector(
                       onTap: () => navigateToHome(context),
                       child: AnimatedContainer(
@@ -206,7 +203,7 @@ class _QuizIntroPageState extends State<QuizIntroPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 15),
                     GestureDetector(
                       onTap: () => navigateToLoginPage(context),
                       child: AnimatedContainer(
