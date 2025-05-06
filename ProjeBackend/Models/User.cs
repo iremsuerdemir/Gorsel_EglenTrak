@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjeBackend.Models
 
@@ -14,5 +15,8 @@ namespace ProjeBackend.Models
         [Required]
         public required string Password { get; set; }
         public ICollection<Game>? Games { get; set; }
+        public ICollection<Score>? Scores { get; set; }
+        public ICollection<Question>? Questions { get; set; }
+
     }
 }
